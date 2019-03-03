@@ -1,7 +1,7 @@
-# FrontEnd
-*My FrontEnd Live*
+# Record
+*My front-end career record*
 
-## 作为记录从0开始的前端生活
+## 作为记录从0开始的前端生涯
 1. Git帐号创建自2016-2-8
 2. 前端学习自2015-10-7至今
 
