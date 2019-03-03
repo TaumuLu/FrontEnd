@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>圆环加载进度条</title>
+<style>
+      canvas{
+		  border:1px solid #ccc;
+		  }
+</style>
+</head>
+<body>
+     <canvas id="myCanvas" width="500" height="500"></canvas>
+     <script>
+        var n=0;
+	    var canvas;
+	    var ctx;
+	    var addn;
+	    var text;
+		window.onload=function(){
+			canvas = document.getElementById('myCanvas');
+			ctx = canvas.getContext('2d');
+			addn = setInterval( drawCircle,10 );
+		}
+		function drawCircle(){
+			if( n<360 ) {
+			    ctx.clearRect(0, 0, 500, 500);
+				ctx.beginPath();
+				n+=2;
+				ctx.arc( 250, 250, 100, 0, Math.PI*n/180, false);
+				ctx.lineWidth = 10;
+				ctx.strokeStyle = "green";
+				ctx.stroke();
+				ctx.closePath();
+				ctx.font = '20px Georgia';
+				text = parseInt((n/360).toFixed(2).slice(2,4))+"%";
+				if (text == '0%') {
+					ctx.fillText('100%',230,250);
+				} else {
+				    ctx.fillText(text,230,250);
+				}
+			} else {
+				clearInterval(addn);
+			}
+		}
+	 </script>
+</body>
+</html>

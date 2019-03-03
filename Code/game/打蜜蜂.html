@@ -1,0 +1,589 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+#tips {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+#div1 {
+    width: 800px;
+    height: 600px;
+    overflow: hidden;
+    background: black;
+    margin: 20px auto;
+    position: relative;
+}
+#gameBtn {
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border: 1px #FFFFFF solid;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -16px;
+    margin-left: -51px;
+}
+#score {
+    color: #FFFFFF;
+}
+#bee {
+    position: relative;
+}
+.enemy1 {
+    width: 40px;
+    height: 28px;
+    background: url(images/mf1.png) no-repeat;
+    float: left;
+}
+.enemy2 {
+    width: 40px;
+    height: 28px;
+    background: url(images/mf2.png) no-repeat;
+    float: left;
+}
+.enemy3 {
+    width: 40px;
+    height: 28px;
+    background: url(images/mf3.png) no-repeat;
+    float: left;
+}
+.air1 {
+    width: 46px;
+    height: 60px;
+    background: url(images/fj.png) no-repeat;
+    position: absolute;
+}
+.bullet {
+    width: 2px;
+    overflow: hidden;
+    height: 10px;
+    background: white;
+    position: absolute;
+}
+</style>
+<script type="text/javascript">
+window.onload=function (){
+
+    var oBtn=document.getElementById("gameBtn");
+
+    oBtn.onclick=function (){
+
+        oBtn.style.display="none";
+        Game.init("div1");
+    }
+}
+
+var Game={
+
+    Bee:{                       //蜜蜂的数据
+
+        b1:{                    //第一种蜜蜂
+            style:"enemy1",     //className
+            blood:1,            //生命力
+            speed:4,            //移动速度
+            score:1,            //消灭分值
+            move:false          //是否被随机指派作战
+        },
+        b2:{                    //第二种蜜蜂
+            style:"enemy2",
+            blood:2,
+            speed:6,
+            score:2,
+            move:false
+        },
+        b3:{                    //第三种蜜蜂
+            style:"enemy3",
+            blood:3,
+            speed:8,
+            score:3,
+            move:false
+        }
+    },
+    BeeMap:[                    //关卡地图
+
+        {
+            num:["b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1"],           //蜜蜂分布
+            colNum:10,          //每排数目
+            speedX:10,          //整体横向移动速度
+            speedY:10,          //整体纵向移动速度
+            times:3900          //随机作战时间间隔
+        },
+        {
+            num:["b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1"],
+            colNum:10,
+            speedX:14,
+            speedY:10,
+            times:3600
+        },
+        {
+            num:["b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1"],
+            colNum:10,
+            speedX:18,
+            speedY:10,
+            times:3300
+        },
+        {
+            num:["b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1"],
+            colNum:10,
+            speedX:22,
+            speedY:10,
+            times:3000
+        },
+        {
+            num:["b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2"],
+            colNum:10,
+            speedX:26,
+            speedY:10,
+            times:2700
+        },
+        {
+            num:["b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1", "b1"],
+            colNum:10,
+            speedX:30,
+            speedY:10,
+            times:2400
+        },
+        {
+            num:["b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2"],
+            colNum:10,
+            speedX:34,
+            speedY:10,
+            times:2100
+        },
+        {
+            num:["b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2", "b2"],
+            colNum:10,
+            speedX:38,
+            speedY:10,
+            times:1800
+        },
+        {
+            num:["b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3", "b3"],
+            colNum:10,
+            speedX:42,
+            speedY:10,
+            times:1500
+        }
+    ],
+    Plane:{                     //飞机数据
+
+        p1:{                    //飞机类型（目前仅一种）
+            style:"air1",       //className
+            speedX:10,          //横向移动速度
+            speedY:10,          //纵向移动速度（未实现）
+            bullet:"bullet"     //子弹className
+        }
+    },
+    init:function (id){         //初始化
+
+        this.parent=document.getElementById(id);    //游戏区域
+        this.iNow=0;                                //关卡级别
+        this.aBee=[];                               //随机作战蜂群
+        this.CreScore();                            //得分计数
+        this.CreBee(this.iNow);                     //开始关卡
+        this.CrePlane();                            //飞机创建
+    },
+    CreScore:function (){       //创建分数
+
+        this.score=document.createElement("div");
+        this.sum=0;                                                 //分数汇总
+        this.score.innerHTML="分数：<span>"+this.sum+"</span>";
+        this.parent.appendChild(this.score);
+        this.score.id="score";
+    },
+    CreBee:function (iNow){     //创建蜜蜂
+
+        var Map=this.BeeMap[iNow];                                  //当前分布
+        var aPos=[];
+
+        if(this.oUl){                                               //开始新关卡时消除旧关卡无用数据
+
+            clearInterval(this.oUl.timer);
+            this.parent.removeChild(this.oUl);
+        }
+        this.oUl=document.createElement("ul");
+        this.oUl.style.width=Map.colNum*40+"px";
+        this.parent.appendChild(this.oUl);
+        this.oUl.id="bee";
+        this.oUl.style.left=(this.parent.offsetWidth-this.oUl.offsetWidth)/2+"px";
+
+        for(var i=0;i<Map.num.length;i++){
+
+            var oLi=document.createElement("li");                   //创建蜜蜂单体并添加相应属性
+            oLi.className=this.Bee[Map.num[i]].style;
+            oLi.blood=this.Bee[Map.num[i]].blood;
+            oLi.speed=this.Bee[Map.num[i]].speed;
+            oLi.score=this.Bee[Map.num[i]].score;
+            oLi.move=this.Bee[Map.num[i]].move;
+            this.oUl.appendChild(oLi);
+        }
+        this.aLi=this.oUl.getElementsByTagName("li");
+        for(var i=0;i<this.aLi.length;i++){
+
+            aPos.push([this.aLi[i].offsetLeft, this.aLi[i].offsetTop]);
+        }
+        for(var i=0;i<this.aLi.length;i++){
+
+            this.aLi[i].style.position="absolute";
+            this.aLi[i].style.left=aPos[i][0]+"px";
+            this.aLi[i].style.top=aPos[i][1]+"px";
+        }
+        this.BeeMove(iNow);
+    },
+    BeeMove:function (iNow){        //蜜蜂移动
+
+        var This=this;
+        var bOne=false;             //判断是否可进行随机作战变量
+
+        this.oUl.timer=setInterval(function (){                                                         //整体移动
+
+            if(This.oUl.offsetLeft>This.parent.offsetWidth-This.oUl.offsetWidth){
+
+                This.BeeMap[iNow].speedX*=-1;
+                This.oUl.style.top=This.oUl.offsetTop+This.BeeMap[iNow].speedY+"px";
+                if(This.aBee.length>0){                                                                 //修正整体移动对随机作战的影响
+
+                    for(var i=0;i<This.aBee.length;i++){
+
+                        This.aBee[i].style.top=This.aBee[i].offsetTop-This.BeeMap[iNow].speedY+"px";
+                    }
+                }
+            }
+            else if(This.oUl.offsetLeft<0){
+
+                This.BeeMap[iNow].speedX*=-1;
+                This.oUl.style.top=This.oUl.offsetTop+This.BeeMap[iNow].speedY+"px";
+                if(This.aBee.length>0){                                                                 //修正整体移动对随机作战的影响
+
+                    for(var i=0;i<This.aBee.length;i++){
+
+                        This.aBee[i].style.top=This.aBee[i].offsetTop-This.BeeMap[iNow].speedY+"px";
+                    }
+                }
+            }
+            This.oUl.style.left=This.oUl.offsetLeft+This.BeeMap[iNow].speedX+"px";
+            if(This.aBee.length>0){                                                                     //修正整体移动对随机作战的影响
+
+                for(var i=0;i<This.aBee.length;i++){
+
+                    This.aBee[i].style.left=This.aBee[i].offsetLeft-This.BeeMap[iNow].speedX+"px";
+                }
+            }
+        },300);
+        this.RanTimer=setInterval(function (){
+
+            if(This.aLi.length==0){
+
+                clearInterval(This.RanTimer);
+            }
+            else{
+
+                for(var i=0;i<This.aLi.length;i++){
+
+                    if(!This.aLi[i].move){          //是否剩余非随机作战蜜蜂
+
+                        bOne=true;
+                    }
+                }
+                if(bOne){
+
+                    This.OneBee();
+                    bOne=false;
+                }
+            }
+        },This.BeeMap[iNow].times);
+    },
+    OneBee:function (){     //随机作战
+
+        var oBee=this.aLi[Math.floor(Math.random()*this.aLi.length)];
+        var This=this;
+
+        this.aBee.push(oBee);                           //所有随机作战蜜蜂
+
+        if(!oBee.move){                                 //禁止已被随机指派的单位再次被随机
+
+            oBee.move=true;
+            oBee.timer=setInterval(function (){
+
+                if(oBee.offsetTop+oBee.parentNode.offsetTop>This.parent.offsetHeight){
+
+                    clearInterval(oBee.timer);
+                    oBee.parentNode.removeChild(oBee);
+                    oBee=null;
+                }
+                else{                                   //设定跟踪作战
+
+                    var x=(This.plane.offsetLeft+This.plane.offsetWidth/2)-(oBee.parentNode.offsetLeft+oBee.offsetLeft+oBee.offsetWidth/2);
+                    var y=(This.plane.offsetTop+This.plane.offsetHeight/2)-(oBee.parentNode.offsetTop+oBee.offsetTop+oBee.offsetHeight/2);
+                    var z=Math.ceil(Math.sqrt(x*x+y*y));
+
+                    if(oBee.offsetTop+oBee.parentNode.offsetTop>This.plane.offsetTop-2*oBee.offsetHeight){      //减少跟踪范围降低难度
+
+                        x=0.9*x;
+                        y=0.8*z;
+                    }
+                    oBee.style.left=oBee.offsetLeft+oBee.speed*x/z+"px";
+                    oBee.style.top=oBee.offsetTop+oBee.speed*y/z+"px";
+                }
+                if(oBee&&This.fnPz(This.plane, oBee)){
+
+                    alert("游戏结束");
+                    window.location.reload();
+                }
+                if(This.aLi.length==0){                                 //判断是否过关
+
+                    clearInterval(This.RanTimer);                       //清除随机作战定时器
+                    clearInterval(This.planeTimer);                     //清除飞机所带定时器
+                    This.planeTimer=null;
+                    var bGo=confirm("是否继续");
+
+                    if(bGo){
+
+                        This.iNow++
+                        if(This.BeeMap[This.iNow]){
+
+                            This.CreBee(This.iNow);
+                        }
+                        else{
+
+                            alert("恭喜通关，总分"+This.sum+"分");
+                            window.location.reload();
+                        }
+                    }
+                    else{
+
+                        var bSure=confirm("您确定要重新开始吗");
+
+                        if(bSure){
+
+                            window.location.reload();
+                        }
+                        else{
+
+                            This.iNow++
+                            if(This.BeeMap[This.iNow]){
+
+                                This.CreBee(This.iNow);
+                            }
+                            else{
+
+                                alert("恭喜通关，总分"+This.sum+"分");
+                                window.location.reload();
+                            }
+                        }
+                    }
+                }
+            },30);
+        }
+    },
+    CrePlane:function (){       //创建飞机
+
+        this.plane=document.createElement("div");
+        this.plane.className=this.Plane.p1.style;
+        this.parent.appendChild(this.plane);
+        this.plane.style.top=this.parent.offsetHeight-this.plane.offsetHeight+"px";
+        this.plane.style.left=(this.parent.offsetWidth-this.plane.offsetWidth)/2+"px";
+        this.PlaneMove();
+    },
+    PlaneMove:function (){      //操控飞机
+
+        this.planeTimer=null;
+        var This=this;
+        var m=0;
+
+        document.onkeydown=function (ev){
+
+            var oEv=ev||window.event;
+            var iSpeed=0;
+
+            if(oEv.keyCode==37){
+
+                m=1;                        //模拟左方向键
+            }
+            else if(oEv.keyCode==39){
+
+                m=2;                        //模拟右方向键
+            }
+            if(!This.planeTimer){
+
+                This.planeTimer=setInterval(function (){
+
+                    if(m==1){
+
+                        iSpeed=-This.Plane.p1.speedX;
+                    }
+                    else if(m==2){
+
+                        iSpeed=This.Plane.p1.speedX;
+                    }
+                    if(This.plane.offsetLeft<Math.abs(iSpeed)&&m==1){
+
+                        This.plane.style.left=0;
+                    }
+                    else if(This.plane.offsetLeft+This.plane.offsetWidth>This.parent.offsetWidth-Math.abs(iSpeed)&&m==2){
+
+                        This.plane.style.left=This.parent.offsetWidth-This.plane.offsetWidth+"px";
+                    }
+                    else{
+
+                        This.plane.style.left=This.plane.offsetLeft+iSpeed+"px";
+                    }
+                },30);
+            }
+        }
+        document.onkeyup=function (ev){
+
+            var oEv=ev||window.event;
+
+            if(oEv.keyCode==32){
+
+                This.CreBullet()
+            }
+            else if(oEv.keyCode==37||oEv.keyCode==39){
+
+                clearInterval(This.planeTimer);
+                This.planeTimer=null;
+                m=0;
+            }
+        }
+    },
+    CreBullet:function (){      //创建子弹
+
+        var oB=document.createElement("div");
+
+        oB.className=this.Plane.p1.bullet;
+        this.parent.appendChild(oB);
+        oB.style.top=this.plane.offsetTop-oB.offsetHeight+"px";
+        oB.style.left=(this.plane.offsetWidth-oB.offsetWidth)/2+this.plane.offsetLeft+"px";
+        this.BulletMove(oB);
+    },
+    BulletMove:function (oB){       //子弹碰撞
+
+        var This=this;
+
+        oB.timer=setInterval(function (){
+
+            if(oB.offsetTop<0){
+
+                clearInterval(oB.timer);
+                This.parent.removeChild(oB);
+                oB=null;
+            }
+            else{
+
+                oB.style.top=oB.offsetTop-10+"px";
+            }
+            for(var i=0;i<This.aLi.length;i++){
+
+                if(oB&&This.fnPz(oB, This.aLi[i])){
+
+                    if(This.aLi[i].blood==1){                                   //根据剩余血量分类操作
+
+                        clearInterval( This.aLi[i].timer );
+                        This.sum+=This.aLi[i].score;
+                        This.score.innerHTML="分数：<span>"+This.sum+"</span>";
+                        This.oUl.removeChild(This.aLi[i]);
+                    }
+                    else{
+
+                        This.aLi[i].blood--;
+                    }
+                    clearInterval(oB.timer);
+                    This.parent.removeChild(oB);
+                    if(This.aLi.length==0){
+
+                        clearInterval(This.RanTimer);
+                        clearInterval(This.planeTimer);
+                        This.planeTimer=null;
+                        var bGo=confirm("是否继续");
+
+                        if(bGo){
+
+                            This.iNow++
+                            if(This.BeeMap[This.iNow]){
+
+                                This.CreBee(This.iNow);
+                            }
+                            else{
+
+                                alert("恭喜通关，总分"+This.sum+"分");
+                                window.location.reload();
+                            }
+                        }
+                        else{
+
+                            var bSure=confirm("您确定要重新开始吗");
+
+                            if(bSure){
+
+                                window.location.reload();
+                            }
+                            else{
+
+                                This.iNow++
+                                if(This.BeeMap[This.iNow]){
+
+                                    This.CreBee(This.iNow);
+                                }
+                                else{
+
+                                    alert("恭喜通关，总分"+This.sum+"分");
+                                    window.location.reload();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },30);
+    },
+    fnPz:function (obj1, obj2){                                     //本游戏中碰撞检测
+
+        if(obj1&&obj2){
+
+            var l1=obj1.offsetLeft;
+            var r1=l1+obj1.offsetWidth;
+            var t1=obj1.offsetTop;
+            var b1=t1+obj1.offsetHeight;
+            var l2=obj2.offsetLeft+obj2.parentNode.offsetLeft;
+            var r2=l2+obj2.offsetWidth;
+            var t2=obj2.offsetTop+obj2.parentNode.offsetTop;
+            var b2=t2+obj2.offsetHeight;
+
+            if(l1>r2||r1<l2||t1>b2||b1<t2){
+
+                return false;
+            }
+            else{
+
+                return true;
+            }
+        }
+    }
+}
+</script>
+</head>
+
+<body>
+    <p id="tips">子弹：空格<br />左：←<br />右：→</p>
+    <div id="div1">
+        <div id="gameBtn">开始游戏</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>无标题文档</title>
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <script src="http://demo.jb51.net/js/myfocus/content/templates/myfocus/js/myfocus-2.0.1.min.js"></script>
+    <script type="text/javascript" type="text/css">
+        myFocus.set({
+            id:'picBox'
+        });
+    </script>
+
+    <style>
+    *{
+        margin:0;
+        padding:0;
+        font-family:"微软雅黑";
+    }
+    .wrap{
+        width:1000px;
+        margin:0 auto;
+    }
+    /*<!-- 头部，导航 -->*/
+    .header{
+        width:100%;
+        height:80px;
+        background:#fff;
+        margin-bottom:5px;
+    }
+    .header img{
+        width:200px;
+        float:left;
+    }
+    .header ul li{
+        float:left;
+        list-style-type:none;
+        width:100px;
+        height:80px;
+        line-height:80px;
+        text-align:center;
+    }
+    .header ul li a{
+        display:block;
+       
+        text-decoration:none;
+        color:black;
+    }
+    .header ul li a:hover{
+        background:#BD3847;
+    }
+    /*<!-- 轮播图 -->*/
+    .myfocus{
+        width:1000px;
+        height:310px;
+        overflow:hidden;
+    }
+    /*<!-- 滚动新闻 -->*/
+    .scrollnews{
+        height:40px;
+        margin:20px 0;
+        overflow:hidden;
+        font-weight:normal;
+    }
+    .scrollnews_left{
+        background-color: #be3948;
+        color: #FFFFFF;
+        float: left;
+        width: 150px;
+        line-height:40px;
+        text-align:center;
+    }
+    .scrollnews_right{
+        text-indent:20px;
+        color: #FFFFFF;
+        background-color: #3E3E3E;
+        float: left;
+        line-height:40px;
+        width:850px;
+    }
+    /*<!-- 展示新闻 -->*/
+    .shownews{
+        height:160px;
+    }
+    .shownews li{
+        list-style-type:none;
+        float:left;
+        width:330px;
+    }
+    .shownews li img{
+        display:block;
+        width:330px;
+        height:130px;
+    }
+    .shownews .show_center{
+        margin:0 5px;
+    }
+    .shownews li a{
+        text-decoration:none;
+        width:328px;
+        height:28px;
+        line-height:28px;
+        display:block;
+        border:1px solid #E7E7E7;
+        color:black;
+        text-align:center;
+    }
+    /*<!-- 三列展示 -->*/
+    .threenew{
+        height:300px;
+        margin:20px 0 8px 0;
+        clear:both;
+    }
+    .threenew>div{
+        width:330px;
+        float:left;
+    }
+    .threenew .showtwo{
+        margin:0 5px;
+    }
+    .newtop{
+        height: 40px;
+        line-height:40px;
+        width: 100%;
+        background-color: #be3948;
+        color:white;
+        text-indent:20px;
+    }
+    /*<!-- 一列 -->*/
+    .showone ul{
+        height:248px;
+        list-style-type:none;
+        padding:5px;
+        border:1px solid #ccc;
+    }
+    .showone ul li{
+        border-bottom:1px solid #ccc;
+        font-size:12px;
+        height:80px;
+        clear:both; 
+    }
+    .showone ul li span{
+        float:left;
+        color:white;
+        display:block;
+        text-align:center;
+        background:#BD3847;
+        border-radius:4px;
+        padding:12px;
+        margin:13px 10px 5px 0;
+    }
+    .showone ul li h3{
+        line-height:35px;
+    }
+    .showone ul li a{
+        text-decoration:none;
+        color:#3E3D3D;
+        font-size:14px;
+    }
+    /*<!-- 二列 -->*/
+    .showtwo div{
+        height:233px;
+        padding:25px 25px 0 25px;
+        border:1px solid #ccc;       
+    }
+    .showtwo div ul{
+        list-style-type:none; 
+    }
+    .showtwo div img{
+        width:278px;
+        height:120px;
+    }
+    .showtwo a{
+        text-decoration:none;
+        color:black;
+    }
+    /*<!-- 三列 -->*/
+    .showthree dl{
+        border:1px solid #ccc;
+        height:248px;
+        padding:5px;
+    }
+    /*<!-- 底部 -->*/
+    .footer{
+        height:80px;
+        background:#E7E7E7;
+    }
+    .footer p{
+        line-height:80px;
+        text-align:center;
+    }
+
+    </style>
+</head>
+  
+<body>
+
+    <div class="wrap">
+        <!-- 头部，导航 -->
+        <div class="header">
+            <img src="http://img.mukewang.com/53edadad0001efe202000070.jpg" alt="慕课网" />
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">产品特色</a></li>
+                <li><a href="#">解决方案</a></li>
+                <li><a href="#">产品价格</a></li>
+                <li><a href="#">帮助中心</a></li>
+                <li><a href="#">关于我们</a></li>
+            </ul>
+        </div>
+        <!-- 轮播图 -->
+        <div class="myfocus" id="picBox">
+            <div class="loading"><img src="http://img.mukewang.com/53edad8c000175cb00300029.jpg" alt="Loading..."></div>
+            <div class="pic">
+                <ul>
+                    <li><a href="#"><img src="http://img.mukewang.com/53edad3e0001afad10000318.jpg" /></a></li>
+                    <li><a href="#"><img src="http://img.mukewang.com/53edad2c0001b61310000314.jpg" /></a></li>
+                    <li><a href="#"><img src="http://img.mukewang.com/53edad1600019ae910000310.jpg" /></a></li>
+                </ul>                
+            </div>
+        </div>
+        <!-- 滚动新闻 -->
+        <div class="scrollnews">
+            <p class="scrollnews_left">滚动新闻</p>
+            <p class="scrollnews_right">这是滚动新闻</p>
+        </div>
+        <!-- 展示新闻 -->
+        <div class="shownews">
+            <ul>
+                <li>
+                    <img src="http://img.mukewang.com/53edad54000119fb03300130.jpg" alt="玩转Bootstrap">
+                    <a href="#">玩转Bootstrap</a>
+                </li>
+                <li class="show_center">
+                   <img src="http://img.mukewang.com/53edad690001260a03300130.jpg" alt="企业网站实战">
+                    <a href="#">企业网站实战</a>
+                </li>
+                <li>
+                    <img src="http://img.mukewang.com/53edad7a0001cde803300130.jpg" alt="JavaScript基础">
+                    <a href="#">JavaScript基础</a>
+                </li>
+            </ul>
+        </div>
+        <!-- 三列展示 -->
+        <div class="threenew">
+            <!-- 一列 -->
+            <div class="showone">
+                <p class="newtop">新闻中心</p>
+                <ul>
+                    <li>
+                        <span>8月<br />23日</span>
+                        <h3>学习计划之“Android攻城狮初养成”</h3>
+                        <p><a href="#">想成为Android攻城狮?想开发一款专属App?没有任何基础的你，应该从何学起?</a></p>
+                    </li>
+                    <li>
+                        <span>8月<br />23日</span>
+                        <h3>学习计划之“Android攻城狮初养成”</h3>
+                        <p><a href="#">想成为Android攻城狮?想开发一款专属App?没有任何基础的你，应该从何学起?</a></p>
+                    </li>
+                    <li>
+                        <span>8月<br />23日</span>
+                        <h3>学习计划之“Android攻城狮初养成”</h3>
+                        <p><a href="#">想成为Android攻城狮?想开发一款专属App?没有任何基础的你，应该从何学起?</a></p>
+                    </li>
+                </ul>               
+            </div>
+            <!-- 二列 -->
+            <div class="showtwo">
+                <p class="newtop">活动中心</p>
+                <div>
+                    <img src="http://img.mukewang.com/53edacdd0001b8e804820302.jpg" alt="活动">
+                    <ul>
+                        <li><a href="#">慕课网2048源码征集</a> </li>
+                        <li><a href="#">慕课网2048源码征集</a> </li>
+                        <li><a href="#">慕课网2048源码征集</a> </li>
+                        <li><a href="#">慕课网2048源码征集</a> </li>
+                        <li><a href="#">慕课网2048源码征集</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 三列 -->
+            <div class="showthree">
+                <p class="newtop">联系我们</p>
+                <dl>
+                    <dt>讲师招募</dt>
+                    <dd>邹同学</dd>
+                    <dd>电话：18911888156</dd>
+                    <dd>QQ：576264119</dd>
+                    <dd>E-mail：daisy@imooc.com</dd>
+                    <dt style="margin-top:30px;">网站合作</dt>
+                    <dd>吕同学</dd>
+                    <dd>电话：13261771103</dd>
+                    <dd>QQ：1059809142</dd>
+                    <dd>E-mail：lvyang@imooc.com</dd>
+                </dl>               
+            </div>
+        </div>
+        <!-- 底部 -->
+        <div class="footer">
+            <p>Copyright © 2013 imooc.com All Rights Reserved 京ICP备 13046642号-2</p>
+        </div>
+
+
+    </div>
+
+</body>
+</html>

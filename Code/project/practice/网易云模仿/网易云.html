@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>无标题文档</title>
+	<style type="text/css">
+
+	*{
+		margin:0px;
+		padding:0px;
+	}
+	.box{
+		width:800px;
+		height:300px;
+		margin:10px auto;
+		border:1px solid red;
+	}
+	.menu{
+		position:relative;
+		width:760px;
+		height:200px;
+		margin-top:50px;
+		margin-left:20px;
+		overflow:hidden;
+		/*border:1px solid blue;*/
+	}
+	.menu img{
+		width:300px;
+		height:150px;
+		cursor:pointer;
+	}
+	.menu img.on{
+		position:absolute;
+		top:0;
+		left:110px;
+		width:540px;
+		height:200px;
+		z-index:5;
+	}
+	.menu img.left{
+		position:absolute;
+		top:25px;
+		left:0px;
+	}
+	.menu img.right{
+		position:absolute;
+		top:25px;
+		right:0px;
+	}
+	.menu img.none{
+		display:none;
+	}
+
+	</style>
+
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+<!-- 	<script type="text/javascript">
+	$(function(){
+		$('.left').click(function(){
+			$(this).addClass('none')
+			.next().removeClass('on').addClass('left').end()
+			.next().next().addClass('on');
+		})
+		$('.right').click(function(){
+			$(this).addClass('none')
+			.prev().removeClass('on').addClass('right').end()
+			.prev().prev().addClass('on');
+		})
+	})
+	</script> -->
+</head>
+<body>`
+
+	<div class='box'>
+		<div class='menu'>
+			<img class="left" src="images/1.jpg" alt=""/>
+			<img class="on" src="images/2.jpg" alt=""/>
+			<img class="right" src="images/3.jpg" alt=""/>
+			<img class="none" src="images/4.jpg" alt=""/>
+			<img class="none" src="images/5.jpg" alt=""/>
+			<img class="none" src="images/6.jpg" alt=""/>
+		</div>
+	</div>
+
+</body>
+</html>

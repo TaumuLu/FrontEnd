@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+    <style>
+    #box{
+        width:339px;
+        height:600px;
+        margin-left:500px;
+        background:url(../../images/手机/iphone6s.png)no-repeat;
+        position:relative;
+        animation:a 1.5s ease-out;
+    }
+    @keyframes a{
+        0%{
+            margin-left:-500px;
+        }
+        80%{
+            margin-left:600px;
+        }
+        100%{
+            margin-left:500px;
+        }
+    }
+    #imgbox{
+        list-style-type:none;
+        width:219px;
+        height:390px;
+        overflow:hidden;
+        position:relative;
+        top:64px;
+        left:20px;
+    }
+    #imgbox li{
+        display:none;
+        opacity:0;
+    }
+    #imgbox li.show{
+        display:block;
+    }
+    </style>
+<body>
+    <div id="box">
+        <ul id="imgbox">
+            <li class="show">
+                <img src="../../images/手机/iphone6s_11.jpg" />
+            </li>
+            <li>
+                <img src="../../images/手机/iphone6s_22.jpg" />
+            </li>
+            <li>
+                <img src="../../images/手机/iphone6s_33.jpg" />
+            </li>
+            <li>
+                <img src="../../images/手机/iphone6s_44.jpg" />
+            </li>
+            <li>
+                <img src="../../images/手机/iphone6s_55.jpg" />
+            </li>
+        </ul>
+    </div>
+
+    <script>
+
+    (function(){
+        var obox=document.getElementById('imgbox');
+        var oli=obox.getElementsByTagName('li');
+
+        var num=0;
+        var timer=null;
+        fadein(oli[num]);
+        setTimeout(function(){
+            fadeout(oli[num]);
+        },2500)
+
+        timer=setTimeout(function(){
+
+            num++;
+            var len=oli.length
+            if(num==len){
+                num=0;
+            }
+            for(var i=0;i<len;i++){
+                oli[i].className="";
+
+            }
+            fadein(oli[num]);
+            oli[num].className="show";
+
+            setTimeout(function(){
+                fadeout(oli[num]);
+            },2500)
+            setTimeout(arguments.callee,3000)
+        },3000)
+        function fadein(ele){
+            setopa(ele,0);
+            for(var i=0;i<21;i++){
+                (function(i){
+                    var speed=i*5;
+                    setTimeout(function(){
+                        setopa(ele,speed);
+                    },i*25)
+                })(i)
+            }
+        }
+        function fadeout(ele){
+            for(var i=0;i<21;i++){
+                (function(i){
+                    var speed=100-i*5;
+                    setTimeout(function(){
+                        setopa(ele,speed);
+                    },i*25)
+                })(i);
+            }
+        }
+        function setopa(ele,opa){
+            ele.style.opacity=opa/100;
+        }
+    })();
+
+
+
+
+
+
+    </script>
+</body>
+</html>

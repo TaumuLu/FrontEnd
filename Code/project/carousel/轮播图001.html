@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+    <style type="text/css">
+    *{
+        margin:0;
+        padding:0;
+    }
+    li{
+        list-style-type:none;
+    }
+    #parbox{
+        width:1000px;
+        margin:0 auto;
+    }
+    #parbox:after{
+        content:"";
+        height:0;
+        display:block;
+        visibility:hidden;
+        clear:both;
+    }
+    #box{
+        width:800px;
+        height:400px;
+        margin:0 auto;
+        position:relative;
+        overflow:hidden;
+    }
+    #imgbox{
+        /*width:3555px;*/
+        width: 4000px;
+        height: 400px;
+        transition:all 0.5s ease;
+        /*margin-left:-300%;*/
+    }
+    #imgbox li{
+        float:left;
+        overflow: hidden;
+    }
+    #imgbox li img{
+        display:block;
+        width:800px;
+        height:400px;
+    }
+    #list{
+        position:absolute;
+        right:20px;
+        bottom:20px;
+        font-size:0px;
+    }
+    #list li{
+        display:inline-block;
+        margin:3px 5px;
+        width:10px;
+        height:10px;
+        border:2px solid #fff;
+        border-radius:7px;
+        border-color:rgba(255,255,255,0.3);
+        background:rgba(0,0,0,0.5);
+        cursor:pointer;
+    }
+    #list li.showli{
+        background:rgba(187,232,239,0.5);
+    }
+    #sebox #prev{
+        position:absolute;
+        top:50%;
+        left:0;
+        width:41px;
+        height:69px;
+        margin-top:-35px;
+        /*background:red;*/
+        background:url(http://i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png) no-repeat -84px;
+        z-index:1000;
+        cursor:pointer;
+    }
+    #sebox #next{
+        position:absolute;
+        top:50%;
+        right:0;
+        width:41px;
+        height:69px;
+        margin-top:-35px;
+        /*background:blue;*/
+        background:url(http://i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png) no-repeat -125px;
+        z-index:1000;
+        cursor:pointer;
+    }
+    #sebox #prev:hover{
+        /*background:url(../images/slides.png) no-repeat 0px;*/
+        background-position:0px;
+    }
+    #sebox #next:hover{
+        /*background:url(../images/slides.png) no-repeat 0px;*/
+        background-position:-43px;
+    }
+    </style>
+<body>
+
+    <div id="parbox">
+        <div id="box">
+            <ul id="imgbox">
+                <li><img src="https://i0.hdslb.com/bfs/archive/04db8cc2f0305c7f34314680d866f02f20b1a4ab.png"/></li>
+                <li><img src="https://i0.hdslb.com/bfs/sycp/tmaterial/201811/2a72a993930e683bb79e6cf7469e4812.jpg"/></li>
+                <li><img src="https://i0.hdslb.com/bfs/archive/6f1a33f540381fe0f59e9a457cd173cc80ed1571.jpg"/></li>
+                <li><img src="https://i0.hdslb.com/bfs/archive/4816b9678ca2dd011c2c6c514bebac38eb096436.jpg"/></li>
+                <li><img src="https://i0.hdslb.com/bfs/archive/0f39fe8ca499d6ddf89a77a1c939fdcb591e01c7.png"/></li>
+            </ul>
+            <ul id="list">
+                <li class="showli"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+            <ul  id="sebox">
+                <li id="prev"></li>
+                <li id="next"></li>
+            </ul>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+    function addLoadEvent(func){
+        var oldfunc=window.onload;
+        if(typeof window.onload!="function"){
+            window.onload=func;
+        }else{
+            window.onload=function(){
+                func();
+                oldfunc();
+            }
+        }
+    }
+    addLoadEvent(Lb1);
+
+    function Lb1(){
+        var oprev=document.getElementById('prev');
+        var onext=document.getElementById('next');
+
+        var oimgbox=document.getElementById('imgbox');
+        var oli1=oimgbox.getElementsByTagName('li');
+
+        var olist=document.getElementById('list');
+        var oli2=olist.getElementsByTagName('li');
+
+        var ind=0;
+        for(var i=0;i<oli2.length;i++){
+            (function(index){
+                oli2[i].onclick=function(){
+                    ind=index;
+                    tab(index);
+                }
+            })(i);
+        }
+        onext.onclick=tabnext;
+        function tabnext(){
+            ind++;
+            if(ind==oli1.length){
+                ind=0;
+            }
+            tab(ind);
+        }
+        oprev.onclick=function(){
+            ind--;
+            if(ind<0){
+                ind=oli1.length-1;
+            }
+            tab(ind);
+        }
+        function tab(index){
+            for(var i=0;i<oli2.length;i++){
+                oli2[i].className="";
+            }
+            oli2[index].className="showli";
+            var num=-(index*100);
+            oimgbox.style.marginLeft=num+'%';
+            console.log(index);
+        }
+        // var timer=setInterval(tabnext,2000);
+        imgbox.onmouseover=oprev.onmouseover=onext.onmouseover=function(){
+            clearInterval(timer);
+        }
+        imgbox.onmouseout=function(){
+            clearInterval(timer);
+            timer=setInterval(tabnext,2000);
+        }
+    }
+
+    </script>
+</body>
+</html>

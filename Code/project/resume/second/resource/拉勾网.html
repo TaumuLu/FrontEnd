@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LG</title>
+    <style>
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td {
+    margin: 0; padding: 0;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
+    font-weight: normal;
+    font-family: "Microsoft YaHei";
+}
+ol,ul {
+    list-style: none;
+}
+html,body {
+    font: 14px/22px "Microsoft Yahei", "Hiragino Sans GB", Helvetica, "Helvetica Neue", "微软雅黑", Tahoma, Arial, sans-serif;
+    color: #14191e;
+}
+a {
+    text-decoration: none;
+    color: #555;
+}
+li {
+    list-style-type: none;
+}
+input {
+    font-family: "Hiragino Sans GB","Microsoft Yahei",SimSun,Arial,"Helvetica Neue",Helvetica;
+}
+img {
+    vertical-align: top;
+    display: inline-block;
+}
+    .clearfix:after {
+        content: "";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+    #lg-tbar{
+        width: 100%;
+        height: 30px;
+        background-color: #333;
+    }
+    .lg-tbar-l{
+        float:left;
+        margin-left:1.5%;
+    }
+    .lg-tbar-r{
+        float:right;
+        margin-right:1.5%;
+    }
+    #lg-tbar a{
+        margin-top:7px;
+        line-height:15px;
+        float:left;
+        color: #c4c3c3;
+        padding:0 12px;
+    }
+    #lg-tbar a:hover{
+        color:white;
+    }
+    #lg-tbar .lg-tbar-l a:nth-of-type(1){
+        background: url(images/lg/app.png) 11px 0 no-repeat;
+        padding: 0 12px 0 27px;
+        color: #08d7a2;
+    }
+    #lg-tbar .lg-tbar-l a:nth-of-type(1):hover{
+        color: #05EAAF;
+    }
+    .lg-tbar-l a:nth-of-type(2),.lg-tbar-r a:nth-of-type(2){
+        border-left: 1px solid #5d5d5d;
+    }
+
+
+    #lg-tnav {
+        min-width: 1024px;
+        height: 54px;
+        border-top: 1px solid #d2d2d2;
+        border-bottom: 1px solid #e5e5e5;
+        background-color: #fafafa;
+    }
+    .inner {
+        width: 1024px;
+        margin: 0 auto;
+    }
+    .lg-tnav-1 {
+        float: left;
+        width: 260px;
+    }
+    .lg-tnav-1 h2 {
+        float: left;
+        width: 97px;
+        height: 34px;
+        margin: 10px 0 0;
+        padding: 0;
+        background-image: url(images/lg/logo.png);
+        overflow: hidden;
+        text-indent: -99em;
+    }
+    .lg-tnav-1 div {
+        float: left;
+        height: 44px;
+        line-height: 44px;
+        padding-top: 10px;
+        padding-left: 12px;
+        font-size: 18px;
+    }
+    .lg-tnav-1 div span:nth-child(2) {
+        color: #999;
+        font-size: 12px;
+        cursor: pointer;
+        margin-left: 8px;
+    }
+
+    .lg-tnav-2 {
+        float: left;
+    }
+    .lg-tnav-2 li {
+        display: inline-block;
+        margin: 0 16px;
+        position: relative;
+    }
+    .lg-tnav-2 li a{
+        display: block;
+        font-size: 18px;
+        padding: 0 5px;
+        color: #999;
+        line-height: 53px;
+    }
+    .lg-tnav-2 li a:hover {
+        color: #333;
+        border-bottom: 2px solid #00b38a;
+    }
+    .lg-tnav-2 li:nth-child(1) a {
+        color: #333;
+        border-bottom: 2px solid #00b38a;
+    }
+
+
+    .container {
+        width: 1024px;
+        margin: 35px auto 0;
+        padding-bottom: 100px;
+    }
+    .sidebar {
+        width: 230px;
+        float: left;
+        position: relative;
+        z-index: 100;
+    }
+    .sidebar-top {
+        background-color: #fafafa;
+    }
+    .menu {
+        position:relative;
+    }
+    .menu-nav {
+        padding: 6px 12px;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid #fafafa;
+        border-right: 0;
+        z-index: 101;
+    }
+/*    .menu-nav:hover + .menu-list {
+        display: block;
+    }*/
+    .menu-over {
+        background-color: #fff;
+        border-color: #c9cbcd;
+        width: 206px;
+    }
+    .menu-nav h2{
+        font-size: 18px;
+        font-weight: 500;
+        padding-left: 8px;
+        margin: 10px 0;
+        position: relative;
+    }
+    .menu-nav h2:after{
+        content: "";
+        position: absolute;
+        top: 6px;
+        right: 7px;
+        width: 8px;
+        height: 8px;
+        border-right: 1px solid #707374;
+        border-bottom: 1px solid #707374;
+        -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+    .menu-nav a{
+        float: left;
+        padding: 0 8px;
+        margin: 0 5px 5px 0;
+        color: #555;
+        white-space: nowrap;
+    }
+    .menu-list {
+        position: absolute;
+        top: 0;
+        left: 230px;
+        width: 540px;
+        z-index: 100;
+        border: 2px solid #c9cbcd;
+        padding: 19px 30px 15px;
+        background-color: #fff;
+        display: none;
+    }
+    .menu-list dl{
+        margin:0 0 20px;
+    }
+    .menu-list dt{
+        width: 70px;
+        font-size: 14px;
+        position: absolute;
+        text-align: right;
+    }
+    .menu-list dt a{
+        color: #333;
+        text-decoration: underline;
+        line-height: 28px;
+    }
+    .menu-list dd{
+        margin-left: 100px;
+        overflow: hidden;
+    }
+    .menu-list dd a{
+        padding: 0 10px;
+        line-height: 28px;
+        white-space: nowrap;
+        color: #333;
+    }
+
+    .sidebar-bottom {
+        height: 46px;
+        line-height: 46px;
+        font-size: 18px;
+        margin-top: 12px;
+        padding-left: 20px;
+        background-color: #fafafa;
+        border-bottom: 2px solid #00b38a;
+    }
+    .sidebar-bottom a {
+        display:block;
+        margin-left: 20px;
+    }
+    .content {
+        width: 744px;
+        margin-left: 280px;
+    }
+    .search {
+        width: 740px;
+        height: 37px;
+        position: relative;
+    }
+    .search input:nth-child(1) {
+        width: 570px;
+        height: 23px;
+        line-height: 23px;
+        border: 2px solid #00b38a;
+        border-right: 0;
+        float: left;
+        padding: 5px 8px 5px 10px;
+        font-size: 16px;
+    }
+    .search input:nth-child(2) {
+        float: right;
+        height: 37px;
+        width: 150px;
+        color: #fff;
+        font-size: 18px;
+        border: 2px solid #00b38a;
+        background-color: #00b38a;
+    }
+    .hot-search {
+        overflow: hidden;
+        margin: 6px 0 18px;
+    }
+    .hot-search dt {
+        float: left;
+        width: 70px;
+        font-size: 14px;
+    }
+    .hot-search dd {
+        margin-right: 20px;
+        float: left;
+    }
+
+    .banner {
+        width: 744px;
+        height: 160px;
+        margin-bottom: 18px;
+        overflow: hidden;
+        position: relative;
+    }
+    .banner-123 {
+        width: 612px;
+        height: 480px;
+        float: left;
+        overflow: hidden;
+        position: relative;
+        -webkit-transition: margin-top .3s;
+        -o-transition: margin-top .3s;
+        transition: margin-top .3s;
+    }
+    .banner-123 li{
+        width: 612px;
+        height: 160px;
+    }
+
+    .banner-abc {
+        width: 121px;
+        height: 160px;
+        position: relative;
+        float: right;
+    }
+    .banner-move {
+        width: 127px;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        left: -6px;
+        background: url(images/lg/abc.png) no-repeat;
+        -webkit-transition: top .3s;
+        -o-transition: top .3s;
+        transition: top .3s;
+    }
+    .banner-abc li {
+        width: 113px;
+        height: 42px;
+        border: 4px solid #d3d3d3;
+        margin-bottom: 5px;
+    }
+    .banner-abc li.current span {
+        background: url(images/lg/cover.png);
+        position: absolute;
+        width: 113px;
+        height: 42px;
+    }
+
+    .thumbs {
+        height: 118px;
+        margin-bottom: 25px;
+        position: relative;
+    }
+    .thumbs li {
+        float: left;
+        margin-right: 8px;
+        border: 2px solid #fafafa;
+        position: relative;
+    }
+    .thumbs li:last-child{
+        margin-right: 0;
+    }
+    .thumbs li a {
+        display: block;
+        overflow: hidden;
+        position: relative;
+    }
+    .thumbs img {
+        display: block;
+        width: 113px;
+        height: 113px;
+        position: relative;
+    }
+    .hot-info {
+        /*display: none;*/
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,179,138,.9);
+    }
+    .hot-info h2 {
+        font-size: 24px;
+        font-weight: 400;
+        overflow: hidden;
+        text-align: center;
+        height: 24px;
+        line-height: 24px;
+        margin:10px 8px 8px;
+        color: #fff;
+    }
+    .hot-info span {
+        display: block;
+        height: 5px;
+        width: 100px;
+        margin: 0 6px;
+        background: rgba(255,255,255,.3);
+        color: #fff;
+    }
+    .hot-info p {
+        font-size: 12px;
+        margin: 6px 8px;
+        line-height: 18px;
+        color: #fff;
+    }
+    .job-tab {
+        font-size: 0;
+        background-color: #f6f6f6;
+    }
+    .job-tab li:first-child {
+        border-top: 3px solid #00b38a;
+        background-color: #fff;
+        color: #333;
+    }
+    .job-tab li {
+        font-size: 18px;
+        display: inline-block;
+        padding: 7px 20px;
+        color: #999;
+    }
+    .hot-list .list-item {
+        width: 744px;
+        height: 123px;
+        overflow: hidden;
+        border-bottom: 1px dashed #e1e1e1;
+    }
+    .item-top {
+        height: 62px;
+        padding-top: 22px;
+        padding-left: 15px;
+        overflow: hidden;
+        background-color: #fff;
+    }
+    .list-l {
+        float: left;
+        width: 400px;
+        margin-right: 20px;
+    }
+    .list-l div:first-child {
+        height: 34px;
+        font-size: 12px;
+    }
+    .list-l div:first-child h2 {
+        float: left;
+        font-size: 16px;
+    }
+    .list-l div:first-child h2 a {
+        float: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        color: #00b38a;
+    }
+    .list-l div:first-child h2 a span {
+        float: none;
+        margin-left: 6px;
+        color: #00b38a;
+        font-size: 16px;
+    }
+    .list-l div:first-child span{
+        float: left;
+        color: #999;
+        font-size: 14px;
+        margin-left: 10px;
+    }
+    .list-l div:last-child span:nth-child(1) {
+        float: left;
+        font-size: 16px;
+        color: #fa6041;
+        margin-right: 20px;
+        height: 28px;
+    }
+    .list-r {
+        float: right;
+        width: 309px;
+    }
+    .list-r div:first-child {
+        width: 294px;
+        height: 34px;
+        color: #00b38a;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .list-r div:first-child a{
+        font-size: 16px;
+        color: #00b38a;
+    }
+    .list-r div:last-child {
+        width: 294px;
+        height: 28px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .item-btm {
+        height: 39px;
+        background-color: #fafafa;
+    }
+    .item-btm div:first-child {
+        float: left;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 400px;
+        height: 39px;
+        line-height: 39px;
+        padding-left: 15px;
+        padding-right: 20px;
+
+    }
+    .item-btm div:last-child {
+        float: left;
+        width: 309px;
+        margin-top: 8px;
+    }
+    .item-btm div:last-child span {
+        display: inline-block;
+        padding: 0 3px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #dcdcdc;
+    }
+    .hot-list .list-fr {
+        float: right;
+        background:#00b38a url(images/lg/fr.png) no-repeat 88px center;
+        font-size: 16px;
+        padding: 5px 40px 5px 15px;
+        margin-top: 25px;
+        color: #fff;
+    }
+    .linkbox {
+        padding-top: 15px;
+        margin-top: 40px;
+        border-top: 1px solid #ececed;
+        overflow: hidden;
+    }
+    .linkbox dl dt {
+        float: left;
+        width: 70px;
+        margin-top: 2px;
+        font-size: 15px;
+    }
+    .linkbox dl dd {
+        margin-left: 70px;
+        overflow: hidden;
+    }
+    .linkbox a {
+        float: left;
+        height: 15px;
+        line-height: 15px;
+        font-size: 12px;
+        color: #555;
+        padding: 8px 9px;
+        white-space: nowrap;
+    }
+    .linkbox a:last-child {
+        text-decoration: underline;
+    }
+    .linkbox span {
+        float: left;
+        padding: 7px 0 9px;
+        font-size: 12px;
+        line-height: 15px;
+        color: #999;
+    }
+    #footer {
+        clear: both;
+        border-top: 1px solid #ebebeb;
+        height: 67px;
+        position: relative;
+        min-width: 1024px;
+        z-index: 1001;
+    }
+    #footer>div {
+        width: 1024px;
+        margin: 0 auto;
+        position: relative;
+    }
+    #footer i {
+        width: 198px;
+        height: 19px;
+        position: absolute;
+        top: 9px;
+        background:url(images/lg/footer_lagou.png) no-repeat 0 0;
+    }
+    .footer-top {
+        float: right;
+        height: 14px;
+        line-height: 14px;
+        padding-top: 12px;
+        white-space: nowrap;
+    }
+    .footer-top a {
+        margin-right: 15px;
+        font-size: 14px;
+        color: #555;
+        float: left;
+        position: relative;
+    }
+    .footer-top a img {
+        display: none;
+        opacity: 0;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        width: 256px;
+        height: 256px;
+        border: 3px solid #0d9572;
+        z-index: 1001;
+        -webkit-transition: all .5s;
+        -moz-transition: all .5s;
+        -ms-transition: all .5s;
+        transition: all .5s;
+    }
+    .footer-top a:hover img {
+        display: block;
+        opacity: 1;
+    }
+    @keyframes a {
+        0% {
+            display:
+        }
+    }
+    .footer-top span {
+        font-size: 14px;
+        float: left;
+        color: #555;
+    }
+    .footer-bottom {
+        clear: both;
+        height: 12px;
+        padding-top: 13px;
+        padding-bottom: 14px;
+        font-size: 12px;
+        text-align: center;
+        line-height: 12px;
+        color: #d5d5d5;
+    }
+    .footer-bottom a {
+        color: inherit;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="lg-header">
+        <div id="lg-tbar" class="clearfix">
+            <div class="lg-tbar-l">
+                <a href="#">拉勾APP</a>
+                <a href="#">进入企业版</a>
+            </div>
+            <div class="lg-tbar-r">
+                <a href="#">登录</a>
+                <a href="#">注册</a>
+            </div>
+        </div>
+        <div id="lg-tnav">
+            <div class="inner">
+                <div class="lg-tnav-1">
+                    <a href="#">
+                        <h2>拉勾网</h2>
+                    </a>
+                    <div>
+                        <span>杭州站</span><span>[切换城市]</span>
+                    </div>
+                </div>
+                <ul class="lg-tnav-2">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">公司</a></li>
+                    <li><a href="#">一拍</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container clearfix">
+        <div class="sidebar">
+            <div class="sidebar-top">
+                <div class="menu">
+                    <div class="menu-nav">
+                        <h2>技术</h2>
+                        <a href="#">Java</a>
+                        <a href="#">PHP</a>
+                        <a href="#">C</a>
+                        <a href="#">C++</a>
+                        <a href="#">Android</a>
+                        <a href="#">iOS</a>
+                        <a href="#">测试</a>
+                        <a href="#">前端开发</a>
+                        <a href="#">技术经理</a>
+                        <a href="#">技术总监</a>
+                        <a href="#">架构师</a>
+                        <a href="#">CTO</a>
+                    </div>
+                    <div class="menu-list">
+                        <dl>
+                            <dt><a href="#">后端开发</a></dt>
+                            <dd>
+                                <a href="#">Java</a>
+                                <a href="#">Python</a>
+                                <a href="#">PHP</a>
+                                <a href="#">.NET</a>
+                                <a href="#">C#</a>
+                                <a href="#">C++</a>
+                                <a href="#">C</a>
+                                <a href="#">VB</a>
+                                <a href="#">Delphi</a>
+                                <a href="#">Perl</a>
+                                <a href="#">Ruby</a>
+                                <a href="#">Hadoop</a>
+                                <a href="#">Node.js</a>
+                                <a href="#">数据挖掘</a>
+                                <a href="#">自然语言处理</a>
+                                <a href="#">搜索算法</a>
+                                <a href="#">精准推荐</a>
+                                <a href="#">全栈工程师</a>
+                                <a href="#">Go</a>
+                                <a href="#">ASP</a>
+                                <a href="#">Shell</a>
+                                <a href="#">后端开发及其它</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">移动开发</a></dt>
+                            <dd>
+                                <a href="#">HTML5</a>
+                                <a href="#">Android</a>
+                                <a href="#">iOS</a>
+                                <a href="#">WP</a>
+                                <a href="#">移动开发其他</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">前端开发</a></dt>
+                            <dd>
+                                <a href="#">web前端</a>
+                                <a href="#">Flash</a>
+                                <a href="#">html5</a>
+                                <a href="#">JavaScript</a>
+                                <a href="#">U3D</a>
+                                <a href="#">COCOS2D-X</a>
+                                <a href="#">前端开发其他</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="menu">
+                    <div class="menu-nav">
+                        <h2>产品</h2>
+                        <a href="#">产品总监</a>
+                        <a href="#">产品经理</a>
+                        <a href="#">移动产品经理</a>
+                        <a href="#">游戏策划</a>
+                    </div>
+                    <div class="menu-list">
+                        <dl>
+                            <dt><a href="#">后端开发</a></dt>
+                            <dd>
+                                <a href="#">Java</a>
+                                <a href="#">Python</a>
+                                <a href="#">PHP</a>
+                                <a href="#">.NET</a>
+                                <a href="#">C#</a>
+                                <a href="#">C++</a>
+                                <a href="#">C</a>
+                                <a href="#">VB</a>
+                                <a href="#">Delphi</a>
+                                <a href="#">Perl</a>
+                                <a href="#">Ruby</a>
+                                <a href="#">Hadoop</a>
+                                <a href="#">Node.js</a>
+                                <a href="#">数据挖掘</a>
+                                <a href="#">自然语言处理</a>
+                                <a href="#">搜索算法</a>
+                                <a href="#">精准推荐</a>
+                                <a href="#">全栈工程师</a>
+                                <a href="#">Go</a>
+                                <a href="#">ASP</a>
+                                <a href="#">Shell</a>
+                                <a href="#">后端开发及其它</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">移动开发</a></dt>
+                            <dd>
+                                <a href="#">HTML5</a>
+                                <a href="#">Android</a>
+                                <a href="#">iOS</a>
+                                <a href="#">WP</a>
+                                <a href="#">移动开发其他</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">前端开发</a></dt>
+                            <dd>
+                                <a href="#">web前端</a>
+                                <a href="#">Flash</a>
+                                <a href="#">html5</a>
+                                <a href="#">JavaScript</a>
+                                <a href="#">U3D</a>
+                                <a href="#">COCOS2D-X</a>
+                                <a href="#">前端开发其他</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="menu">
+                    <div class="menu-nav">
+                        <h2>设计</h2>
+                        <a href="#">设计总监</a>
+                        <a href="#">UI</a>
+                        <a href="#">UE</a>
+                        <a href="#">交互设计</a>
+                        <a href="#">数据分析</a>
+                    </div>
+                    <div class="menu-list">
+                        <dl>
+                            <dt><a href="#">后端开发</a></dt>
+                            <dd>
+                                <a href="#">Java</a>
+                                <a href="#">Python</a>
+                                <a href="#">PHP</a>
+                                <a href="#">.NET</a>
+                                <a href="#">C#</a>
+                                <a href="#">C++</a>
+                                <a href="#">C</a>
+                                <a href="#">VB</a>
+                                <a href="#">Delphi</a>
+                                <a href="#">Perl</a>
+                                <a href="#">Ruby</a>
+                                <a href="#">Hadoop</a>
+                                <a href="#">Node.js</a>
+                                <a href="#">数据挖掘</a>
+                                <a href="#">自然语言处理</a>
+                                <a href="#">搜索算法</a>
+                                <a href="#">精准推荐</a>
+                                <a href="#">全栈工程师</a>
+                                <a href="#">Go</a>
+                                <a href="#">ASP</a>
+                                <a href="#">Shell</a>
+                                <a href="#">后端开发及其它</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">移动开发</a></dt>
+                            <dd>
+                                <a href="#">HTML5</a>
+                                <a href="#">Android</a>
+                                <a href="#">iOS</a>
+                                <a href="#">WP</a>
+                                <a href="#">移动开发其他</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">前端开发</a></dt>
+                            <dd>
+                                <a href="#">web前端</a>
+                                <a href="#">Flash</a>
+                                <a href="#">html5</a>
+                                <a href="#">JavaScript</a>
+                                <a href="#">U3D</a>
+                                <a href="#">COCOS2D-X</a>
+                                <a href="#">前端开发其他</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="menu">
+                    <div class="menu-nav">
+                        <h2>运营</h2>
+                        <a href="#">新媒体运营</a>
+                        <a href="#">数据运营</a>
+                        <a href="#">运营总监</a>
+                        <a href="#">CEO</a>
+                        <a href="#">编辑</a>
+                    </div>
+                    <div class="menu-list">
+                        <dl>
+                            <dt><a href="#">后端开发</a></dt>
+                            <dd>
+                                <a href="#">Java</a>
+                                <a href="#">Python</a>
+                                <a href="#">PHP</a>
+                                <a href="#">.NET</a>
+                                <a href="#">C#</a>
+                                <a href="#">C++</a>
+                                <a href="#">C</a>
+                                <a href="#">VB</a>
+                                <a href="#">Delphi</a>
+                                <a href="#">Perl</a>
+                                <a href="#">Ruby</a>
+                                <a href="#">Hadoop</a>
+                                <a href="#">Node.js</a>
+                                <a href="#">数据挖掘</a>
+                                <a href="#">自然语言处理</a>
+                                <a href="#">搜索算法</a>
+                                <a href="#">精准推荐</a>
+                                <a href="#">全栈工程师</a>
+                                <a href="#">Go</a>
+                                <a href="#">ASP</a>
+                                <a href="#">Shell</a>
+                                <a href="#">后端开发及其它</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">移动开发</a></dt>
+                            <dd>
+                                <a href="#">HTML5</a>
+                                <a href="#">Android</a>
+                                <a href="#">iOS</a>
+                                <a href="#">WP</a>
+                                <a href="#">移动开发其他</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">前端开发</a></dt>
+                            <dd>
+                                <a href="#">web前端</a>
+                                <a href="#">Flash</a>
+                                <a href="#">html5</a>
+                                <a href="#">JavaScript</a>
+                                <a href="#">U3D</a>
+                                <a href="#">COCOS2D-X</a>
+                                <a href="#">前端开发其他</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="menu">
+                    <div class="menu-nav">
+                        <h2>市场与营销</h2>
+                        <a href="#">市场推广</a>
+                        <a href="#">市场总监</a>
+                        <a href="#">市场策划</a>
+                        <a href="#">BD</a>
+                        <a href="#">销售总监</a>
+                    </div>
+                    <div class="menu-list">
+                        <dl>
+                            <dt><a href="#">后端开发</a></dt>
+                            <dd>
+                                <a href="#">Java</a>
+                                <a href="#">Python</a>
+                                <a href="#">PHP</a>
+                                <a href="#">.NET</a>
+                                <a href="#">C#</a>
+                                <a href="#">C++</a>
+                                <a href="#">C</a>
+                                <a href="#">VB</a>
+                                <a href="#">Delphi</a>
+                                <a href="#">Perl</a>
+                                <a href="#">Ruby</a>
+                                <a href="#">Hadoop</a>
+                                <a href="#">Node.js</a>
+                                <a href="#">数据挖掘</a>
+                                <a href="#">自然语言处理</a>
+                                <a href="#">搜索算法</a>
+                                <a href="#">精准推荐</a>
+                                <a href="#">全栈工程师</a>
+                                <a href="#">Go</a>
+                                <a href="#">ASP</a>
+                                <a href="#">Shell</a>
+                                <a href="#">后端开发及其它</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">移动开发</a></dt>
+                            <dd>
+                                <a href="#">HTML5</a>
+                                <a href="#">Android</a>
+                                <a href="#">iOS</a>
+                                <a href="#">WP</a>
+                                <a href="#">移动开发其他</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">前端开发</a></dt>
+                            <dd>
+                                <a href="#">web前端</a>
+                                <a href="#">Flash</a>
+                                <a href="#">html5</a>
+                                <a href="#">JavaScript</a>
+                                <a href="#">U3D</a>
+                                <a href="#">COCOS2D-X</a>
+                                <a href="#">前端开发其他</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="menu">
+                    <div class="menu-nav">
+                        <h2>职能</h2>
+                        <a href="#">HR</a>
+                        <a href="#">行政</a>
+                        <a href="#">会计</a>
+                        <a href="#">出纳</a>
+                    </div>
+                    <div class="menu-list">
+                        <dl>
+                            <dt><a href="#">移动开发</a></dt>
+                            <dd>
+                                <a href="#">HTML5</a>
+                                <a href="#">Android</a>
+                                <a href="#">iOS</a>
+                                <a href="#">WP</a>
+                                <a href="#">移动开发其他</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">前端开发</a></dt>
+                            <dd>
+                                <a href="#">web前端</a>
+                                <a href="#">Flash</a>
+                                <a href="#">html5</a>
+                                <a href="#">JavaScript</a>
+                                <a href="#">U3D</a>
+                                <a href="#">COCOS2D-X</a>
+                                <a href="#">前端开发其他</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="menu">
+                    <div class="menu-nav">
+                        <h2>金融</h2>
+                        <a href="#">投资</a>
+                        <a href="#">融资</a>
+                        <a href="#">并购</a>
+                        <a href="#">风投</a>
+                    </div>
+                    <div class="menu-list">
+                        <dl>
+                            <dt><a href="#">移动开发</a></dt>
+                            <dd>
+                                <a href="#">HTML5</a>
+                                <a href="#">Android</a>
+                                <a href="#">iOS</a>
+                                <a href="#">WP</a>
+                                <a href="#">移动开发其他</a>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><a href="#">前端开发</a></dt>
+                            <dd>
+                                <a href="#">web前端</a>
+                                <a href="#">Flash</a>
+                                <a href="#">html5</a>
+                                <a href="#">JavaScript</a>
+                                <a href="#">U3D</a>
+                                <a href="#">COCOS2D-X</a>
+                                <a href="#">前端开发其他</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-bottom">
+                <a href="#">订阅职位</a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="search clearfix">
+                <form>
+                    <input type="text" placeholder="请输入职位名称或公司名称">
+                    <input type="submit" value="搜索">
+                </form>
+            </div>
+            <dl class="hot-search">
+                <dt>热门搜索：</dt>
+                <dd><a href="#">自动化测试</a></dd>
+                <dd><a href="#">新媒体运营</a></dd>
+                <dd><a href="#">UI</a></dd>
+                <dd><a href="#">前端开发</a></dd>
+                <dd><a href="#">产品经理</a></dd>
+                <dd><a href="#">Android</a></dd>
+                <dd><a href="#">数据分析师</a></dd>
+                <dd><a href="#">架构师</a></dd>
+                <dd><a href="#">拉勾APP</a></dd>
+            </dl>
+            <div class="banner">
+                <ul class="banner-123">
+                    <li><a href="#">
+                        <img src="images/lg/1.jpg" alt="">
+                    </a></li>
+                    <li><a href="#">
+                        <img src="images/lg/2.jpg" alt="">
+                    </a></li>
+                    <li><a href="#">
+                        <img src="images/lg/3.jpg" alt="">
+                    </a></li>
+                </ul>
+                <div class="banner-abc">
+                    <div class="banner-move"></div>
+                    <ul>
+                        <li class="">
+                            <span></span>
+                            <img src="images/lg/a.jpg" alt="">
+                        </li>
+                        <li class="current">
+                            <span></span>
+                            <img src="images/lg/b.jpg" alt="">
+                        </li>
+                        <li class="current">
+                            <span></span>
+                            <img src="images/lg/c.jpg" alt="">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <ul class="thumbs">
+                <li><a href="#">
+                        <img src="images/lg/001.png" alt="">
+                        <div class="hot-info">
+                            <h2>淘粉吧</h2>
+                            <span></span>
+                            <p>新三板上市公司，国内第一超高返利导购平台</p>
+                        </div>
+                    </a></li>
+                <li><a href="#">
+                        <img src="images/lg/002.png" alt="">
+                        <div class="hot-info">
+                            <h2>慧泉众康</h2>
+                            <span></span>
+                            <p>国内第一家医疗自然语言大数据公司</p>
+                        </div>
+                    </a></li>
+                <li><a href="#">
+                        <img src="images/lg/003.jpg" alt="">
+                        <div class="hot-info">
+                            <h2>婚礼记</h2>
+                            <span></span>
+                            <p>做最大的婚礼服务平台</p>
+                        </div>
+                    </a></li>
+                <li><a href="#">
+                        <img src="images/lg/004.jpg" alt="">
+                        <div class="hot-info">
+                            <h2>和创科技</h2>
+                            <span></span>
+                            <p>中国企业级移动互联网营销管理领域绝对领导者</p>
+                        </div>
+                    </a></li>
+                <li><a href="#">
+                        <img src="images/lg/005.png" alt="">
+                        <div class="hot-info">
+                            <h2>喝彩网</h2>
+                            <span></span>
+                            <p>Facebook和央视春晚设计师创立</p>
+                        </div>
+                    </a></li>
+                <li><a href="#">
+                        <img src="images/lg/006.png" alt="">
+                        <div class="hot-info">
+                            <h2>靠我</h2>
+                            <span></span>
+                            <p>你的专属智囊团</p>
+                        </div>
+                    </a></li>
+            </ul>
+            <ul class="job-tab">
+                <li>推荐职位</li>
+                <li>热门职位</li>
+                <li>最新职位</li>
+            </ul>
+            <div class="hot-list clearfix">
+                <div>
+                    <ul class="clearfix">
+                        <li class="list-item">
+                            <div class="item-top">
+                                <div class="list-l">
+                                    <div>
+                                        <h2>
+                                            <a href="#">web前端(西湖区)<span>[杭州]</span></a>
+                                        </h2>
+                                        <span>17:49发布</span>
+                                    </div>
+                                    <div>
+                                        <span>8k-15k</span>
+                                        <span>经验1-3年</span>
+                                        /
+                                        <span>不限</span>
+                                    </div>
+                                </div>
+                                <div class="list-r">
+                                    <div>
+                                        <a href="#">美妮萱</a>
+                                    </div>
+                                    <div>
+                                        <span>电子商务</span>
+                                        /
+                                        <span>天使轮</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-btm">
+                                <div>“创业型公司，人少，钱多，速来！”</div>
+                                <div>
+                                    <span>交通补助</span>
+                                    <span>午餐补助</span>
+                                    <span>美女多</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-item">
+                            <div class="item-top">
+                                <div class="list-l">
+                                    <div>
+                                        <h2>
+                                            <a href="#">web前端(西湖区)<span>[杭州]</span></a>
+                                        </h2>
+                                        <span>17:49发布</span>
+                                    </div>
+                                    <div>
+                                        <span>8k-15k</span>
+                                        <span>经验1-3年</span>
+                                        /
+                                        <span>不限</span>
+                                    </div>
+                                </div>
+                                <div class="list-r">
+                                    <div>
+                                        <a href="#">美妮萱</a>
+                                    </div>
+                                    <div>
+                                        <span>电子商务</span>
+                                        /
+                                        <span>天使轮</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-btm">
+                                <div>“创业型公司，人少，钱多，速来！”</div>
+                                <div>
+                                    <span>交通补助</span>
+                                    <span>午餐补助</span>
+                                    <span>美女多</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-item">
+                            <div class="item-top">
+                                <div class="list-l">
+                                    <div>
+                                        <h2>
+                                            <a href="#">web前端(西湖区)<span>[杭州]</span></a>
+                                        </h2>
+                                        <span>17:49发布</span>
+                                    </div>
+                                    <div>
+                                        <span>8k-15k</span>
+                                        <span>经验1-3年</span>
+                                        /
+                                        <span>不限</span>
+                                    </div>
+                                </div>
+                                <div class="list-r">
+                                    <div>
+                                        <a href="#">美妮萱</a>
+                                    </div>
+                                    <div>
+                                        <span>电子商务</span>
+                                        /
+                                        <span>天使轮</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-btm">
+                                <div>“创业型公司，人少，钱多，速来！”</div>
+                                <div>
+                                    <span>交通补助</span>
+                                    <span>午餐补助</span>
+                                    <span>美女多</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-item">
+                            <div class="item-top">
+                                <div class="list-l">
+                                    <div>
+                                        <h2>
+                                            <a href="#">web前端(西湖区)<span>[杭州]</span></a>
+                                        </h2>
+                                        <span>17:49发布</span>
+                                    </div>
+                                    <div>
+                                        <span>8k-15k</span>
+                                        <span>经验1-3年</span>
+                                        /
+                                        <span>不限</span>
+                                    </div>
+                                </div>
+                                <div class="list-r">
+                                    <div>
+                                        <a href="#">美妮萱</a>
+                                    </div>
+                                    <div>
+                                        <span>电子商务</span>
+                                        /
+                                        <span>天使轮</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-btm">
+                                <div>“创业型公司，人少，钱多，速来！”</div>
+                                <div>
+                                    <span>交通补助</span>
+                                    <span>午餐补助</span>
+                                    <span>美女多</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-item">
+                            <div class="item-top">
+                                <div class="list-l">
+                                    <div>
+                                        <h2>
+                                            <a href="#">web前端(西湖区)<span>[杭州]</span></a>
+                                        </h2>
+                                        <span>17:49发布</span>
+                                    </div>
+                                    <div>
+                                        <span>8k-15k</span>
+                                        <span>经验1-3年</span>
+                                        /
+                                        <span>不限</span>
+                                    </div>
+                                </div>
+                                <div class="list-r">
+                                    <div>
+                                        <a href="#">美妮萱</a>
+                                    </div>
+                                    <div>
+                                        <span>电子商务</span>
+                                        /
+                                        <span>天使轮</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-btm">
+                                <div>“创业型公司，人少，钱多，速来！”</div>
+                                <div>
+                                    <span>交通补助</span>
+                                    <span>午餐补助</span>
+                                    <span>美女多</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-item">
+                            <div class="item-top">
+                                <div class="list-l">
+                                    <div>
+                                        <h2>
+                                            <a href="#">web前端(西湖区)<span>[杭州]</span></a>
+                                        </h2>
+                                        <span>17:49发布</span>
+                                    </div>
+                                    <div>
+                                        <span>8k-15k</span>
+                                        <span>经验1-3年</span>
+                                        /
+                                        <span>不限</span>
+                                    </div>
+                                </div>
+                                <div class="list-r">
+                                    <div>
+                                        <a href="#">美妮萱</a>
+                                    </div>
+                                    <div>
+                                        <span>电子商务</span>
+                                        /
+                                        <span>天使轮</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-btm">
+                                <div>“创业型公司，人少，钱多，速来！”</div>
+                                <div>
+                                    <span>交通补助</span>
+                                    <span>午餐补助</span>
+                                    <span>美女多</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-item">
+                            <div class="item-top">
+                                <div class="list-l">
+                                    <div>
+                                        <h2>
+                                            <a href="#">web前端(西湖区)<span>[杭州]</span></a>
+                                        </h2>
+                                        <span>17:49发布</span>
+                                    </div>
+                                    <div>
+                                        <span>8k-15k</span>
+                                        <span>经验1-3年</span>
+                                        /
+                                        <span>不限</span>
+                                    </div>
+                                </div>
+                                <div class="list-r">
+                                    <div>
+                                        <a href="#">美妮萱</a>
+                                    </div>
+                                    <div>
+                                        <span>电子商务</span>
+                                        /
+                                        <span>天使轮</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-btm">
+                                <div>“创业型公司，人少，钱多，速来！”</div>
+                                <div>
+                                    <span>交通补助</span>
+                                    <span>午餐补助</span>
+                                    <span>美女多</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <a class="list-fr" href="#">查看更多</a>
+                </div>
+            </div>
+            <div class="linkbox">
+                <dl>
+                    <dt>友情链接</dt>
+                    <dd>
+                        <a href="#">手机软件</a>
+                        <span>|</span>
+                        <a href="#">中大网校</a>
+                        <span>|</span>
+                        <a href="#">人人都是产品经理</a>
+                        <span>|</span>
+                        <a href="#">教师招聘</a>
+                        <span>|</span>
+                        <a href="#">研究报告</a>
+                        <span>|</span>
+                        <a href="#">汽车团购</a>
+                        <span>|</span>
+                        <a href="#">创投圈</a>
+                        <a href="#">创头条</a>
+                        <span>|</span>
+                        <a href="#">安卓开发论坛</a>
+                        <span>|</span>
+                        <a href="#">新疆人才网</a>
+                        <span>|</span>
+                        <a href="#">互联网的一些事</a>
+                        <a href="#">爱思英语网</a>
+                        <span>|</span>
+                        <a href="#">徐州英才网</a>
+                        <span>|</span>
+                        <a href="#">手机软件</a>
+                        <span>|</span>
+                        <a href="#">中大网校</a>
+                        <span>|</span>
+                        <a href="#">人人都是产品经理</a>
+                        <span>|</span>
+                        <a href="#">教师招聘</a>
+                        <span>|</span>
+                        <a href="#">研究报告</a>
+                        <span>|</span>
+                        <a href="#">汽车团购</a>
+                        <span>|</span>
+                        <a href="#">创投圈</a>
+                        <a href="#">创头条</a>
+                        <span>|</span>
+                        <a href="#">安卓开发论坛</a>
+                        <span>|</span>
+                        <a href="#">新疆人才网</a>
+                        <span>|</span>
+                        <a href="#">互联网的一些事</a>
+                        <a href="#">爱思英语网</a>
+                        <span>|</span>
+                        <a href="#">徐州英才网</a>
+                        <span>|</span>
+                        <a href="#">手机软件</a>
+                        <span>|</span>
+                        <a href="#">中大网校</a>
+                        <span>|</span>
+                        <a href="#">人人都是产品经理</a>
+                        <span>|</span>
+                        <a href="#">教师招聘</a>
+                        <span>|</span>
+                        <a href="#">研究报告</a>
+                        <span>|</span>
+                        <a href="#">汽车团购</a>
+                        <span>|</span>
+                        <a href="#">创投圈</a>
+                        <a href="#">创头条</a>
+                        <span>|</span>
+                        <a href="#">安卓开发论坛</a>
+                        <span>|</span>
+                        <a href="#">新疆人才网</a>
+                        <span>|</span>
+                        <a href="#">互联网的一些事</a>
+                        <a href="#">爱思英语网</a>
+                        <span>|</span>
+                        <a href="#">徐州英才网</a>
+                        <span>|</span>
+                        <a href="#">安卓开发论坛</a>
+                        <span>|</span>
+                        <a href="#">新疆人才网</a>
+                        <span>|</span>
+                        <a href="#">PHP100中文网</a>
+                        <a href="#">培训网</a>
+                        <a href="#">更多</a>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div>
+            <i></i>
+            <div class="footer-top">
+                <a href="#">拉勾APP
+                    <img src="images/lg/footer_1.jpg" alt="">
+                </a>
+                <a href="#">拉勾微博</a>
+                <a href="#">拉勾微信
+                    <img src="images/lg/footer_2.jpg" alt="">
+                </a>
+                <a href="#">版本更新</a>
+                <a href="#">帮助中心</a>
+                <a href="#">联系我们</a>
+                <a href="#">在线交流</a>
+                <span>服务热线：400-605-9900(9:00-18:00)</span>
+            </div>
+            <div class="footer-bottom">
+                <span>©2016 Lagou</span>
+                <a href="#">京ICP备14023790号-2</a>
+                <span>京公网安备11010802017116号</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script src="../javascript/jquery-1.11.3.js" type="text/javascript"></script> -->
+    <script>
+
+    function getClass(cla) {
+        var all = document.getElementsByTagName("*"),
+            len = all.length,
+            array = [];
+        for(var i = 0;i < len;i++){
+            if(all[i].nodeType == 1){
+                var name = all[i].className,
+                    arrName = [];
+                if(name){
+                    arrName = name.split(" ");
+                    var arrlen = arrName.length;
+                    for(var j=0; j<arrlen; j++) {
+                        if(arrName[j] === cla){
+                            array.push(all[i]);
+                        }
+                    }
+                }
+            }
+        }
+        return array;
+
+    }
+    function getStyle(ele,attr) {
+        if(ele.currentStyle){
+            return ele.currentStyle[attr];
+        }else{
+            return window.getComputedStyle(ele,null)[attr];
+        }
+    }
+    function getBoundingClientRect(ele) {
+        if(typeof arguments.callee.offst != 'number') {
+            var scrollTop = document.documentElement.scrollTop;
+            var temp = document.createElement('div');
+            temp.style.cssText = "position:absolute;top:0;left:0;";
+            document.body.appendChild(temp);
+            arguments.callee.offset = -temp.getBoundingClientRect().top;
+            document.body.removeChild(temp);
+            temp = null;
+        }
+        var rect = ele.getBoundingClientRect();
+        var offset = arguments.callee.offset;
+        return {
+            left : rect.left + offset,
+            right : rect.right + offset,
+            top : rect.top + offset,
+            bottom : rect.bottom + offset
+        };
+    }
+    function getTop(ele) {
+        var offsetTo = ele.offsetTop,
+            oParent = ele.offsetParent;
+        while(oParent != null) {
+            offsetTo += oParent.offsetTop;
+            oParent = oParent.offsetParent;
+        }
+        return offsetTo;
+    }
+    function getLeft(ele) {
+        var offsetLe = ele.offsetLeft,
+            oParent = ele.offsetParent;
+        while(oParent != null) {
+            offsetLe += oParent.offsetLeft;
+            oParent = oParent.offsetParent;
+        }
+        return offsetLe;
+    }
+
+    (function(){
+        var menu = getClass('menu')
+            menuNav = getClass('menu-nav'),
+            menuList = getClass('menu-list');
+        function showDiv(){
+            for(var i = 0,len = menu.length;i < len;i++) {
+                (function(i){
+                    menu[i].onmouseover = function() {
+                        menuNav[i].className = "menu-nav menu-over";
+                        menuList[i].style.display = "block";
+                    }
+                })(i)
+            }
+        }
+        function hideDiv(){
+            for(var i = 0,len = menu.length;i < len;i++) {
+                (function(i){
+                    menu[i].onmouseout = function() {
+                        menuNav[i].className = "menu-nav";
+                        menuList[i].style.display = "none";
+                    }
+                })(i)
+            }
+        }
+        showDiv();
+        hideDiv();
+    })();
+
+    (function(){
+        var bannerL = getClass('banner-123'),
+            bannerR = getClass('banner-abc'),
+            bannerRli = bannerR[0].getElementsByTagName('li'),
+            bannerM = getClass('banner-move'),
+            len = bannerRli.length,
+            timer = null,
+            ind = 0;
+
+        function move(){
+            for(var i = 0;i < len;i++){
+                (function(i){
+                    bannerRli[i].onmouseover = function(){
+                        clearInterval(timer);
+                        ind = i;
+                        bannerRli[i].className = "";
+                        for(var j=0;j<len;j++){
+                           if( j!=i ){
+                                bannerRli[j].className = "current";
+                            }
+                        }
+                        bannerM[0].style.top = i*55+'px';
+                        bannerL[0].style.marginTop = i*-160 +'px';
+                    }
+                    bannerRli[i].onmouseout = function(){
+                        timer = setInterval(function(){
+                                    ind++;
+                                    if(ind > 2){
+                                        ind = 0;
+                                    }
+                                    moveAuto(ind);
+                                },4000);
+                    }
+                })(i)
+            }
+        }
+        move();
+        function moveAuto(ind){
+            var disL = ind*-160,
+                disM = ind*55;
+            bannerL[0].style.marginTop = disL+'px';
+            bannerM[0].style.top = disM+'px';
+
+            bannerRli[ind].className = "";
+            for(var i=0;i<len;i++){
+                if(i!=ind){
+                    bannerRli[i].className = "current";
+                }
+            }
+        }
+        timer = setInterval(function(){
+            ind++;
+            if(ind > 2){
+                ind = 0;
+            }
+            moveAuto(ind);
+        },4000);
+    })();
+
+    (function(){
+        // function moveLi(){
+        //     $(".thumbs li").on("mouseenter mouseout", function(e) {
+        //         var w = $(this).width();
+        //         var h = $(this).height();
+        //         var x = (e.pageX - this.getBoundingClientRect().left - (w / 2)) * (w > h ? (h / w) : 1);
+        //         var y = (e.pageY - getBoundingClientRect(this).top - (h / 2)) * (h > w ? (w / h) : 1);
+        //         var direction = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
+        //         //direction的值为“0,1,2,3”分别对应着“上，右，下，左”
+        //         var cssName = [{'top':'-100%',left:'0'},{'top':'0',left:'100%'},{'top':'100%',left:'0'},{'top':'0','left':'-100%'}],
+        //             aniName = {'top':'0','left':'0'};
+        //         if (e.type == 'mouseenter') {
+        //             switch(direction){
+        //                 case(0):
+        //                     $(this).find("div").css(cssName[0]).animate(aniName,300);
+        //                 case(1):
+        //                     $(this).find("div").css(cssName[1]).animate(aniName,300);
+        //                 case(2):
+        //                     $(this).find("div").css(cssName[2]).animate(aniName,300);
+        //                 case(3):
+        //                     $(this).find("div").css(cssName[3]).animate(aniName,300);
+        //             }
+        //         } else {
+        //             // switch(direction){
+        //             //     case(0):
+        //             //         $(this).find("div").animate({top:'-100%',left:'0'},100);
+        //             //     case(1):
+        //             //         $(this).find("div").animate({top:'0',left:'-100%'},100);
+        //             //     case(2):
+        //             //         $(this).find("div").animate({top:'100%',left:'0'},100);
+        //             //     case(3):
+        //             //         $(this).find("div").animate({top:'-100%',left:'0'},100);
+        //             // }
+        //         }
+        //     });
+
+        // }
+        // moveLi()
+
+        var thumbs = getClass('thumbs'),
+            oli = thumbs[0].getElementsByTagName('li'),
+            odiv = getClass('hot-info');
+        for(var  i=0,len=oli.length; i<len; i++){
+            (function(i){
+                oli[i].onmouseenter = function(ev){
+                    var oEvent = ev||event;
+                    var q=getMousePos(this,oEvent);
+                    console.log(i);
+                    switch(q){
+                        case 0:
+                            odiv[i].style.left = '113px';
+                            odiv[i].style.top='0';
+                            break;
+                        case 1:
+                            odiv[i].style.left='0'
+                            odiv[i].style.top = '113px';
+                            break;
+                        case 2:
+                            odiv[i].style.left = '-113px';
+                            odiv[i].style.top='0';
+                            break;
+                        case 3:
+                            odiv[i].style.left='0'
+                            odiv[i].style.top= '-113px';
+                            break;
+                    }
+                    move(odiv[i],{left:0,top:0})
+                };
+                oli[i].onmouseleave = function(ev){
+                    var oEvent = ev||event;
+                    var q=getMousePos(this,oEvent);
+                    switch(q){
+                        case 0:
+                            move(odiv[i],{left:113,top:0})
+                        break;
+                        case 1:
+                            move(odiv[i],{left:0,top:113})
+                        break;
+                        case 2:
+                            move(odiv[i],{left:-113,top:0})
+                        break;
+                        case 3:
+                            move(odiv[i],{left:0,top:-113})
+                        break;
+                    }
+                }
+            })(i);
+        }
+
+        function getMousePos(obj,ev){
+            var w = obj.offsetWidth;
+            var h = obj.offsetHeight;
+            var x = obj.getBoundingClientRect().left+w/2-ev.pageX;
+            var y = getBoundingClientRect(obj).top+h/2-ev.pageY;
+            return Math.round((Math.atan2(y,x)*180/Math.PI+180)/90)%4;
+        };
+        function move(obj,json){
+            var start={};
+            var dis={};
+            for(var name in json){
+                start[name]=parseFloat(getComputedStyle(obj,false)[name]);
+                switch(name){
+                    case 'left':
+                        start[name]=obj.offsetLeft;
+                    break;
+                    case 'top':
+                        start[name]=obj.offsetTop;
+                    break;
+                }
+                // debugger;
+                // console.log(start[name]);
+                dis[name]=json[name]-start[name];
+            }
+            var count = Math.round(300/(1000/30));
+            var n=0;
+            clearInterval(obj.timer);
+            obj.timer=setInterval(function(){
+                n++;
+                for(var name in json){
+                    var a=n/count;
+                    var cur = start[name]+dis[name]*a;
+                    obj.style[name]=cur+'px';
+                }
+                if(n==count){
+                    clearInterval(obj.timer);
+                }
+            },1000/40)
+        }
+    })()
+
+// var speedM = (function a(){
+//     var sty = parseInt(getStyle(bannerL[0],'marginTop'));
+//     var s = (disL-sty)/10;
+//     s =s >0?Math.ceil(s):Math.floor(s);
+//     console.log(s)
+//     if(sty!= disL){
+//         setTimeout(a,10);
+//     }
+//     bannerL[0].style.marginTop = sty+s +'px';
+// })();
+
+// var speedT = (function b(){
+//     var sty = parseInt(getStyle(bannerM[0],'top'));
+//     var s = (disM-sty)/10;
+//     s = s>0?Math.ceil(s):Math.floor(s);
+//     if(sty!=disM){
+//         setTimeout(b,10);
+//     }
+//     bannerM[0].style.top = sty+s +'px';
+// })();
+
+    </script>
+</body>
+</html>

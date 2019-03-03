@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    #myDiv {
+        width: 200px;
+        height: 200px;
+        background-color: #1087ef;
+        opacity: 0.7;
+        cursor: pointer;
+        position: absolute;
+        z-index: 1000;
+    }
+    #myDiv span {
+        position: absolute;
+        background-color: #1087ef;
+        z-index: 999;
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+    </style>
+</head>
+<body>
+    <div id="myDiv">
+        <span id="mySpan"></span>
+    </div>
+    <h1 id="status"></h1>
+    <script>
+        // 事件处理对象
+        var EventUtil={
+            // 添加事件
+            addHandler:function(element,type,handler){
+                if(element.addEventListener){
+                    element.addEventListener(type,handler,false);
+                }else if(element.attachEvent){
+                    element.attachEvent("on"+type,handler);
+                }else{
+                    element["on+type"]=handler;
+                }
+            },
+            // 删除事件
+            removeHandler:function(element,type,handler){
+                if(element.removeEventListener){
+                    element.removeEventListener(type,handler,false);
+                }else if(element.detachEvent){
+                    element.detachEvent("on"+type,handler);
+                }else{
+                    element["on+type"]=handler;
+                }
+            },
+            // 获取事件对象
+            getEvent:function(event){
+                return event?event:window.event;
+            },
+            // 获取事件目标
+            getTarget:function(event){
+                return event.target||event.srcElement;
+            },
+            // 取消事件默认行为
+            preventDefault:function(event){
+                if(evnet.preventDefault){
+                    event.preventDefault();
+                }else{
+                    event.returnValue=false;
+                }
+            },
+            // 阻止事件流
+            stopPropagation:function(event){
+                if(event.stopPropagation){
+                    event.stopPropagation();
+                }else{
+                    event.cancelBubble=true;
+                }
+            },
+            // 鼠标滑动事件，提供相关元素信息
+            getRelatedTarget:function(event){
+                if(event.relatedTarget){
+                    return event.relatedTarget;
+                }else if(event.toElement){
+                    return event.toElement;
+                }else if(event.fromElement){
+                    return event.fromElement;
+                }else{
+                    return null;
+                }
+            },
+            // 鼠标按钮事件，提供所按键信息
+            getButton:function(event){
+                if(document.implementation.hasFeature("MouseEvents","2.0")){
+                    return event.button;
+                }else{
+                    switch(event.button){
+                        case 0:
+                        case 1:
+                        case 3:
+                        case 5:
+                        case 7:
+                            return 0;
+                        case 2:
+                        case 6:
+                            return 2;
+                        case 4:
+                            return 1;
+                    }
+                }
+            },
+            // 鼠标滚动事件，提供滚动信息
+            getWheelDelta:function(event){
+                if(event.wheelDelta){
+                    return (client.engine.opera&&client.engine.opera<9.5?
+                            -event.wheelDelta:event.wheelDelta);
+                }else{
+                    return -event.detail*40;
+                }
+            },
+            // 键盘事件，提供所按键字符编码信息
+            getCharCode:function(event){
+                if(typeof event.charCode=="number"){
+                    return event.charCode;
+                }else{
+                    return event.keyCode;
+                }
+            },
+        }
+        function EventTarget() {
+            this.handlers = {};
+        }
+        EventTarget.prototype = {
+            constructor: EventTarget,
+            addHandler: function(type, handler) {
+                if (typeof this.handlers[type] == "undefined") {
+                    this.handlers[type] = [];
+                }
+                this.handlers[type].push(handler);
+            },
+            fire: function(event) {
+                if (!event.target) {
+                    event.target = this;
+                }
+                if (this.handlers[event.type] instanceof Array) {
+                    var handlers = this.handlers[event.type];
+                    for (var i = 0, len = handlers.length; i < len; i++) {
+                        handlers[i](event);
+                    }
+                }
+            },
+            removeHandler: function(type, handler) {
+                if (this.handlers[type] instanceof Array) {
+                    var handlers = this.handlers[type];
+                    for (var i = 0, len = handlers.length; i < len; i++) {
+                        if (handlers[i] === handler) {
+                            break;
+                        }
+                    }
+                    handlers.splice(i, 1);
+                }
+            }
+        };
+        var DragDrop = function() {
+            var dragdrop = new EventTarget(),
+                dragging = null,
+                diffX = 0,
+                diffY = 0;
+
+            var div = document.getElementById('myDiv'),
+                span = document.getElementById('mySpan');
+
+            function handleEvent(event) {
+                //获取事件和对象
+                event = EventUtil.getEvent(event);
+                var target = EventUtil.getTarget(event);
+                //确定事件类型
+                switch (event.type) {
+                    case "mousedown":
+                        // if (target.className.indexOf("draggable") > -1) {
+                            dragging = target;
+                            diffX = event.clientX - target.offsetLeft;
+                            diffY = event.clientY - target.offsetTop;
+                            // var pos = ['top','left','right','bottom'],
+                            //     len =pos.length;
+                            // for( var i=0; i<len; i++ ){
+                            //     span.style[pos[i]] = 0;
+                            // }
+                            dragdrop.fire({
+                                type: "dragstart",
+                                target: dragging,
+                                x: event.clientX,
+                                y: event.clientY
+                            });
+                        // }
+                        break;
+                    case "mousemove":
+                        if (dragging !== null) {
+                            //指定位置
+                            var left = (event.clientX - diffX) + "px",
+                                top = (event.clientY - diffY) + "px";
+                            if( parseFloat(left) < 0 ) left = '0px';
+                            if( parseFloat(top)< 0 ) top = '0px';
+                            dragging.style.left = left;
+                            dragging.style.top = top;
+                            // 触发自定义事件
+                            dragdrop.fire({
+                                type: "drag",
+                                target: dragging,
+                                x: left,
+                                y: top
+                            });
+                        }
+                        break;
+                    case "mouseup":
+                        dragdrop.fire({
+                            type: "dragend",
+                            target: dragging,
+                            x: event.clientX,
+                            y: event.clientY
+                        });
+                        dragging = null;
+                        break;
+                }
+            };
+            //公共接口
+            dragdrop.enable = function() {
+                EventUtil.addHandler(div, "mousedown", handleEvent);
+                EventUtil.addHandler(document, "mousemove", handleEvent);
+                EventUtil.addHandler(div, "mouseup", handleEvent);
+            };
+            dragdrop.disable = function() {
+                EventUtil.removeHandler(div, "mousedown", handleEvent);
+                EventUtil.removeHandler(document, "mousemove", handleEvent);
+                EventUtil.removeHandler(div, "mouseup", handleEvent);
+            };
+            return dragdrop;
+        }();
+
+        window.onload = function(){
+            DragDrop.enable();
+            DragDrop.addHandler("dragstart", function(event) {
+                var status = document.getElementById("status");
+                status.innerHTML = "<br/> Started dragging " + event.target.id;
+            });
+            DragDrop.addHandler("drag", function(event) {
+                var status = document.getElementById("status");
+                status.innerHTML = "<br/> Dragged " + event.target.id + " to (" + event.x +
+                    "," + event.y + ")";
+            });
+            DragDrop.addHandler("dragend", function(event) {
+                var status = document.getElementById("status");
+                status.innerHTML = "<br/> Dropped " + event.target.id + " at (" + event.x +
+                    "," + event.y + ")";
+            });
+        }
+    </script>
+</body>
+</html>

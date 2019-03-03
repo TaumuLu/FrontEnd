@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+    <style>
+    .bottomPage {
+        height: 50px;
+        list-style: none;
+        font-family: '微软雅黑';
+    }
+    .bottomPage input {
+        float: left;
+        /*box-sizing: border-box;*/
+        width: 29px;
+        height: 29px;
+        line-height: 30px;
+        color: #333;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        text-align: center;
+        margin-right: 20px;
+        border-radius: 10%;
+
+    }
+    .bottomPage li {
+        float: left;
+        color: #333;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        margin-right: 20px;
+        border-radius: 10%;
+        cursor: pointer;
+    }
+    .bottomPage a {
+        float: left;
+        color: #333;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        width: 70px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        margin-right: 20px;
+        border-radius: 10%;
+        cursor: pointer;
+    }
+
+    </style>
+</head>
+<body>
+    <div id="myDiv"></div>
+    <script>
+        var div = document.getElementById('myDiv');
+        window.onload = function(){
+            paging( 1, 20, div )
+        }
+        /**
+         * js分页实现
+         * @param  {[number]} currentPage [初始页]
+         * @param  {[number]} pageCount   [总页数]
+         * @param  {[Dom]} parentDom   [父级Dom]
+         * @param  {[Function]} callBack   [点击触发函数，传入页码]
+         * @return {[null]}             [null]
+         */
+        function paging( currentPage, pageCount, parentDom, callBack ) {
+            var pageClick;
+            // 根据传入页数判断如何生成分页
+            queuePage( currentPage );
+            // 生成页面
+            function generatePage( startPage, endPage, ind ) {
+                var pageHtml = "<ul class='bottomPage'><a class='pageFirst'>首页</a><a class='pagePrev'>上一页</a>";
+                for( var i=startPage; i<=endPage; i++ ) {
+                    pageHtml += "<li>" + i + "</li>";
+                }
+                pageHtml += "<a class='pageNext'>下一页</a><a class='pageLast'>末页</a><input type='text' class='jumpInput'><a class='jumpBtn'>跳转</a></ul>";
+                $(parentDom).html(pageHtml);
+                // $('.bottomPage').css();
+                pageClick = parseInt($(".bottomPage li").eq(ind).text());
+                $(".bottomPage li").eq(ind).css({"background-color":"#5c95c1","color":"#fff","border-color":"#5c95c1"});
+            }
+            // 点击指定页
+            $(document).off('click', '.bottomPage li');
+            $(document).on('click', '.bottomPage li',function(){
+                var pageNum = parseInt($(this).text());
+                if( pageNum == pageClick ) return;
+                queuePage( pageNum );
+                // 传入当前页数给页数处理函数
+                if( callBack ) {
+                    callBack( pageClick )
+                }
+                console.log(pageClick);
+            })
+            // 跳转指定页
+            $(document).off('click', '.bottomPage .jumpBtn');
+            $(document).on('click', '.bottomPage .jumpBtn',function(){
+                var pageNum = parseInt($( '.bottomPage .jumpInput').val());
+                if( pageNum == pageClick ) return;
+                if( /^[1-9]\d*$/.test(pageNum) && pageNum<=pageCount ) {
+                    queuePage( pageNum );
+                } else {
+                    alert('请输入正确的数字');
+                }
+                // 传入当前页数给页数处理函数
+                if( callBack ) {
+                    callBack( pageClick )
+                }
+                console.log(pageClick);
+            })
+            //点击上一页触发
+            $(document).off('click','.bottomPage .pagePrev');
+            $(document).on('click','.bottomPage .pagePrev',function(e){
+                e.preventDefault();
+                var pageNum = parseInt(pageClick) - 1 <= 0 ? 1:parseInt(pageClick) - 1;
+                if( pageNum == pageClick ) return;
+                queuePage( pageNum );
+                // 传入当前页数给页数处理函数
+                if( callBack ) {
+                    callBack( pageClick )
+                }
+                console.log(pageClick);
+            });
+            //点击下一页触发
+            $(document).off('click','.bottomPage .pageNext');
+            $(document).on('click','.bottomPage .pageNext',function(e){
+                e.preventDefault();
+                var pageNum = parseInt(pageClick) + 1 > pageCount ? pageCount:parseInt(pageClick) + 1;
+                if( pageNum == pageClick ) return;
+                queuePage( pageNum );
+                // 传入当前页数给页数处理函数
+                if( callBack ) {
+                    callBack( pageClick )
+                }
+                console.log(pageClick);
+            });
+            // 点击第一页
+            $(document).off('click','.bottomPage .pageFirst');
+            $(document).on('click','.bottomPage .pageFirst',function(e){
+                e.preventDefault();
+                if( pageClick == 1 ) return;
+                if( pageCount > 5 ) {
+                    generatePage( 1, 5, 0 )
+                } else {
+                    generatePage( 1, pageCount, 0 );
+                }
+                // 传入当前页数给页数处理函数
+                if( callBack ) {
+                    callBack( pageClick )
+                }
+                console.log(pageClick);
+            })
+            // 点击最后一页
+            $(document).off('click','.bottomPage .pageLast');
+            $(document).on('click','.bottomPage .pageLast',function(e){
+                e.preventDefault();
+                if( pageClick == pageCount ) return;
+                if( pageCount > 5 ) {
+                    generatePage( pageCount-4, pageCount, 4 );
+                } else {
+                    generatePage( 1, pageCount, pageCount-1)
+                }
+                // 传入当前页数给页数处理函数
+                if( callBack ) {
+                    callBack( pageClick )
+                }
+                console.log(pageClick);
+            })
+            /**
+             * 判断对应页面生成
+             * @param  {[number]} pageNum [传入点击的页码]
+             * @return {[null]}         [null]
+             */
+            function queuePage( pageNum ) {
+                if( pageCount > 5 ) {
+                    switch (pageNum) {
+                        case 1:
+                            generatePage( 1, 5, 0 );
+                            break;
+                        case 2:
+                            generatePage( 1, 5, 1 );
+                            break;
+                        case pageCount - 1:
+                            generatePage( pageCount - 4, pageCount, 3 );
+                            break;
+                        case pageCount:
+                            generatePage( pageCount - 4, pageCount, 4 );
+                            break;
+                        default:
+                            generatePage( pageNum - 2, pageNum + 2, 2 );
+                            break;
+                    }
+                } else {
+                    generatePage( 1, pageCount, pageNum-1 );
+                }
+            }
+        }
+    </script>
+</body>
+</html>

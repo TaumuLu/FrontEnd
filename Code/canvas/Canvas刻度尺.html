@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <canvas class="chart-canvas" width="530" height="25"></canvas>
+    <script>
+        window.onload = function() {
+            var myCanvas = document.querySelector('.chart-canvas'),
+                can = myCanvas.getContext("2d"),
+                w = myCanvas.width,
+                h = myCanvas.height,
+                // maxW = w-51,
+                avg = w/50,
+                long = 10,
+                short = 5;
+            can.lineWidth = 1;
+            can.fillStyle = "#999";
+            can.clearRect(0, 0, w, h);
+            can.fillRect(0, 24, w, 1);
+            for(var i=0; i<51; i++) {
+                var x = i%5;
+                if(i === 0) {
+                    can.fillRect(i*avg, 15, 1, long);
+                    can.fillText(i*2, i*avg, 10);
+                } else if(i == 50) {
+                    can.fillRect(i*avg-1, 15, 1, long);
+                    can.fillText(i*2, i*avg-18, 10);
+                } else if (i % 5 === 0) {
+                    can.fillRect(i*avg-1, 15, 1, long);
+                    can.fillText(i*2, i*avg-6, 10);
+                } else {
+                    can.fillRect(i*avg-1, 20, 1, short);
+                }
+            }
+        };
+    </script>
+</body>
+</html>

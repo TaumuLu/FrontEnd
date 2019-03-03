@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>3D图片旋转轮播焦点图左右切换js特效</title>
+	<script type="text/javascript">
+	
+	function ZoomPic ()
+	{
+		this.initialize.apply(this, arguments)	
+	}
+	ZoomPic.prototype = 
+	{
+		initialize : function (id)
+		{
+			var _this = this;
+			this.wrap = typeof id === "string" ? document.getElementById(id) : id;
+			this.oUl = this.wrap.getElementsByTagName("ul")[0];
+			this.aLi = this.wrap.getElementsByTagName("li");
+			this.prev = this.wrap.getElementsByTagName("pre")[0];
+			this.next = this.wrap.getElementsByTagName("pre")[1];
+			this.timer = null;
+			this.aSort = [];
+			this.iCenter = 2;
+			this._doPrev = function () {return _this.doPrev.apply(_this)};
+			this._doNext = function () {return _this.doNext.apply(_this)};
+			this.options = [
+				{width:476, height:210, top:40, left:0, zIndex:1},
+				{width:426, height:250, top:20, left:50, zIndex:2},
+				{width:654, height:290, top:0, left:150, zIndex:3},
+				{width:426, height:250, top:20, left:480, zIndex:2},
+				{width:476, height:210, top:40, left:476, zIndex:1},
+			];
+			for (var i = 0; i < this.aLi.length; i++) this.aSort[i] = this.aLi[i];
+			this.aSort.unshift(this.aSort.pop());
+			this.setUp();
+			this.addEvent(this.prev, "click", this._doPrev);
+			this.addEvent(this.next, "click", this._doNext);
+			this.doImgClick();		
+			this.timer = setInterval(function ()
+			{
+				_this.doNext()	
+			}, 3000);		
+			this.wrap.onmouseover = function ()
+			{
+				clearInterval(_this.timer)	
+			};
+			this.wrap.onmouseout = function ()
+			{
+				_this.timer = setInterval(function ()
+				{
+					_this.doNext()	
+				}, 3000);	
+			}
+		},
+		doPrev : function ()
+		{
+			this.aSort.unshift(this.aSort.pop());
+			this.setUp()
+		},
+		doNext : function ()
+		{
+			this.aSort.push(this.aSort.shift());
+			this.setUp()
+		},
+		doImgClick : function ()
+		{
+			var _this = this;
+			for (var i = 0; i < this.aSort.length; i++)
+			{
+				this.aSort[i].onclick = function ()
+				{
+					if (this.index > _this.iCenter)
+					{
+						for (var i = 0; i < this.index - _this.iCenter; i++) _this.aSort.push(_this.aSort.shift());
+						_this.setUp()
+					}
+					else if(this.index < _this.iCenter)
+					{
+						for (var i = 0; i < _this.iCenter - this.index; i++) _this.aSort.unshift(_this.aSort.pop());
+						_this.setUp()
+					}
+				}
+			}
+		},
+		setUp : function ()
+		{
+			var _this = this;
+			var i = 0;
+			for (i = 0; i < this.aSort.length; i++) this.oUl.appendChild(this.aSort[i]);
+			for (i = 0; i < this.aSort.length; i++)
+			{
+				this.aSort[i].index = i;
+				if (i < 5)
+				{
+					this.css(this.aSort[i], "display", "block");
+					this.doMove(this.aSort[i], this.options[i], function ()
+					{
+						_this.doMove(_this.aSort[_this.iCenter].getElementsByTagName("img")[0], {opacity:100}, function ()
+						{
+							_this.doMove(_this.aSort[_this.iCenter].getElementsByTagName("img")[0], {opacity:100}, function ()
+							{
+								_this.aSort[_this.iCenter].onmouseover = function ()
+								{
+									_this.doMove(this.getElementsByTagName("div")[0], {bottom:0})
+								};
+								_this.aSort[_this.iCenter].onmouseout = function ()
+								{
+									_this.doMove(this.getElementsByTagName("div")[0], {bottom:-100})
+								}
+							})
+						})
+					});
+				}
+				else
+				{
+					this.css(this.aSort[i], "display", "none");
+					this.css(this.aSort[i], "width", 0);
+					this.css(this.aSort[i], "height", 0);
+					this.css(this.aSort[i], "top", 37);
+					this.css(this.aSort[i], "left", this.oUl.offsetwidth / 2)
+				}
+				if (i < this.iCenter || i > this.iCenter)
+				{
+					this.css(this.aSort[i].getElementsByTagName("img")[0], "opacity", 100)
+					this.aSort[i].onmouseover = function ()
+					{
+						_this.doMove(this.getElementsByTagName("img")[0], {opacity:100})	
+					};
+					this.aSort[i].onmouseout = function ()
+					{
+						_this.doMove(this.getElementsByTagName("img")[0], {opacity:100})
+					};
+					this.aSort[i].onmouseout();
+				}
+				else
+				{
+					this.aSort[i].onmouseover = this.aSort[i].onmouseout = null
+				}
+			}		
+		},
+		addEvent : function (oElement, sEventType, fnHandler)
+		{
+			return oElement.addEventListener ? oElement.addEventListener(sEventType, fnHandler, false) : oElement.attachEvent("on" + sEventType, fnHandler)
+		},
+		css : function (oElement, attr, value)
+		{
+			if (arguments.length == 2)
+			{
+				return oElement.currentStyle ? oElement.currentStyle[attr] : getComputedStyle(oElement, null)[attr]
+			}
+			else if (arguments.length == 3)
+			{
+				switch (attr)
+				{
+					case "width":
+					case "height":
+					case "top":
+					case "left":
+					case "bottom":
+						oElement.style[attr] = value + "px";
+						break;
+					case "opacity" :
+						oElement.style.filter = "alpha(opacity=" + value + ")";
+						oElement.style.opacity = value / 100;
+						break;
+					default :
+						oElement.style[attr] = value;
+						break
+				}	
+			}
+		},
+		doMove : function (oElement, oAttr, fnCallBack)
+		{
+			var _this = this;
+			clearInterval(oElement.timer);
+			oElement.timer = setInterval(function ()
+			{
+				var bStop = true;
+				for (var property in oAttr)
+				{
+					var iCur = parseFloat(_this.css(oElement, property));
+					property == "opacity" && (iCur = parseInt(iCur.toFixed(2) * 100));
+					var iSpeed = (oAttr[property] - iCur) / 5;
+					iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+					
+					if (iCur != oAttr[property])
+					{
+						bStop = false;
+						_this.css(oElement, property, iCur + iSpeed)
+					}
+				}
+				if (bStop)
+				{
+					clearInterval(oElement.timer);
+					fnCallBack && fnCallBack.apply(_this, arguments)	
+				}
+			}, 30)
+		}
+	};
+	window.onload = function ()
+	{
+		new ZoomPic("Index_Box");
+	}
+
+	</script>
+	<style type="text/css">
+
+	*{margin:0;padding:0;}
+	img{border:0;}
+	#Index {
+		Z-INDEX: 1; MARGIN: 50px auto 0px; width: 960px; height:auto;
+	}
+	#Index .style {
+		Z-INDEX: 99; width: 150px; BOTTOM: 0px; DISPLAY: block; BACKGROUND: url(images/icon_f.png) no-repeat right bottom; FLOAT: right; height: 172px; RIGHT: 0px
+	}
+	#Index_Box {
+		position: relative; MARGIN: 30px auto 20px; width: 960px; height: 300px
+	}
+	#Index_Box UL {
+		position: relative; width: 960px; height: 300px
+	}
+	#Index_Box LI {
+		Z-INDEX: 0; position: absolute; LIST-STYLE-TYPE: none; width: 0px; BACKGROUND: #787878; height: 0px; OVERFLOW: hidden; TOP: 146px; CURSOR: pointer; LIST-STYLE-IMAGE: none; LEFT: 377px; border-radius: 4px; box-shadow: 1px 1px 12px rgba(200, 200, 200, 1)
+	}
+	#Index_Box LI IMG {
+		width: 100%; BACKGROUND: url(images/loading.gif) no-repeat center 50%; height: 100%; VERTICAL-ALIGN: top
+	}
+	#Index_Box .prev {
+		DISPLAY: block
+	}
+	#Index_Box .next {
+		DISPLAY: block
+	}
+	#Index_Box .prev {
+		Z-INDEX: 100; OVERFLOW: hidden; CURSOR: pointer
+	}
+	#Index_Box .next {
+		Z-INDEX: 100; OVERFLOW: hidden; CURSOR: pointer
+	}
+	#Index_Box .prev {
+		position: absolute; width: 80px; BACKGROUND: url(images/next.png) 0px 0px; height: 120px; TOP: 80px; LEFT: 85px
+	}
+	#Index_Box .next {
+		position: absolute; width: 80px; BACKGROUND: url(images/next.png) -80px 0px; height: 120px; TOP: 80px; RIGHT: 85px
+	}
+
+	</style>
+</head>
+<body>
+	<div id="Index_Box">
+		<pre class="prev">&nbsp;</pre>
+		<pre class="next">&nbsp;</pre>
+		<ul>
+			<li><a href="#"><img src="images/1.jpg"></a></li>
+			<li><a href="#"><img src="images/2.jpg"></a></li>
+			<li><a href="#"><img src="images/3.jpg"></a></li>
+			<li><a href="#"><img src="images/4.jpg"></a></li>
+			<li><a href="#"><img src="images/5.jpg"></a></li>
+			<li><a href="#"><img src="images/6.jpg"></a></li>
+			<li><a href="#"><img src="images/7.jpg"></a></li>
+			<li><a href="#"><img src="images/8.jpg"></a></li>
+		</ul>
+	</div>
+</body>
+</html>

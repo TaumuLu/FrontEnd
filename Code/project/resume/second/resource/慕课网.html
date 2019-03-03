@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LG</title>
+    <style>
+
+/* CSS reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td {
+    margin: 0; padding: 0;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
+    font-weight: normal;
+    font-family: "Microsoft YaHei";
+}
+ol,ul {
+    list-style: none;
+}
+html,body {
+    font: 14px/1.5 "Microsoft Yahei", "Hiragino Sans GB", Helvetica, "Helvetica Neue", "微软雅黑", Tahoma, Arial, sans-serif;
+    color: #14191e;
+}
+a {
+    text-decoration: none;
+}
+li {
+    list-style-type: none;
+}
+    .clearfix:after {
+        content: "";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    #header {
+        background: #000000;
+    }
+    #nav {
+        width: auto;
+        height: 60px;
+        position: relative;
+        z-index: 1000;
+        padding-right: 20px;
+        margin: 0 auto;
+    }
+    .logo {
+        float: left;
+        margin: 0 20px;
+    }
+    .logo a {
+        display: block;
+        height: 60px;
+        width: 140px;
+        background: url("images/imooc/logo.png") no-repeat center center;
+        text-indent: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .logo_menu,.logo_menu_l {
+        float: left;
+    }
+    .logo_menu_l li {
+        float: left;
+        width: 80px;
+        text-align: center;
+    }
+    .logo_menu_l li a {
+        display: block;
+        height: 60px;
+        width: 80px;
+        line-height: 60px;
+        font-size: 14px;
+        color: white;
+        -webkit-transition: background-color 0.3s;
+        -ms-transition: background-color 0.3s;
+        -o-transition: background-color 0.3s;
+        transition: background-color 0.3s;
+    }
+    .logo_menu_l li a:hover {
+        background-color: #363C41;
+    }
+    .logo_area {
+        float: right;
+    }
+    .logo_area ul li {
+        float: left;
+        width: 60px;
+        text-align: center;
+        position: relative;
+    }
+    .logo_area ul li a {
+        display: block;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        color: #787d82;
+        font-size: 14px;
+        -webkit-transform: all 0.3;
+        -ms-transform: all 0.3;
+        -o-transform: all 0.3;
+        transform: all 0.3;
+    }
+    .logo_area ul li:nth-of-type(1) a:hover {
+        background-color: #363C41;
+    }
+    .logo_area ul li:nth-of-type(1):hover div {
+        display: block;
+    }
+    .logo_area ul li:nth-of-type(1) a:hover:before,.logo_area ul li:nth-of-type(1) a:hover:after {
+        border-color: white;
+    }
+    .logo_area ul li:nth-of-type(2) a:hover {
+        background-color: #CC0000;
+        color: white;
+    }
+    .logo_area ul li:nth-of-type(3) a:hover {
+        background-color: #363C41;
+        color: white;
+    }
+    .logo_area_app a:before {
+        position: absolute;
+        top: 22px;
+        left: 23px;
+        content: "";
+        width: 8px;
+        height: 14px;
+        border: 2px solid #787d82;
+        border-radius:10%;
+    }
+    .logo_area_app a:after {
+        position: absolute;
+        top: 33px;
+        left: 28px;
+        content: "";
+        border: 1px solid #787d82;
+        border-radius:100%;
+    }
+    .logo_area_app div {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: -57px;
+        width: 140px;
+        height: 166px;
+        background: #fff;
+        padding: 16px 20px 18px 20px;
+        text-align: center;
+        z-index:9999;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .logo_area_app div:before {
+        content: "";
+        display: block;
+        position:absolute;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid #fff;
+        position: absolute;
+        top: -8px;
+        left: 79px;
+    }
+    .logo_area_app div p:nth-of-type(1) {
+        color: #14191e;
+        font: bold 14px/15px "微软雅黑";
+        height: 15px;
+    }
+    .logo_area_app div p:nth-of-type(2) {
+        color: #787d82;
+        font: 12px/20px "微软雅黑";
+        height: 30px;
+    }
+
+    .tab_section {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+    }
+    .tab_section ul {
+        position: relative;
+        height: 60px;
+        line-height: 60px;
+        width: 280px;
+        margin: 0 auto;
+        z-index: 100;
+    }
+    .tab_section ul li {
+        float: left;
+        color: white;
+        width: 50%;
+        cursor: pointer;
+        font-size: 14px;
+        position: relative;
+        text-align: center;
+    }
+    .tab_section .tab_section_move{
+        position: absolute;
+        top: 0;
+        width: 140px;
+        height: 58px;
+        border-bottom: 2px solid white;
+    }
+
+
+
+
+    .mobile_top {
+        position: relative;
+        overflow: hidden;
+        height: 720px;
+        background: url("images/imooc/bg_banner_mobile.png") no-repeat center center;
+    }
+    .mobile_top_download{
+        position: relative;
+        width: 521px;
+        height: 166px;
+        margin: 141px auto 0;
+    }
+    .mobile_top_download:before {
+        content: "";
+        width: 493px;
+        height: 66px;
+        background: url("images/imooc/sprite.png") no-repeat 0 -308px;
+        display: block;
+        margin-bottom: 40px;
+    }
+    .mobile_top_download a:nth-of-type(1) {
+        margin: 0 16px 0 37px;
+        display: inline-block;
+        width: 200px;
+        height: 60px;
+        background: url("images/imooc/sprite.png") no-repeat right -394px;
+    }
+    .mobile_top_download a:nth-of-type(1):hover {
+        background-position: right -454px;
+    }
+    .mobile_top_download a:nth-of-type(2) {
+        display: inline-block;
+        width: 200px;
+        height: 60px;
+        background: url("images/imooc/sprite.png") no-repeat -100px -394px;
+    }
+    .mobile_top_download a:nth-of-type(2):hover {
+        background-position: -100px -454px;
+    }
+    .mobile_top_btn {
+        position: static;
+        display: inline-block;
+        vertical-align: 13px;
+        margin-left: 20px;
+        width: 32px;
+        height: 32px;
+        background: url("images/imooc/sprite.png") no-repeat right -40px;
+    }
+    .mobile_top_btn:hover {
+        background-position: right -104px
+    }
+    .mobile_top_btn:hover div{
+        display:block;
+    }
+    .mobile_top_btn div {
+        width: 160px;
+        height: 160px;
+        display: none;
+        background: url("images/imooc/sprite.png") no-repeat 0 -148px;
+        position: absolute;
+        left: 50%;
+        top: 84px;
+        margin-left: -80px;
+    }
+    .mobile_top_view {
+        width: 624px;
+        height: 279px;
+        background: url("images/imooc/view_mobile.png") no-repeat center;
+        position: absolute;
+        bottom: -279px;
+        left: 50%;
+        margin-left: -312px;
+        animation:view 1s .5s forwards;
+        -webkit-animation:view 1s .5s forwards;
+    }
+    @keyframes view{
+        100%{
+            bottom:0;
+        }
+    }
+    @-webkit-keyframes view{
+        100%{
+            bottom:0;
+        }
+    }
+    @-moz-keyframes view{
+        100%{
+            bottom:0;
+        }
+    }
+    .mobile_bottom {
+        background-color: #fff;
+        padding: 112px 0 162px;
+    }
+    .mobile_bottom_inner {
+        width:1200px;
+        margin:0 auto;
+    }
+    .mobile_bottom_inner ul li {
+        width: 400px;
+        text-align: center;
+        float: left;
+    }
+    .mobile_icon {
+        position: relative;
+        width: 400px;
+        height: 166px;
+    }
+    .mobile_icon img:hover {
+        -webkit-transform: scale(1.1,1.1);
+        -ms-transform: scale(1.1,1.1);
+        -o-transform: scale(1.1,1.1);
+        transform: scale(1.1,1.1);
+    }
+    .mobile_icon img{
+        position: absolute;
+        top: 0;
+        left: 118px;
+        animation: imgshow .4s .4s ease-out backwards;
+        -webkit-animation: imgshow .4s .4s ease-out backwards;
+    }
+    @keyframes imgshow{
+        0%{
+            opacity: 0;
+            left: 200px;
+            top: 0px;
+            -webkit-transform: scale(0.5,0.5);
+            -ms-transform: scale(0.5,0.5);
+            -o-transform: scale(0.5,0.5);
+            transform: scale(0.5,0.5);
+        }
+        90%{
+            opacity: 1;
+            left: 118px;
+            top: 0px;
+            -webkit-transform: scale(1.1,1.1);
+            -ms-transform: scale(1.1,1.1);
+            -o-transform: scale(1.1,1.1);
+            transform: scale(1.1,1.1);
+        }
+        100%{
+            -webkit-transform: scale(1,1);
+            -ms-transform: scale(1,1);
+            -o-transform: scale(1,1);
+            transform: scale(1,1);
+        }
+    }
+    @-webkit-keyframes imgshow{
+        0%{
+            opacity: 0;
+            left: 200px;
+            top: 0px;
+            -webkit-transform: scale(0.5,0.5);
+            -ms-transform: scale(0.5,0.5);
+            -o-transform: scale(0.5,0.5);
+            transform: scale(0.5,0.5);
+        }
+        90%{
+            opacity: 1;
+            left: 118px;
+            top: 0px;
+            -webkit-transform: scale(1.1,1.1);
+            -ms-transform: scale(1.1,1.1);
+            -o-transform: scale(1.1,1.1);
+            transform: scale(1.1,1.1);
+        }
+        100%{
+            -webkit-transform: scale(1,1);
+            -ms-transform: scale(1,1);
+            -o-transform: scale(1,1);
+            transform: scale(1,1);
+        }
+    }
+    @-moz-keyframes imgshow{
+        0%{
+            opacity: 0;
+            left: 200px;
+            top: 0px;
+            -webkit-transform: scale(0.5,0.5);
+            -ms-transform: scale(0.5,0.5);
+            -o-transform: scale(0.5,0.5);
+            transform: scale(0.5,0.5);
+        }
+        90%{
+            opacity: 1;
+            left: 118px;
+            top: 0px;
+            -webkit-transform: scale(1.1,1.1);
+            -ms-transform: scale(1.1,1.1);
+            -o-transform: scale(1.1,1.1);
+            transform: scale(1.1,1.1);
+        }
+        100%{
+            -webkit-transform: scale(1,1);
+            -ms-transform: scale(1,1);
+            -o-transform: scale(1,1);
+            transform: scale(1,1);
+        }
+    }
+    .mobile_txt {
+        margin-top: 30px;
+        color: #9A9DA2;
+        font-size: 28px;
+    }
+    #footer {
+        background: #000000;
+        border-top: 1px solid #e2e4e6;
+        font-size: 12px;
+        color: #787d82;
+        padding: 27px 0;
+        min-width: 620px;
+    }
+    .footer_wrap {
+        width: 1200px;
+        margin: 0 auto;
+    }
+    .footer_intro {
+        padding-left: 40px;
+        float: left;
+        line-height: 1.7;
+    }
+    .footer_intro ul {
+        overflow: hidden;
+        margin-bottom: 4px;
+    }
+    .footer_intro ul li {
+        float: left;
+        margin-right: 30px;
+        text-align: center;
+
+    }
+    .footer_intro a {
+        font-size: 12px;
+        color: #c8cdd2;
+    }
+    .footer_intro p {
+        font-size: 12px;
+    }
+
+    #top_fixed {
+        position: fixed;
+        right: 15px;
+        bottom: 10px;
+        z-index: 1030;
+    }
+    #top_fixed a {
+        display: block;
+        position: relative;
+        margin: 1px 0;
+        height: 52px;
+        width: 52px;
+        background: url("images/imooc/elevator.png") no-repeat;
+        -webkit-transition: background-position 0.15s;
+        -moz-transition: background-position 0.15s;
+        transition: background-position 0.15s;
+    }
+    #top_fixed a:nth-of-type(1) {
+        background-position: 0 -860px;
+    }
+    #top_fixed a:nth-of-type(1):hover {
+        background-position: 0 -922px;
+    }
+    #top_fixed a:nth-of-type(1) div {
+        position: absolute;
+        width: 172px;
+        height: 212px;
+        bottom: -10px;
+        right: 46px;
+        opacity: 0;
+        background: url("images/imooc/elevator.png") no-repeat 0 0;
+        -webkit-transition: opacity 0.25s, transform .3s;
+        -moz-transition: opacity 0.25s, transform .3s;
+        transition: opacity 0.25s, transform .3s;
+        -webkit-transform: scale(0.01);
+        -ms-transform: scale(0.01);
+        transform: scale(0.01);
+        -webkit-transform-origin: 100% 95%;
+        -ms-transform-origin: 100% 95%;
+        transform-origin: 100% 95%;
+    }
+    #top_fixed a:nth-of-type(1):hover div{
+        opacity: 1;
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
+    #top_fixed a:nth-of-type(2) {
+        background-position: 0 -426px;
+    }
+    #top_fixed a:nth-of-type(2):hover {
+        background-position: 0 -488px;
+    }
+    #top_fixed a:nth-of-type(3) {
+        background-position: 0 -550px;
+    }
+    #top_fixed a:nth-of-type(3):hover {
+        background-position: 0 -612px;
+    }
+    #top_fixed a:nth-of-type(3) div {
+        position: absolute;
+        width: 172px;
+        height: 194px;
+        bottom: -10px;
+        right: 46px;
+        opacity: 0;
+        background: url("images/imooc/elevator.png") no-repeat 0 -222px;
+        -webkit-transition: opacity 0.25s, transform .3s;
+        -moz-transition: opacity 0.25s, transform .3s;
+        transition: opacity 0.25s, transform .3s;
+        -webkit-transform: scale(0.01);
+        -ms-transform: scale(0.01);
+        transform: scale(0.01);
+        -webkit-transform-origin: 100% 95%;
+        -ms-transform-origin: 100% 95%;
+        transform-origin: 100% 95%;
+    }
+    #top_fixed a:nth-of-type(3):hover div {
+        opacity:1;
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+
+    #top_fixed a:nth-of-type(4) {
+        background-position: 0 -674px;
+    }
+    #top_fixed a:nth-of-type(4):hover {
+        background-position: 0 -736px;
+    }
+
+
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div id="nav">
+            <div class="logo">
+                <a href="#">慕课网</a>
+            </div>
+            <div class="logo_menu">
+                <ul class="logo_menu_l">
+                    <li><a href="#">课程</a></li>
+                    <li><a href="#">计划</a></li>
+                    <li><a href="#">猿问</a></li>
+                    <li><a href="#">文章</a></li>
+                </ul>
+            </div>
+            <div class="logo_area">
+                <ul class="clearfix">
+                    <li class="logo_area_app">
+                        <a href="#"></a>
+                        <div>
+                            <p>慕课网APP下载</p>
+                            <p>iPhone / Android / iPad</p>
+                            <img src="images/imooc/QR-code.jpg">
+                        </div>
+                    </li>
+                    <li><a href="#">登录</a></li>
+                    <li><a href="#">注册</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div class="tab_section">
+            <ul class="clearfix">
+                <li>手机版</li>
+                <li>iPad版</li>
+                <li class="tab_section_move"></li>
+            </ul>
+        </div>
+        <div class="tab_content">
+            <div class="tab_content_mobile">
+                <div class="mobile_top">
+                    <div class="mobile_top_download">
+                        <a href="#"></a>
+                        <a href="#"></a>
+                        <div class="mobile_top_btn">
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="mobile_top_view"></div>
+                </div>
+                <div class="mobile_bottom">
+                    <div class="mobile_bottom_inner">
+                        <ul class="clearfix">
+                            <li>
+                                <div class="mobile_icon">
+                                    <img title="随时随地 免费学习" src="images/imooc/icon_free.png">
+                                </div>
+                                <div class="mobile_txt">随时随地 免费学习</div>
+                            </li>
+                            <li>
+                                <div class="mobile_icon">
+                                    <img title="离线缓存 节省流量" src="images/imooc/icon_cache.png">
+                                </div>
+                                <div class="mobile_txt">离线缓存 节省流量</div>
+                            </li>
+                            <li>
+                                <div class="mobile_icon">
+                                    <img title="各类达人 即时沟通" src="images/imooc/icon_community.png">
+                                </div>
+                                <div class="mobile_txt">各类达人 即时沟通</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="footer_wrap">
+            <div class="clearfix">
+                <div class="footer_intro">
+                    <ul>
+                        <li><a href="#">网站首页</a></li>
+                        <li><a href="#">人才招聘</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">慕课云</a></li>
+                        <li><a href="#">合作专区</a></li>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">讲师招募</a></li>
+                        <li><a href="#">意见反馈</a></li>
+                        <li><a href="#">友情链接</a></li>
+                    </ul>
+                    <p>Copyright © 2016 imooc.com All Rights Reserved | 京ICP备 13046642号-2</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="top_fixed">
+        <a href="#">
+            <div></div>
+        </a>
+        <a href="#"></a>
+        <a href="#">
+            <div></div>
+        </a>
+        <a href="#"></a>
+    </div>
+    <script>
+
+    </script>
+</body>
+</html>

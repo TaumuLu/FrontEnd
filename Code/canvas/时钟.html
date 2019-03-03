@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>FlexJS</title>
+
+    <style type="text/css">
+        #canvas,#p_canvas {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+        }
+/*        #p_canvas {
+            position: absolute;
+            top: 10px;
+            right: 260px;
+        }*/
+        body {
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="myCanvas" width="500" height="310"></canvas>
+
+    <canvas id="canvas" width="200" height="200"></canvas>
+    <canvas id="p_canvas" width="200" height="200"></canvas>
+
+<script>
+    //获取绘图对象
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+
+    var p_canvas = document.getElementById('p_canvas');
+    var p_context = p_canvas.getContext('2d');
+
+    var height = 200,
+        width = 200;
+    //画大圆
+    context.beginPath();
+    context.strokeStyle = "#009999"; //外框颜色
+    context.arc(width / 2, height / 2, width / 2 - 1, 0, Math.PI * 2, true);
+    context.stroke();
+    context.closePath();
+    //画中间点
+    context.beginPath();
+    context.fillStyle = "#000";
+    context.arc(width / 2, height / 2, 3, 0, Math.PI * 2, true);
+    context.fill();
+    context.closePath();
+
+    //画小刻度
+    var angle = 0,
+        radius = width / 2 - 4;
+    for (var i = 0; i < 60; i++) {
+        context.beginPath();
+        context.strokeStyle = "#000";
+        //确认刻度的起始点
+        var x = width / 2 + radius * Math.cos(angle),
+            y = height / 2 + radius * Math.sin(angle);
+        context.moveTo(x, y);
+        //这里是用来将刻度的另一点指向中心点，并给予正确的角度
+        //PI是180度，正确的角度就是 angle+180度，正好相反方向
+        var temp_angle = Math.PI + angle;
+        context.lineTo(x + 3 * Math.cos(temp_angle), y + 3 * Math.sin(temp_angle));
+        context.stroke();
+        context.closePath();
+        angle += 6 / 180 * Math.PI;
+    }
+    //大刻度
+    angle = 0, radius = width / 2 - 4;
+    context.textBaseline = 'middle';
+    context.textAlign = 'center';
+    context.lineWidth = 2;
+    for (var i = 0; i < 12; i++) {
+        var num = i + 3 > 12 ? i + 3 - 12 : i + 3;
+        context.beginPath();
+        context.strokeStyle = "#FFD700";
+        var x = width / 2 + radius * Math.cos(angle),
+            y = height / 2 + radius * Math.sin(angle);
+        context.moveTo(x, y);
+        var temp_angle = Math.PI + angle;
+        context.lineTo(x + 8 * Math.cos(temp_angle), y + 8 * Math.sin(temp_angle));
+        context.stroke();
+        context.closePath();
+        //大刻度 文字
+        context.fillText(num, x + 16 * Math.cos(temp_angle), y + 16 * Math.sin(temp_angle));
+        angle += 30 / 180 * Math.PI;
+    }
+
+    function Pointer() {
+        var p_type = [
+            ['#000', 70, 1],
+            ['#ccc', 60, 2],
+            ['red', 50, 3]
+        ];
+
+        function drwePointer(type, angle) {
+            type = p_type[type];
+            angle = angle * Math.PI * 2 - 90 / 180 * Math.PI;
+            var length = type[1];
+            p_context.beginPath();
+            p_context.lineWidth = type[2];
+            p_context.strokeStyle = type[0];
+            p_context.moveTo(width / 2, height / 2);
+            p_context.lineTo(width / 2 + length * Math.cos(angle), height / 2 + length * Math.sin(angle));
+            p_context.stroke();
+            p_context.closePath();
+
+        }
+        setInterval(function() {
+            p_context.clearRect(0, 0, height, width);
+            var time = new Date();
+            var h = time.getHours();
+            var m = time.getMinutes();
+            var s = time.getSeconds();
+            h = h > 12 ? h - 12 : h;
+            h = h + m / 60;
+            h = h / 12;
+            m = m / 60;
+            s = s / 60;
+            drwePointer(0, s);
+            drwePointer(1, m);
+            drwePointer(2, h);
+        }, 500);
+    }
+    var p = new Pointer();
+
+
+
+
+
+
+    var myApp = function() {
+        var canvas; //canavs Dom节点的引用
+        var context; //上下文的引用
+        var bgImg; //背景图片的引用
+        var date; //声明当前时间
+        var timeLabel;
+        var initContext = function(canvasId) { //初始化上下文
+            canvas = document.getElementById(canvasId);
+            if (canvas.getContext) {
+                context = canvas.getContext("2d");
+                context.translate(canvas.width / 2, canvas.height / 2); //将坐标系的(0,0)位置移动到中心
+                context.save(); //保存初始化时候的状态
+            } else {
+                alert("your browser didn't support html5");
+            }
+        };
+
+        var numSet = function(targetNum) { //如果数字小于10的话 前面补零
+            if (parseInt(targetNum) < 10) {
+                targetNum = "0" + targetNum;
+            }
+            return targetNum;
+        }
+
+        return {
+            initContext: initContext,
+            drawBG: function() {
+                context.globalCompositeOperation = "destination-over";
+                context.fillStyle = "RGBA(255,0,0,0)"; //背景色 透明度
+                context.strokeStyle = "#f00"; //border color
+                context.lineWidth = 1;
+                context.fillRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+                context.strokeRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+
+                // if (!bgImg) {
+                //     bgImg = new Image();
+                //     bgImg.src = "http://airia.github.com/JSLearn/images/Prettybeauty8_05.jpg";
+                //     bgImg.onload = function() {
+                //         context.drawImage(bgImg, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+                //     };
+                // } else {
+                //     context.drawImage(bgImg, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+                // }
+
+            },
+            drawSkin: function() {
+
+                /**
+                 * 绘制外面的圆形边框
+                 */
+                context.rotate(-Math.PI / 2); //逆时针旋转 90度 将垂直方向 作为起始
+                context.strokeStyle = "#fff000";
+                context.lineWidth = 5;
+                context.beginPath();
+                context.arc(0, 0, 150, 0, Math.PI * 2, false);
+                context.stroke();
+                context.closePath();
+                /**
+                 * 开始绘制小时刻度
+                 */
+                context.beginPath(); //每次修改了strokeStyle之前 都要调用beginPath;
+                context.strokeStyle = "#FFFFFF";
+                context.lineWidth = 3;
+                context.lineCap = "round";
+                for (var i = 0; i < 12; i++) {
+                    context.rotate(Math.PI / 6);
+                    context.moveTo(0, -125);
+                    context.lineTo(0, -140);
+                    context.stroke();
+                }
+
+                /**
+                 * 绘制分钟刻度
+                 */
+                context.beginPath();
+                context.strokeStyle = "#FFFF33";
+                context.lineWidth = 1;
+                context.lineCap = "round";
+                for (var i = 0; i < 60; i++) {
+                    if (i % 5 != 0) {
+                        context.moveTo(0, -139);
+                        context.lineTo(0, -132);
+                        context.stroke();
+                    }
+                    context.rotate(Math.PI / 30);
+                }
+                context.restore(); //回到初始化的状态
+                context.save(); //保存初始化的状态
+            },
+            timeGo: function() { //绘制指针 让指针走起来
+                date = new Date();
+                var seconds = date.getSeconds();
+                var minutes = date.getMinutes();
+                var hours = date.getHours();
+                var month = date.getMonth();
+                var day = date.getDate();
+                this.setTimeTxt(numSet(hours) + ":" + numSet(minutes) + ":" + numSet(seconds), 0, -93);
+                this.setTimeTxt(numSet(month + 1) + "月" + numSet(day) + "日", 0, 100);
+                //绘制时针
+                context.beginPath();
+                var hoursPointAngle = Math.PI / 6 * (hours % 12) + minutes / 60 * Math.PI / 6;
+                context.rotate(hoursPointAngle); //在beginPath后紧跟rotate方法 确保后面的绘制效果可以应用到旋转的参数
+                context.strokeStyle = "RGB(112,170,50)";
+                context.lineCap = "round";
+                context.lineWidth = 4;
+                context.moveTo(0, 15);
+                context.lineTo(0, -60);
+                context.stroke();
+                context.restore();
+                context.save();
+
+                //绘制分针
+                context.beginPath();
+                context.rotate(Math.PI / 30 * minutes + seconds / 60 * Math.PI / 30);
+                context.strokeStyle = "#FFF333";
+                context.lineCap = "round";
+                context.lineWidth = 3;
+                context.moveTo(0, 15);
+                context.lineTo(0, -80);
+                context.stroke();
+                context.restore();
+                context.save();
+
+                //绘制秒针
+                context.beginPath();
+                // context.globalCompositeOperation = "source-over";
+                context.strokeStyle = "RGB(224,120,49)";
+                context.lineWidth = 3;
+                context.lineCap = "round";
+                context.rotate(Math.PI / 30 * seconds);
+                context.moveTo(0, -120);
+                context.lineTo(0, 30);
+                context.stroke();
+                //绘制秒针上面的圆圈
+                context.beginPath();
+                context.fillStyle = "#FFFFFF";
+                context.arc(0, -100, 8, 0, Math.PI * 2, false);
+                context.fill();
+                context.stroke();
+                //绘制秒针后面的圆圈
+                context.beginPath();
+                context.fillStyle = "RGB(224,120,49)";
+                context.arc(0, 30, 6, 0, Math.PI * 2, false);
+                context.fill();
+                context.restore(); //回到初始化的状态
+                context.save(); //保存初始化的状态;
+
+                //绘制中心的柱子
+                context.beginPath();
+                context.strokeStyle = "#FFFFFF";
+                context.fillStyle = "#FFFFFF";
+                context.arc(0, 0, 6, 0, Math.PI * 2, false);
+                context.fill();
+            },
+            setTimeTxt: function(timeLabelText, x, y) {
+                context.fillStyle = "#FFFFFF";
+                context.font = "20px 微软雅黑 ";
+                context.textAlign = "center";
+                context.textBaseLine = "middle";
+                context.fillText(timeLabelText, x, y);
+            },
+            startUp: function() {
+                context.clearRect(-canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+                myApp.drawSkin();
+                myApp.timeGo();
+                myApp.drawBG();
+            }
+        };
+    }();
+    myApp.initContext("myCanvas");
+    myApp.startUp();
+    setInterval(myApp.startUp, 1000);
+
+</script>
+</body>
+</html>
+
+<!-- Generated by RunJS (Thu Sep 08 15:17:55 CST 2016) 2ms -->

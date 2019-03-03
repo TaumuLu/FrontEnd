@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+
+    *{
+        padding:0;
+        margin:0;
+    }
+
+    img{
+        width:160px;
+        height:100px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+        position: absolute;
+        cursor:pointer;
+    }
+
+    #box_wrap{
+        width: 900px;
+        min-height: 100px;
+        margin-top:100px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px 50px;
+        position: relative;
+        cursor:pointer;
+
+        -webkit-perspective: 800px;
+        -moz-perspective: 800px;
+        -ms-perspective: 800px;
+        perspective: 800px;
+    }
+    #imgbox{
+        width:160px;
+        height:100px;
+        margin-left:-80px;
+        position: absolute;
+        left: 50%;
+
+        -webkit-transition: -webkit-transform 1s;
+        -moz-transition: -webkit-transform 1s;
+        -ms-transition: -webkit-transform 1s;
+        transition: transform 1s;
+
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+    img:nth-child(1) {
+        -webkit-transform: rotateY(0deg) translateZ(300px);
+        transform: rotateY(0deg) translateZ(300px);
+    }
+    img:nth-child(2) {
+        -webkit-transform: rotateY(60deg) translateZ(300px);
+        transform: rotateY(60deg) translateZ(300px);
+    }
+    img:nth-child(3) {
+        -webkit-transform: rotateY(120deg) translateZ(300px);
+        transform: rotateY(120deg) translateZ(300px);
+    }
+    img:nth-child(4) {
+        -webkit-transform: rotateY(180deg) translateZ(300px);
+        transform: rotateY(180deg) translateZ(300px);
+    }
+    img:nth-child(5) {
+        -webkit-transform: rotateY(240deg) translateZ(300px);
+        transform: rotateY(240deg) translateZ(300px);
+    }
+    img:nth-child(6) {
+        -webkit-transform: rotateY(300deg) translateZ(300px);
+        transform: rotateY(300deg) translateZ(300px);
+    }
+
+
+
+    /*静态bilibili*/
+    #wrap{
+        position:absolute;
+        top:60%;
+        left:75%;
+        width:165px;
+        height:125px;
+        border-radius:25px;
+        background:#00B1FF;
+        -webkit-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
+        -o-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+    }
+    /*顶部*/
+    #wrap:before{
+        content:"";
+        position:absolute;
+        top:-10px;
+        left:30px;
+        width:55px;
+        height:11px;
+        border-radius:5.5px;
+        background:#00B1FF;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    #wrap:after{
+        content:"";
+        position:absolute;
+        top:-10px;
+        left:80px;
+        width:55px;
+        height:11px;
+        border-radius:5.5px;
+        background:#00B1FF;
+        -webkit-transform: rotate(135deg);
+        -ms-transform: rotate(135deg);
+        -o-transform: rotate(135deg);
+        transform: rotate(135deg);
+    }
+    /*主体*/
+    #box{
+        position:absolute;
+        top:17px;
+        left:17px;
+        width:131px;
+        height:91px;
+        border-radius:10px;
+        background:white;
+    }
+    /*眉毛*/
+    #box:before{
+        content:"";
+        position:absolute;
+        top:25px;
+        left:12px;
+        width:36px;
+        height:13px;
+        background:#00B1FF;
+        -webkit-transform: rotate(-10deg);
+        -ms-transform: rotate(-10deg);
+        -o-transform: rotate(-10deg);
+        transform: rotate(-10deg);
+    }
+    #box:after{
+        content:"";
+        position:absolute;
+        top:25px;
+        left:83px;
+        width:36px;
+        height:13px;
+        background:#00B1FF;
+        -webkit-transform: rotate(190deg);
+        -ms-transform: rotate(190deg);
+        -o-transform: rotate(190deg);
+        transform: rotate(190deg);
+    }
+    /*嘴部*/
+    #left{
+        position:absolute;
+        top:50px;
+        left:40px;
+        width:12px;
+        height:12px;
+        background:#FFF;
+        border-top:7px solid #FFF;
+        border-left:7px solid #FFF;
+        border-bottom:7px solid #00B1FF;
+        border-right:7px solid #00B1FF;
+        border-radius:0 0 60% 0;
+        -webkit-transform: rotate(40deg) skew(10deg);
+        -ms-transform: rotate(40deg) skew(10deg);
+        -o-transform: rotate(40deg) skew(10deg);
+        transform: rotate(40deg) skew(10deg);
+    }
+    #left:after{
+        content:"";
+        position:absolute;
+        top:12px;
+        right:11px;
+        width:7px;
+        height:7px;
+        background:#00B1FF;
+        -webkit-transform: rotate(5deg);
+        -ms-transform: rotate(5deg);
+        -o-transform: rotate(5deg);
+        transform: rotate(5deg);
+    }
+    #right{
+        z-index:1;
+        position:absolute;
+        top:50px;
+        left:65px;
+        width:12px;
+        height:12px;
+        background:#FFF;
+        border-top:7px solid #FFF;
+        border-right:7px solid #FFF;
+        border-left:7px solid #00B1FF;
+        border-bottom:7px solid #00B1FF;
+        border-radius:0 0 0 60%;
+        -webkit-transform: rotate(-40deg) skew(-10deg);
+        -ms-transform: rotate(-40deg) skew(-10deg);
+        -o-transform: rotate(-40deg) skew(-10deg);
+        transform: rotate(-40deg) skew(-10deg);
+    }
+    #right:after{
+        content:"";
+        position:absolute;
+        top:12px;
+        right:-6px;
+        width:7px;
+        height:7px;
+        background:#00B1FF;
+        -webkit-transform: rotate(-5deg);
+        -ms-transform: rotate(-5deg);
+        -o-transform: rotate(-5deg);
+        transform: rotate(-5deg);
+    }
+    #right:before{
+        z-index:1000;
+        content:"";
+        position:absolute;
+        top:-7px;
+        left:-8px;
+        width:7px;
+        height:7px;
+        background:#00B1FF;
+        -webkit-transform: rotate(-10deg);
+        -ms-transform: rotate(-10deg);
+        -o-transform: rotate(-10deg);
+        transform: rotate(-10deg);
+    }
+    /*底部*/
+    #footer:before{
+        content:"";
+        position:absolute;
+        top:115px;
+        left:35px;
+        width:20px;
+        height:20px;
+        background:#00B1FF;
+        border-radius:100%;
+    }
+    #footer:after{
+        content:"";
+        position:absolute;
+        top:115px;
+        left:111px;
+        width:20px;
+        height:20px;
+        background:#00B1FF;
+        border-radius:100%;
+    }
+
+
+    /*动画bilibili*/
+    #main{
+        position:absolute;
+        top:60%;
+        left:25%;
+        width:170px;
+        height:130px;
+        -webkit-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
+        -o-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+    }
+    /*顶部*/
+    #main:before{
+        content:"";
+        position:absolute;
+        top:0px;
+        left:14px;
+        width:70px;
+        height:11px;
+        border-radius:5.5px;
+        background:#000;
+        transform:rotate(26deg);
+        transform-origin:100% 100%;
+        animation:a .3s .1s ease-out infinite forwards;
+        -webkit-animation:a .3s .1s ease-out infinite forwards;
+    }
+    #main:after{
+        content:"";
+        position:absolute;
+        top:-7px;
+        left:28px;
+        width:60px;
+        height:12px;
+        border-radius:5.5px;
+        background:#000;
+        transform-origin:100% 100%;
+        transform:rotate(125deg);
+        animation:b .3s ease-out .2s infinite forwards;
+        -webkit-animation:b .3s ease-out .2s infinite forwards;
+    }
+    /*主体*/
+    #nav1{
+        z-index:100;
+        background:#000;
+        position:absolute;
+        top:0px;
+        left:0px;
+        width:85px;
+        height:12px;
+        box-shadow:12px 5px #707070;
+        animation:c .3s ease-out 0s infinite forwards;
+        -webkit-animation:c .3s ease-out 0s infinite forwards;
+    }
+    #nav2{
+        z-index:100;
+        background:#000;
+        position:absolute;
+        top:0px;
+        left:85px;
+        width:85px;
+        height:12px;
+        box-shadow:5px 5px #707070;
+        animation:c .3s ease-out .2s infinite forwards;
+        -webkit-animation:c .3s ease-out .2s infinite forwards;
+    }
+    #nav3{
+        z-index:100;
+        background:#000;
+        position:absolute;
+        top:0px;
+        left:158px;
+        width:12px;
+        height:65px;
+        box-shadow:5px 5px #707070;
+        animation:d .3s ease-out 0s infinite forwards;
+        -webkit-animation:d .3s ease-out 0s infinite forwards;
+    }
+    #nav4{
+        z-index:100;
+        background:#000;
+        position:absolute;
+        top:65px;
+        left:158px;
+        width:12px;
+        height:65px;
+        box-shadow:5px 5px #707070;
+        animation:d .3s ease-out .2s infinite forwards;
+        -webkit-animation:d .3s ease-out .2s infinite forwards;
+    }
+    #nav5{
+        z-index:100;
+        background:#000;
+        position:absolute;
+        top:118px;
+        left:85px;
+        width:85px;
+        height:12px;
+        box-shadow:5px 5px #707070;
+        animation:c .3s ease-out 0s infinite forwards;
+        -webkit-animation:c .3s ease-out 0s infinite forwards;
+    }
+    #nav6{
+        z-index:99;
+        background:#000;
+        position:absolute;
+        top:118px;
+        left:0px;
+        width:85px;
+        height:12px;
+        box-shadow:5px 5px #707070;
+        animation:c .3s ease-out .2s infinite forwards;
+        -webkit-animation:c .3s ease-out .2s infinite forwards;
+    }
+    #nav7{
+        z-index:98;
+        background:#000;
+        position:absolute;
+        top:65px;
+        left:0px;
+        width:12px;
+        height:65px;
+        box-shadow:5px 5px #707070;
+        animation:d .3s ease-out 0s infinite forwards;
+        -webkit-animation:d .3s ease-out 0s infinite forwards;
+    }
+    #nav8{
+        z-index:97;
+        background:#000;
+        position:absolute;
+        top:0px;
+        left:0px;
+        width:12px;
+        height:65px;
+        box-shadow:5px 5px #707070;
+        animation:d .3s ease-out .2s infinite forwards;
+        -webkit-animation:d .3s ease-out .2s infinite forwards;
+    }
+    /*内部130 90*/
+    #nav1:before{
+        z-index:100;
+        content:"";
+        background:#000;
+        position:absolute;
+        top:20px;
+        left:20px;
+        width:65px;
+        height:12px;
+        box-shadow:12px 5px #707070;
+        animation:c .3s ease-out .2s infinite forwards;
+        -webkit-animation:c .3s ease-out .2s infinite forwards;
+    }
+    #nav2:before{
+        z-index:100;
+        content:"";
+        background:#000;
+        position:absolute;
+        top:20px;
+        left:0px;
+        width:65px;
+        height:12px;
+        box-shadow:5px 5px #707070;
+        animation:c .3s ease-out .4s infinite forwards;
+        -webkit-animation:c .3s ease-out .4s infinite forwards;
+    }
+    #nav3:before{
+        z-index:100;
+        content:"";
+        background:#000;
+        position:absolute;
+        top:20px;
+        left:-20px;
+        width:12px;
+        height:45px;
+        box-shadow:5px 5px #707070;
+        animation:d .3s ease-out .2s infinite forwards;
+        -webkit-animation:d .3s ease-out .2s infinite forwards;
+    }
+    #nav4:before{
+        z-index:100;
+        content:"";
+        background:#000;
+        position:absolute;
+        top:0px;
+        left:-20px;
+        width:12px;
+        height:45px;
+        box-shadow:5px 5px #707070;
+        animation:d .3s ease-out .4s infinite forwards;
+        -webkit-animation:d .3s ease-out .4s infinite forwards;
+    }
+    #nav5:before{
+        z-index:100;
+        content:"";
+        background:#000;
+        position:absolute;
+        top:-20px;
+        left:0px;
+        width:65px;
+        height:12px;
+        box-shadow:5px 5px #707070;
+        animation:c .3s ease-out .2s infinite forwards;
+        -webkit-animation:c .3s ease-out .2s infinite forwards;
+    }
+    #nav6:before{
+        z-index:99;
+        content:"";
+        background:#000;
+        position:absolute;
+        top:-20px;
+        left:20px;
+        width:65px;
+        height:12px;
+        box-shadow:5px 5px #707070;
+        animation:c .3s ease-out .4s infinite forwards;
+        -webkit-animation:c .3s ease-out .4s infinite forwards;
+    }
+    #nav7:before{
+        z-index:98;
+        content:"";
+        background:#000;
+        position:absolute;
+        top:0px;
+        left:20px;
+        width:12px;
+        height:45px;
+        box-shadow:5px 5px #707070;
+        animation:d .3s ease-out .2s infinite forwards;
+        -webkit-animation:d .3s ease-out .2s infinite forwards;
+    }
+    #nav8:before{
+        z-index:97;
+        content:"";
+        background:#000;
+        position:absolute;
+        top:20px;
+        left:20px;
+        width:12px;
+        height:45px;
+        box-shadow:5px 5px #707070;
+        animation:d .3s ease-out .4s infinite forwards;
+        -webkit-animation:d .3s ease-out .4s infinite forwards;
+    }
+    /*眉毛*/
+    #nav1:after{
+        content:"";
+        background:#000;
+        position:absolute;
+        top:50px;
+        left:38px;
+        width:36px;
+        height:11px;
+        border-radius:6px;
+        box-shadow:5px 5px #707070;
+        -webkit-transform: rotate(-30deg);
+        -ms-transform: rotate(-30deg);
+        -o-transform: rotate(-30deg);
+        transform: rotate(-30deg);
+    }
+    #nav2:after{
+        content:"";
+        background:#000;
+        position:absolute;
+        top:50px;
+        left:10px;
+        width:36px;
+        height:11px;
+        border-radius:6px;
+        box-shadow:5px 5px #707070;
+        -webkit-transform: rotate(30deg);
+        -ms-transform: rotate(30deg);
+        -o-transform: rotate(30deg);
+        transform: rotate(30deg);
+    }
+    /*嘴部*/
+    #nav8:after{
+        content:"";
+        background:#000;
+        position:absolute;
+        top:72px;
+        left:60px;
+        width:30px;
+        height:20px;
+        border-radius:50% 0 100% 100%;
+        box-shadow:5px 5px #707070;
+    }
+    #nav7:after{
+        content:"";
+        background:#000;
+        position:absolute;
+        top:7px;
+        left:80px;
+        width:30px;
+        height:20px;
+        border-radius:0 50% 100% 100%;
+        box-shadow:5px 5px #707070;
+    }
+    #nav3:after{
+        content:"";
+        z-index:1000;
+        background:#FFF;
+        position:absolute;
+        top:70px;
+        left:-92px;
+        width:15px;
+        height:15px;
+        border-radius:0 50% 100% 100%;
+    }
+    #nav4:after{
+        content:"";
+        z-index:1000;
+        background:#FFF;
+        position:absolute;
+        top:5px;
+        left:-70px;
+        width:15px;
+        height:15px;
+        border-radius:50% 0 100% 100%;
+    }
+    /*底部*/
+    #nav5:after{
+        content:"";
+        background:rgba(255,255,255,0);
+        position:absolute;
+        top:0px;
+        left:15px;
+        width:10px;
+        height:10px;
+        border:12px solid #000;
+        border-radius:100%;
+        box-shadow:5px 5px #707070;
+    }
+    #nav6:after{
+        content:"";
+        background:rgba(255,255,255,0);
+        position:absolute;
+        top:0px;
+        left:35px;
+        width:10px;
+        height:10px;
+        border:12px solid #000;
+        border-radius:100%;
+        box-shadow:5px 5px #707070;
+    }
+
+    @-webkit-keyframes a{
+        0%{
+            transform:rotate(30deg);
+        }
+        100%{
+            transform:rotate(26deg);
+        }
+    }
+    @keyframes a{
+        0%{
+            transform:rotate(30deg);
+        }
+        100%{
+            transform:rotate(26deg);
+        }
+    }
+    @-webkit-keyframes b{
+        0%{
+            transform:rotate(121deg);
+        }
+        100%{
+            transform:rotate(125deg);
+        }
+    }
+    @keyframes b{
+        0%{
+            transform:rotate(121deg);
+        }
+        100%{
+            transform:rotate(125deg);
+        }
+    }
+
+    @-webkit-keyframes c{
+        0%{
+            transform:translate(0,-1.5px);
+        }
+        100%{
+            transform:translate(0,1.5px);
+        }
+    }
+    @keyframes c{
+        0%{
+            transform:translate(0,-1.5px);
+        }
+        100%{
+            transform:translate(0,1.5px);
+        }
+    }
+    @-webkit-keyframes d{
+        0%{
+            transform:translate(3px,0);
+        }
+        100%{
+            transform:translate(0px,0);
+        }
+    }
+    @keyframes d{
+        0%{
+            transform:translate(3px,0);
+        }
+        100%{
+            transform:translate(0px,0);
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <div id="box_wrap">
+        <div id="imgbox">
+            <img src="images/01.jpg" id="s1" />
+            <img src="images/02.jpg" id="s2" />
+            <img src="images/03.jpg" id="s3" />
+            <img src="images/04.jpg" id="s4" />
+            <img src="images/05.jpg" id="s5" />
+            <img src="images/06.jpg" id="s6" />
+        </div>
+    </div>
+    <div id="main">
+        <div id="nav1"></div>
+        <div id="nav2"></div>
+        <div id="nav3"></div>
+        <div id="nav4"></div>
+        <div id="nav5"></div>
+        <div id="nav6"></div>
+        <div id="nav7"></div>
+        <div id="nav8"></div>
+    </div>
+
+    <div id="wrap">
+        <div id="box">
+            <div id="left"></div>
+            <div id="right"></div>
+        </div>
+        <div id="footer"></div>
+    </div>
+
+    <script type="text/javascript">
+    var imageBox=(function(){
+        var obox=document.getElementById('box_wrap');
+        var oimgbox=document.getElementById('imgbox');
+        var oimg=oimgbox.getElementsByTagName('img');
+        var j=0;
+        obox.onclick=function(event){
+            var disX=event.clientX-obox.offsetLeft;
+            var oW=obox.clientWidth/2;
+            if(disX>oW){
+                j++;
+                oimgbox.style.WebkitTransform="rotateY(" + (60 * j) + "deg)";
+            }else{
+                j--;
+                oimgbox.style.WebkitTransform="rotateY(" + (60 * j) + "deg)";
+            }
+        }
+    })();
+    </script>
+</body>
+</html>

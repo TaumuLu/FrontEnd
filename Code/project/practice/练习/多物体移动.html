@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>无标题文档</title>
+	<style type="text/css">
+
+	*{
+		margin:0;
+		padding:0;
+	}
+
+	#a{
+		width:200px;
+		height:200px;
+		background:red;
+		position:absolute;
+		left:-200px;
+	}
+	#aa{
+		width:20px;
+		height:50px;
+		background:blue;
+		position:absolute;
+		left:200px;
+		top:75px;
+	}
+
+	#b{
+		margin-left:300px;
+	}
+	#b ul{
+		list-style-type:none;
+	}
+	#b li{
+		width:200px;
+		height:100px;
+		background:yellow;
+		margin-bottom:20px;
+		border:1px solid blue;
+		opacity:0.3;
+	}
+
+	</style>
+	<script type="text/javascript">
+
+	function addLoadEvent(func){
+		var oldonload=window.onload;
+		if(typeof window.onload!='function'){
+			window.onload=func;
+		}else{
+			window.onload=function(){
+				oldonload();
+				func();
+			}
+		}
+	}
+
+	function getStyle(obj,attr){
+		if(obj.currenStyle){
+			return obj.currenStyle[attr];
+		}else{
+			return getComputedStyle(obj,false)[attr];
+		}
+	}
+
+	addLoadEvent(aaa);
+
+	function aaa(){
+		var a=document.getElementById('a');
+		a.onmouseover=function(){
+			aaaa(0,'left');
+		}
+		a.onmouseout=function(){
+			aaaa(-200,'left');
+		}
+	}
+
+	var timer=null;
+	function aaaa(m,attr){
+		clearInterval(timer);
+		var a=document.getElementById('a');
+		timer=setInterval(function(){
+			var sty=parseInt(getStyle(a,attr));
+			var speed=(m-sty)/10;
+			speed=speed>0?Math.ceil(speed):Math.floor(speed);
+			if(sty==m){
+				clearInterval(timer);
+			}else{
+				a.style[attr]=sty+speed+'px';
+			}
+		},30)	
+	}
+	
+	addLoadEvent(b);
+
+	function b(){
+		var b=document.getElementsByTagName('li');
+		for(var i=0;i<b.length;i++){
+			b[i].onmouseover=function(){
+				var that=this;
+				ani(that,400,'width',function(){
+					ani(that,200,'height',function(){
+						ani(that,100,'opacity')
+					})
+				});
+			}
+			b[i].onmouseout=function(){
+				var that=this;
+				ani(that,30,'opacity',function(){
+					ani(that,100,'height',function(){
+						ani(that,200,'width')
+					})
+				});
+			}
+		}
+	}
+
+	function ani(obj,itarget,attr,fn){
+		clearInterval(obj.timer);
+		obj.timer=setInterval(function(){
+			//取得当前值
+			var sty=0;
+			if(attr=='opacity'){
+				sty=Math.round(parseFloat(getStyle(obj,attr))*100)
+			}else{
+				sty=parseInt(getStyle(obj,attr));
+			}	
+			//计算速度
+			var speed=(itarget-sty)/8;
+			speed=speed>0?Math.ceil(speed):Math.floor(speed);
+			//检测停止
+			if(sty==itarget){
+				clearInterval(obj.timer);
+				if(fn){
+					fn();
+				}
+			}else{
+				if(attr=='opacity'){
+					obj.style[attr]=(sty+speed)/100;
+				}else{
+					obj.style[attr]=sty+speed+'px';
+				}	
+			}
+		},30)
+	}
+
+	</script> 
+</head>
+<body>
+
+	<div id="a">
+		<span id="aa"></span>
+	</div>
+
+	<div id="b">
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</body>
+</html>

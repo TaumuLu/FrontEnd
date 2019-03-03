@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>无标题文档</title>
+	<style type="text/css">
+
+	*{
+		margin:0;
+		padding:0;
+	}
+	div{
+		float:left;
+		margin:20px;
+		width:200px;
+		height:200px;
+		background:red;
+		opacity:0.3;
+	}
+
+	</style>
+	<script type="text/javascript">
+
+	function addLoadEvent(func){
+		var oldonload=window.onload;
+		if(typeof window.onload!='function'){
+			window.onload=func;
+		}else{
+			window.onload=function(){
+				oldonload();
+				func();
+			}
+		}
+	}
+
+	function getStyle(obj,attr){
+		if(obj.currenStyle){
+			return obj.currenStyle[attr];
+		}else{
+			return getComputedStyle(obj,false)[attr];
+		}
+	}
+
+	addLoadEvent(a);
+
+	function a(){
+		var a=document.getElementsByTagName('div');
+		for(var i=0;i<a.length;i++){
+			a[i].timer=null;
+			a[i].onmouseover=function(){
+				ani(this,100)
+			}
+			a[i].onmouseout=function(){
+				ani(this,30)
+			}
+		}
+	}
+
+	function ani(obj,s){
+		clearInterval(obj.timer);
+
+		obj.timer=setInterval(function(){
+			var opa=Math.round(parseFloat(getStyle(obj,'opacity'))*100);
+			var speed=(s-opa)/8;
+			speed=speed>0?Math.ceil(speed):Math.floor(speed);
+			// var speed=0;
+			// if(obj.opa>s){
+			// 	speed=-10;
+			// }else{
+			// 	speed=10;
+			// }
+			if(opa==s){
+				clearInterval(obj.timer);
+			}else{
+				obj.style.opacity=(opa+speed)/100;
+			}
+		},50)
+	}
+
+	</script> 
+</head>
+<body>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+</body>
+</html>

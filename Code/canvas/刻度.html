@@ -1,0 +1,45 @@
+<html >
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+</head>
+<body>
+    <div style="float:left;width=600px">
+        <canvas id=c width=524 height=400 style="border:1px solid grey;float:left"></canvas>
+    </div>
+    <div style="float:left;">
+        <form name='f'>下限:
+            <input name='min' onblur='draw()' value="-324" />上限:
+            <input name='max' onblur='draw()' value="9859" />
+            <input type="reset" onclick="draw()" value='刷新 ' />
+        </form>
+    </div>
+    <script>
+        function rand(min, max) {
+            var range = max - min + 1;
+            return Math.floor(Math.random() * range + min);
+        }
+        var myCanvas = document.getElementById("c");
+        var c = myCanvas.getContext("2d");
+        var w = 524;
+        var h = 400;
+        function draw() {
+            c.clearRect(0, 0, w, h);
+            var max = parseInt(document.f.max.value);
+            var min = parseInt(document.f.min.value);
+            var ratio = (max - min) / w;
+            var tickSize = 50;
+            var tickCnt = Math.ceil(w / tickSize);
+            var unit = tickSize * ratio;
+            c.moveTo(0, 50);
+            c.lineTo(w, 50);
+            for (var i = 0; i < tickCnt; i++) {
+                c.moveTo(0 + tickSize * i, 50);
+                c.lineTo(0 + tickSize * i, 60);
+                c.textAlign = 'center';
+                c.fillText((min + unit * i).toFixed(2), 0 + tickSize * i, 70);
+                //console.log(min + unit * i);
+            }
+            c.stroke();
+        }
+    </script>
+</html>

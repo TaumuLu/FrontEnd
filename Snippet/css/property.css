@@ -1,0 +1,113 @@
+table {
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*超出文字省略号*/
+
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.css3-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/*清除浮动*/
+
+.clearfix:after {
+  content: "";
+  visibility: hidden;
+  display: block;
+  clear: both;
+  height: 0;
+}
+.clearfix {
+  zoom: 1;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}
+
+/*文字无法被选中*/
+
+.firefox {
+  user-select: none;
+}
+
+:-ms-input-placeholder,
+::-moz-placeholder,
+::-webkit-input-placeholder {
+  color: #bbb;
+  opacity: 1;
+}
+
+/*滚动条*/
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  -webkit-border-radius: 0px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+::-webkit-scrollbar: horizontal {
+  height: 11px;
+}
+
+::-webkit-scrollbar: vertical {
+  width: 11px;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.33);
+}
+
+/*兼容rgba*/
+
+.background {
+  background-color: rgba(0, 0, 0, 0.7);
+  -ms-filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#90000000, endColorstr=#90000000);
+  filter: progid: DXImageTransform.Microsoft.gradient(startColorstr=#90000000, endColorstr=#90000000);
+  zoom: 1;
+}
+
+/*背景充满*/
+
+.supportIE(@url) {
+  filter: progid: DXImageTransform.Microsoft.AlphaImageLoader(src=@url, sizingMethod='scale');
+  -ms-filter: progid: DXImageTransform.Microsoft.AlphaImageLoader(src=@url, sizingMethod='scale');
+}

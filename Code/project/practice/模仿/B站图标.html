@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>无标题文档</title>
+	<style type="text/css">
+
+	*{
+		margin:0;
+		padding:0;
+	}
+	.box{
+		margin:100px auto;
+		width:270px;
+		height:100px;
+	}
+	.box div{
+		float:left;
+		width:80px;
+		height:80px;
+		border:1px solid #ccc;
+		border-radius:5px;
+	}
+	.box #box1{
+		background-image:url(bz1.png);
+		background-position:0px 0px;
+	}
+	.box #box2{
+		background-image:url(bz2.png);
+		background-position:0px 0px;
+		margin:0 10px;
+	}
+	.box #box3{
+		background-image:url(bz3.png);
+		background-position:0px 0px;
+	}
+
+	</style>
+	<script type="text/javascript">
+
+	;(function(){
+
+		function addLoadEvent(func){
+			var oldonload=window.onload;
+			if(typeof window.onload!='function'){
+				window.onload=func;
+			}else{
+				window.onload=function(){
+					oldonload();
+					func();
+				}
+			}
+		}
+
+		addLoadEvent(bz1);
+		addLoadEvent(bz2);
+		addLoadEvent(bz3);
+
+		function bz1(){
+			var box1=document.getElementById('box1');
+			box1.onmouseover=function(event){
+				var that=this;
+				one(-1280,that,event);
+			}
+			box1.onmouseout=function(event){
+				var that=this;
+				one(0,that,event);
+			}
+
+			var sty=0;
+			function one(a,b,event){
+				clearInterval(b.timer);
+
+				b.timer=setInterval(function(){
+					if(event.type==='mouseover'){
+						var speed=sty-80;
+						if(speed==a){
+							clearInterval(b.timer);
+						}
+					}else if(event.type==='mouseout'){
+						var speed=sty+80;
+						if(speed>a){
+							speed=0;
+							clearInterval(b.timer);
+						}
+					}
+					b.style.backgroundPositionX=speed+'px';
+					sty=speed;
+				},80)
+			}
+		}
+
+		function bz2(){
+			var box1=document.getElementById('box2');
+			box2.onmouseover=function(){
+				var that=this;
+				two(-1040,that,true);
+			}
+			box2.onmouseout=function(){
+				var that=this;
+				two(0,that,false);
+			}
+
+			var sty=0;
+			function two(a,b,e){
+				clearInterval(b.timer);
+
+				b.timer=setInterval(function(){
+					if(e==true){
+						var speed=sty-80;
+						if(speed==a){
+							speed=0;
+							sty=0;
+						}
+					}else if(e==false){
+						var speed=sty+80;
+						if(speed>a){
+							speed=0;
+							clearInterval(b.timer);
+						}
+					}
+					b.style.backgroundPositionX=speed+'px';
+					sty=speed;
+				},80)
+			}
+		}
+
+		function bz3(){
+			var box3=document.getElementById('box3');
+			box3.onmouseover=function(){
+				var that=this;
+				three(-1200,that,true);
+			}
+			box3.onmouseout=function(){
+				var that=this;
+				three(0,that,false);
+			}
+
+			var sty=0;
+			function three(a,b,e){
+				clearInterval(b.timer);
+
+				b.timer=setInterval(function(){
+					if(e==true){
+						var speed=sty-80;
+						if(speed==a){
+							speed=-720;
+						}
+					}else if(e==false){
+						var speed=sty+80;
+						if(speed>a){
+							speed=0;
+							clearInterval(b.timer);
+						}
+					}
+					b.style.backgroundPositionX=speed+'px';
+					sty=speed;
+				},80)
+			}
+		}
+	})()
+
+
+
+	</script>
+</head>
+<body>
+	<div class="box">
+		<div id="box1"></div>
+		<div id="box2"></div>
+		<div id="box3"></div>
+	</div>
+</body>
+</html>

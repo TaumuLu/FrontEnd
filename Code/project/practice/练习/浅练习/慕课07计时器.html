@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>定时器</title>
+    <script type="text/javascript">
+        var attime,hour,minutes,second;
+        function clock(){
+        var time=new Date();
+        hour=time.getHours();
+        if(hour<10){hour="0"+hour};
+        minutes=time.getMinutes();
+        if(minutes<10){minutes="0"+minutes};
+        second=time.getSeconds();
+        if(second<10){second="0"+second};
+        attime=hour+":"+minutes+":"+second;
+        document.getElementById("clock").value = attime;
+        }
+        var int=setInterval(clock,1000);
+    </script>
+</head>
+<body>
+<form>
+    <input type="text" id="clock" size="50"  />
+</form>
+</body>
+</html>

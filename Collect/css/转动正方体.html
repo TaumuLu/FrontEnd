@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>3D正方体</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="icon" href="http://senola.github.io/favicon.png">
+    <style>
+    @charset "utf-8";
+    /* -------------------------------------------------
+     * reset css
+     * -------------------------------------------------
+    */
+    html{
+        height:100%;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        -webkit-font-smoothing:antialiased;
+    }
+    body{
+        margin:0;
+        padding:0;
+        background-color:#fff;
+        min-height:100%;
+        height:auto !important;
+        height:100%;
+        text-align:center;
+        color:#404040;
+        background-color: #fafafa;
+        font:12px/1.5 Helvetica,arial;
+    }
+    h1,h2,h3,h4,h5,h6,p,figure,form{
+        margin:0;
+    }
+    table{
+        border-collapse:collapse;
+        border-spacing:0;
+    }
+    img{
+        border:0;
+        vertical-align:middle;
+        -ms-interpolation-mode: bicubic;
+    }
+    a{
+        text-decoration:none;
+        color:#ffffff;
+    }
+    a:focus {
+        outline: thin dotted;
+    }
+    a:hover{
+        color:#ffffff;
+        text-decoration:none;
+    }
+    /* hn */
+    h1{
+        font-size:16px;
+        line-height:36px;
+    }
+    h2{
+        font-size:14px;
+        line-height:30px;
+    }
+    h3{
+        line-height:24px;
+    }
+    h3,h4,h5,h6{
+        font-size:12px;
+    }
+    /* ul ol dl */
+    ul,li,ol{
+        margin: 0;
+        padding:0;
+        list-style: none outside none;
+    }
+    ul.has-style li,ol li{
+        margin-left:25px;
+    }
+    ul.has-style li{
+        list-style:disc;
+    }
+    ol li{
+        list-style:decimal;
+    }
+    ul.inline-style li{
+        float:left;
+        display:inline;
+    }
+    dl{
+        margin-bottom: 18px;
+    }
+    dt{
+        font-weight: bold;
+    }
+    dd{
+        margin:0 0 0 9px;
+        padding:0;
+    }
+    svg:not(:root) {
+        overflow: hidden;
+    }
+    pre{
+        margin:0;
+        white-space: pre-wrap;
+        white-space: -moz-pre-wrap !important;
+        white-space: -pre-wrap;
+        white-space: -o-pre-wrap;
+        word-wrap: break-word;
+    }
+    /* clearfix */
+    .clearfix:before, .clearfix:after {
+        content:"";
+        display:table;
+    }
+    .clearfix:after{
+        clear:both;
+        overflow:hidden;
+    }
+    .clearfix{
+        zoom:1;
+    }
+    /* -------------------------------------------------
+     * form
+     * -------------------------------------------------
+    */
+    button,input,select,textarea{
+        font-size:100%;
+        font-family:tahoma;
+        margin: 0;
+        outline: 0 none;
+        vertical-align: baseline;
+        *vertical-align: middle;
+    }
+    textarea{
+        overflow: auto;
+        vertical-align:top;
+        resize:none;
+    }
+    button,input{
+        line-height:normal;
+    }
+    button,
+    html input[type="button"],
+    input[type="reset"],
+    input[type="submit"],
+    .submit-btn{
+        -webkit-appearance: button;
+        cursor: pointer;
+        *overflow: visible;
+    }
+    button[disabled],
+    input[disabled],
+    .disable{
+        cursor: default;
+    }
+    input[type="checkbox"],
+    input[type="radio"],
+    .form-radio,
+    .form-checkbox{
+        box-sizing: border-box;
+        padding: 0;
+        *height: 13px;
+        *width: 13px;
+    }
+    fieldset{
+        border: 1px solid #c0c0c0;
+        margin: 0 2px 18px;
+        padding: 0.35em 0.625em 0.75em;
+    }
+    legend{
+        border: 0;
+        padding: 0;
+        white-space: normal;
+        *margin-left: -7px;
+    }
+    button::-moz-focus-inner,
+    input::-moz-focus-inner{
+        border: 0;
+        padding: 0;
+    }
+    /* -------------------------------------------------
+     * css3 & html5
+     * -------------------------------------------------
+    */
+    /* html5 */
+    article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{
+        display: block;
+    }
+    audio,canvas,video{
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+    }
+    audio:not([controls]){
+        display: none;
+        height: 0;
+    }
+    nav ul,
+    nav ol {
+        list-style: none;
+        list-style-image: none;
+    }
+    input[type="search"]{
+        -webkit-appearance: textfield;
+        -moz-box-sizing: content-box;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-decoration{
+        -webkit-appearance: none;
+    }
+    :-moz-placeholder,
+    ::-webkit-input-placeholder{
+      color: #999;
+    }
+    *,
+    *:before,
+    *:after {
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+    }
+    .window {
+        -webkit-perspective: 800px;
+           -moz-perspective: 800px;
+            -ms-perspective: 800px;
+             -o-perspective: 800px;
+                perspective: 800px;
+        -webkit-perspective-origin: 50% 50%;
+           -moz-perspective-origin: 50% 50%;
+            -ms-perspective-origin: 50% 50%;
+             -o-perspective-origin: 50% 50%;
+                perspective-origin: 50% 50%;
+        overflow: hidden;
+    }
+    .cube {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        margin:10% auto;
+        padding: 50px;
+        -webkit-animation: cubeRotate 5s linear 0s infinite;
+           -moz-animation: cubeRotate 5s linear 0s infinite;
+            -ms-animation: cubeRotate 5s linear 0s infinite;
+             -o-animation: cubeRotate 5s linear 0s infinite;
+                animation: cubeRotate 5s linear 0s infinite;
+
+        -webkit-transform-style: preserve-3d;
+           -moz-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+             -o-transform-style: preserve-3d;
+                transform-style: preserve-3d;
+
+        -webkit-transition:all 1s ease;
+             -moz-transition:all 1s ease;
+              -ms-transition:all 1s ease;
+                 -o-transition:all 1s ease;
+                    transition:all 1s ease;
+
+        -webkit-transform-origin:60%;
+           -moz-transform-origin:60%;
+            -ms-transform-origin:60%;
+          -o-transform-origin:60%;
+              transform-origin:60%;
+    }
+    .surface {
+        position: absolute;
+        display: block;
+        width: 300px;
+        height: 300px;
+        line-height: 300px;
+        font-size: 200px;
+        background-color: #5194A5;
+        color: #fff;
+    }
+    .surface-1 {
+       background-color:  rgba(179, 114, 42, 0.5);
+         -webkit-transform:translate3d(0,0,150px);
+            -moz-transform:translate3d(0,0,150px);
+             -ms-transform:translate3d(0,0,150px);
+              -o-transform:translate3d(0,0,150px);
+                 transform:translate3d(0,0,150px);
+    }
+    .surface-2 {
+       background-color: rgba(78, 142, 165, 0.5);
+         -webkit-transform-origin: 0 50%;
+                 transform-origin: 0 50%;
+       -webkit-transform:translate3d(0,50%,0) rotateX(-90deg);
+          -moz-transform:translate3d(0,50%,0) rotateX(-90deg);
+            -o-transform:translate3d(0,50%,0) rotateX(-90deg);
+               transform:translate3d(0,50%,0) rotateX(-90deg);
+    }
+    .surface-3 {
+       background-color: rgba(65, 187, 99, 0.5);
+       -webkit-transform-origin: 50% 50%;
+               transform-origin: 50% 50%;
+       -webkit-transform:translate3d(0,0,-150px) rotateX(-180deg);
+               transform:translate3d(0,0,-150px) rotateX(-180deg);
+    }
+    .surface-4 {
+       -webkit-transform-origin: 50% 50%;
+               transform-origin: 50% 50%;
+       -webkit-transform:translate3d(0,-50%,0) rotateX(90deg);
+               transform:translate3d(0,-50%,0) rotateX(90deg);
+       background-color: rgba(124, 72, 40, 0.5);
+    }
+    .surface-5 {
+       -webkit-transform-origin: 50% 50%;
+               transform-origin: 50% 50%;
+       -webkit-transform:translate3d(-50%,0,0) rotateY(90deg);
+               transform:translate3d(-50%,0,0) rotateY(90deg);
+       background-color: rgba(213, 86, 202, 0.5);
+    }
+    .surface-6 {
+       -webkit-transform-origin: 50% 50%;
+               transform-origin: 50% 50%;
+       -webkit-transform:translate3d(50%,0,0) rotateY(-90deg);
+               transform:translate3d(50%,0,0) rotateY(-90deg);
+       background-color: rgba(187, 185, 35, 0.5);
+    }
+
+    @-webkit-keyframes cubeRotate{
+        0%{
+            -webkit-transform:rotateX(0deg) rotateY(0deg);
+                    transform:rotateX(0deg) rotateY(0deg);
+        }
+        100%{
+            -webkit-transform:rotateX(360deg) rotateY(360deg);
+                    transform:rotateX(360deg) rotateY(360deg);
+        }
+    }
+    @-moz-keyframes cubeRotate{
+        0%{
+            -webkit-transform:rotateX(0deg) rotateY(0deg);
+                    transform:rotateX(0deg) rotateY(0deg);
+        }
+        100%{
+            -webkit-transform:rotateX(360deg) rotateY(360deg);
+                    transform:rotateX(360deg) rotateY(360deg);
+        }
+    }
+    @-o-keyframes cubeRotate{
+         0%{
+            -webkit-transform:rotateX(0deg) rotateY(0deg);
+                    transform:rotateX(0deg) rotateY(0deg);
+        }
+        100%{
+            -webkit-transform:rotateX(360deg) rotateY(360deg);
+                    transform:rotateX(360deg) rotateY(360deg);
+        }
+    }
+    @keyframes cubeRotate{
+         0%{
+            -webkit-transform:rotateX(0deg) rotateY(0deg);
+                    transform:rotateX(0deg) rotateY(0deg);
+        }
+        100%{
+            -webkit-transform:rotateX(360deg) rotateY(360deg);
+                    transform:rotateX(360deg) rotateY(360deg);
+        }
+    }
+    .pic-1 {
+        background-image: url("https://raw.githubusercontent.com/senola/pictures/master/background/background1.jpg");
+      background-size: cover;
+    }
+    .pic-2 {
+        background-image: url("https://raw.githubusercontent.com/senola/pictures/master/background/background2.jpg");
+      background-size: cover;
+    }
+    .pic-3 {
+        background-image: url("https://raw.githubusercontent.com/senola/pictures/master/background/background3.jpg");
+      background-size: cover;
+    }
+    .pic-4 {
+        background-image: url("https://raw.githubusercontent.com/senola/pictures/master/background/background4.jpg");
+      background-size: cover;
+    }
+    .pic-5 {
+        background-image: url("https://raw.githubusercontent.com/senola/pictures/master/background/background5.jpg");
+      background-size: cover;
+    }
+    .pic-6 {
+        background-image: url("https://raw.githubusercontent.com/senola/pictures/master/background/background6.jpg");
+      background-size: cover;
+    }
+    </style>
+
+</head>
+<body>
+    <div class="window">
+        <div class="cube">
+            <a href="javascript:;" class="surface surface-1" id="surface-1">1</a>
+            <a href="javascript:;" class="surface surface-2" id="surface-2">2</a>
+            <a href="javascript:;" class="surface surface-3" id="surface-3">3</a>
+            <a href="javascript:;" class="surface surface-4" id="surface-4">4</a>
+            <a href="javascript:;" class="surface surface-5" id="surface-5">5</a>
+            <a href="javascript:;" class="surface surface-6" id="surface-6">6</a>
+        </div>
+    </div>
+</body>
+    <script>
+    //独立完成部分
+    var s_1 = document.getElementById("surface-1");
+    var s_2 = document.getElementById("surface-2");
+    var s_3 = document.getElementById("surface-3");
+    var s_4 = document.getElementById("surface-4");
+    var s_5 = document.getElementById("surface-5");
+    var s_6 = document.getElementById("surface-6");
+    var arr = {
+                1: s_1,
+                2: s_2,
+                3: s_3,
+                4: s_4,
+                5: s_5,
+                6: s_6
+            };
+    function changeStyle(){
+        setTimeout(function(){
+            var i = getRandomNum(1, 6);
+            var obj = arr[i];
+            console.log("==========:" + i + ",------->:" + arr[i].flag)
+            if(arr[i].flag) {
+                 var j = getRandomNum(1, 6);
+                 obj.className = "surface " + "surface-" + i +  " pic-" + j;
+                 arr[i].flag = true
+            }else{
+           arr[i].flag = true;
+            }
+        changeStyle();
+        },200);
+    }
+    // 随机数
+    function getRandomNum(under, over){
+        switch ( arguments.length ){
+            case 1:
+                return parseInt(Math.random()*under+1);
+            case 2:
+                return parseInt(Math.random()*(over-under+1) + under);
+            default: return 1;
+        }
+    }
+
+    setTimeout(changeStyle,6000);
+    </script>
+</html>

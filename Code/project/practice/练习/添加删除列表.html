@@ -1,0 +1,527 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title> new document </title>  
+    <meta http-equiv="content-Type" content="text/html; charset=utf-8"/> -->
+
+<!--     <script type="text/javascript"> 
+
+    function addLoadEvent(func){
+        var oldonload=window.onload;
+        if(typeof window.onload!='function'){
+            window.onload=func;
+        }else{
+            window.onload=function(){
+                oldonload();
+                func();
+            }
+        }
+    }
+
+    addLoadEvent(a);
+  
+    function a(){
+        var tr=document.getElementsByTagName("tr");
+        for(var i= 0;i<tr.length;i++){
+            bgChange(tr[i]);
+        } 
+     // 鼠标移动改变背景,可以通过给每行绑定鼠标移上事件和鼠标移除事件来改变所在行背景色。
+    }         
+	function bgChange(obj){
+        obj.onmouseover=function(){
+            obj.style.backgroundColor="#f2f2f2";
+        }
+        obj.onmouseout=function(){
+            obj.style.backgroundColor="#fff";
+        }
+	}
+   
+	 // 编写一个函数，供添加按钮调用，动态在表格的最后一行添加子节点；
+    var num=2;
+    function add(){ 
+        num++;
+        var tra=document.createElement("tr");
+        var tda=document.createElement("td");
+        var tdb=document.createElement("td");
+        var tdc=document.createElement("td");
+
+        tda.innerHTML="xh00"+num;
+        tdb.innerHTML="第"+num+"个学生"; 
+        tdc.innerHTML="<a href='javascript:;' onclick='del(this)' >删除</a>";
+
+        var tab=document.getElementById("table");
+        tab.appendChild(tra);
+        tra.appendChild(tda);
+        tra.appendChild(tdb);
+        tra.appendChild(tdc);
+        var tr = document.getElementsByTagName("tr");
+        for(var i= 0;i<tr.length;i++){
+            bgcChange(tr[i]);
+        }
+    }
+			
+   	 
+     // 创建删除函数
+    function del(obj){
+        var tr=obj.parentNode.parentNode;
+        tr.parentNode.removeChild(tr);
+    }
+
+    </script>  -->
+
+
+
+
+
+
+<!--     <script type="text/javascript">
+
+    window.onload = function(){
+        var trs = document.getElementsByTagName('tr');
+        for(var i = 1; i < trs.length; i++){
+            trs[i].onmouseover = function(){
+                 this.style.backgroundColor = "#f2f2f2";
+            }
+            trs[i].onmouseout = function(){
+                 this.style.backgroundColor = "#fff";
+            }
+        }
+    }
+
+    function add(){
+        var table = document.getElementById('table');
+        var tr = document.createElement('tr');
+        var tda = document.createElement('td');
+
+        tda.innerHTML="<input type = 'text' />";
+        tr.appendChild(tda);
+
+        var tdb = document.createElement('td');
+        tdb.innerHTML="<input type = 'text' />";
+        tr.appendChild(tdb);
+
+        var tdc = document.createElement('td');
+        tdc.innerHTML='<a href="javascript:;" onclick="del(this); return false;">删除</a>';
+        tr.appendChild(tdc);
+
+        table.appendChild(tr);
+
+        var trs = document.getElementsByTagName('tr');
+        for(var i = 1; i < trs.length; i++){
+            trs[i].onmouseover = function(){
+                 this.style.backgroundColor = "#f2f2f2";
+            }
+            trs[i].onmouseout = function(){
+                 this.style.backgroundColor = "#fff";
+            }
+        }
+    }
+
+    function del(obj){
+        var table = obj.parentNode.parentNode.parentNode;
+        var tr = obj.parentNode.parentNode;
+        table.removeChild(tr);
+    }
+    </script> -->
+
+
+
+
+<!-- </head> 
+<body> 
+    <table border="1" width="50%" id="table">
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>操作</th>
+        </tr>  
+        <tr>
+            <td>xh001</td>
+            <td>王小明</td>
+            <td><a href="javascript:;" onclick="del(this); return false;">删除</a></td>
+        </tr>
+        <tr>
+            <td>xh002</td>
+            <td>刘小芳</td>
+            <td><a href="javascript:;" onclick="del(this); return false;">删除</a></td>
+        </tr>  
+    </table>
+    <input type="button" value="添加一行" onclick="add()" />
+</body>
+</html>
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title> new document </title>  
+    <meta http-equiv="content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript"> 
+  
+    window.onload = function(){
+                  
+        var str_tr=document.getElementsByTagName('tr');
+        for(var i=0;i<str_tr.length;i++){
+            str_tr[i].setAttribute('onmouseover',document.all ? eval(function(){this.style.background="#f2f2f2"}) : 'javascript:this.style.background="#f2f2f2"'); 
+            str_tr[i].setAttribute('onmouseout',document.all?eval(function(){this.style.background="#fff"}):'javascript:this.style.background="#fff"');
+        }
+    }
+     
+     
+    function addtr(){
+        var sNum=prompt('请输入学号','');
+        var sName=prompt('请输入姓名','');
+        if(sNum!=null&&sNum!=''&&sName!=null&&sName!=''){
+            
+            var newtr=document.createElement('tr');
+            var newtrS=newtr.innerHTML='<td>'+sNum+'</td>'+'<td>'+sName+'</td>'+'<td><a href="javascript:;" onclick="del(this)">删除</a></td>';
+            var oTC=document.getElementById("table");
+            oTC.appendChild(newtr);
+            
+        }else{
+            alert('请重新输入');
+        }
+    }
+    
+    function del(obj){
+        var oG=obj.parentNode.parentNode.parentNode;
+        var oP=obj.parentNode.parentNode;
+        oG.removeChild(oP);
+    }
+    </script> 
+</head> 
+<body> 
+    <table border="1" width="50%" id="table">
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>操作</th>
+        </tr>  
+        <tr>
+            <td>xh001</td>
+            <td>王小明</td>
+            <td><a href="javascript:;" onclick="del(this)">删除</a></td>   
+        </tr>
+        <tr>
+            <td>xh002</td>
+            <td>刘小芳</td>
+            <td><a href="javascript:;" onclick="del(this)" >删除</a></td>  
+        </tr>  
+    </table>
+    <input type="button" value="添加一行"  onclick="addtr()"/>   
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title> new document </title>
+    <meta http-equiv="content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/javascript">
+
+        window.onload = function(){
+
+            // 鼠标移动改变背景,可以通过给每行绑定鼠标移上事件和鼠标移除事件来改变所在行背景色。
+            var tr=document.getElementsByTagName("tr");
+            for(var i=0;i<tr.length;i++){
+                tr[i].setAttribute("onmouseover","over(this)");
+                tr[i].setAttribute("onmouseout","out(this)");
+            }
+        }
+        function over(e){
+            e.style.backgroundColor="#f2f2f2";
+        }
+        function out(e) {
+            e.style.backgroundColor="#FFF";
+        }
+        // 编写一个函数，供添加按钮调用，动态在表格的最后一行添加子节点；
+        function beginAdd() {
+            var num = document.getElementById("num");
+            var name = document.getElementById("name");
+            var butt = document.getElementById("butt");
+            num.style.display = "block";
+            name.style.display = "block";
+            butt.style.display = "block";
+        }
+        function cancelAdd() {
+            var num = document.getElementById("num");
+            var name = document.getElementById("name");
+            var butt = document.getElementById("butt");
+            num.style.display = "none";
+            name.style.display = "none";
+            butt.style.display = "none";
+        }
+        function addInfo() {
+            var _node = document.getElementById("table");
+            var _num = document.getElementById("num").value;
+            var _name = document.getElementById("name").value;
+            if(_num=="" || _name==""){
+                alert("请输入相关信息");
+                return false;
+            }else{
+                var _html = "";
+                _html += "<tr onmouseover='over(this)' onmouseout='out(this)'><td>"+_num+"</td><td>"+_name
+                        + "</td><td><a href='javascript:;' onclick='removeNode(this)'>删除</a></td></tr>";
+                _node.childNodes[1].innerHTML += _html;
+            }
+        }
+        // 创建删除函数
+        function removeNode(node) {
+            var delNode = node.parentNode.parentNode;
+            delNode.remove(delNode);
+        }
+    </script>
+</head>
+<body>
+    <table border="1" width="50%" id="table">
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>操作</th>
+        </tr>
+
+        <tr>
+            <td>xh001</td>
+            <td>王小明</td>
+            <td><a href="javascript:;" onclick="removeNode(this)">删除</a></td>
+        </tr>
+
+        <tr>
+            <td>xh002</td>
+            <td>刘小芳</td>
+            <td><a href="javascript:;" onclick="removeNode(this)">删除</a></td>
+        </tr>
+    </table>
+    <input type="button" value="添加一行" onclick="beginAdd()"/> 
+    <input type="button" value="不再添加" onclick="cancelAdd()">
+    <input id="num" type="text" placeholder="请输入您的学号" style="display: none;">
+    <input id="name" type="text" placeholder="请输入您的姓名" style="display: none;">
+    <input id="butt" type="button" value="确认添加" style="display: none;" onclick="addInfo()"/>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title></title>
+    <style type="text/css">
+        body{
+            font-size:15px;
+        }
+        td{
+            width:33%;
+            height:15px;
+        }
+    </style>
+</head>
+<body>
+    <table border="1" width="50%" id="table">
+        <tr>
+            <th>学号0</th>
+            <th>姓名</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td>xh001</td>
+            <td>王小明</td>
+            <td><a href="javascript:;" onclick="del(this)">删除</a></td>
+        </tr>
+        <tr>
+            <td>xh002</td>
+            <td>刘小芳</td>
+            <td><a href="javascript:;" onclick="del(this)">删除</a></td>
+        </tr>
+    </table>
+    <input type="button" value="添加一行" onclick="add()"/>
+    <input type="button" value="添加一行" onclick="add1()"/>
+    <script type="text/javascript">
+        window.onload = function(){
+            var trs = document.getElementsByTagName("tr");
+            //切记不要<=length
+            //变量的命名要注意，尽量都要有意义，且不要相同；比如循环里var
+            //为i，下面又有一个var i==3就不对了
+            for(var x=0;x<trs.length;x++){
+                var tds = trs[x].getElementsByTagName("td");
+                for(var z=0;z<tds.length;z++){
+                    bgcChange(tds[z]);
+                }
+            }
+        }
+
+        function bgcChange(obj){
+            obj.onmouseover=function(){
+                obj.style.backgroundColor="#f2f2f2";
+            }
+            obj.onmouseout=function(){
+                obj.style.backgroundColor="#fff";
+            }
+        }
+
+
+        //我的开始
+        var table = document.getElementById("table");
+        var i = 3;
+        function del(obj){
+            var tr = obj.parentNode.parentNode;
+            //table也是tr它爹啊，怎么就不行呢?原来tr他爹是tbody，tbody的爹才是table
+            //table.removeChild(d);
+            //alert(tr.parentNode.nodeName);
+            tr.parentNode.removeChild(tr);
+        }
+
+        function add(){
+            var tr = document.createElement("tr");
+            table.appendChild(tr);
+
+            var td1 = document.createElement("td");
+            var td2 = document.createElement("td");
+            var td3 = document.createElement("td");
+
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+
+            td1.innerHTML = "xh00"+i;
+            td2.innerHTML = "第"+i+"学生";
+            i++;
+
+            var newA = document.createElement("a");
+            var n = td3.appendChild(newA);
+            n.innerHTML = "删除";
+            n.href="javascript:;"
+            n.setAttribute("onclick","del(this)");
+
+
+            //重新加上鼠标经过的方法
+            var trs = document.getElementsByTagName("tr");
+            for(var x=0;x<trs.length;x++){
+                var tds = trs[x].getElementsByTagName("td");
+                for(var z=0;z<tds.length;z++){
+                    bgcChange(tds[z]);
+                }
+            }
+        }
+
+        function add1(){
+            var tr = document.createElement("tr");
+            table.appendChild(tr);
+            var td1 = document.createElement("td");
+            var td2 = document.createElement("td");
+            var td3 = document.createElement("td");
+
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+
+            var input1 = document.createElement("input");
+            var input2 = document.createElement("input");
+            //默认是type为text，这两行可以省略
+            // input1.setAttribute("type","text");
+            // input2.setAttribute("type","text");      
+            input1.style.width = "97%";
+            input2.style.height = "18px";
+            input1.style.background = "pink";
+            input2.style.width = "97%";
+            input2.style.height = "18px";
+            input2.style.background = "pink";
+
+            td1.appendChild(input1);
+            td2.appendChild(input2);
+
+            var a = document.createElement("a");
+            a.setAttribute("href","javascript:;");
+            a.setAttribute("onclick","sub(this)");
+            a.innerHTML = "确定";
+            td3.appendChild(a);
+        }
+
+        function sub(obj){
+            //获得当前元素的祖先元素tr再通过标签获取第一个td
+            var td1 = obj.parentNode.parentNode.getElementsByTagName("td")[0];
+
+            var td2 = obj.parentNode.parentNode.getElementsByTagName("td")[1];
+
+            var a =td1.getElementsByTagName("input")[0].value;
+            var b =td2.getElementsByTagName("input")[0].value;
+
+            td1.removeChild(td1.getElementsByTagName("input")[0]);
+            td1.innerHTML = a;
+
+            td2.removeChild(td2.getElementsByTagName("input")[0]);
+            td2.innerHTML = b;
+
+            obj.setAttribute("onclick","del(this)");
+            obj.innerHTML = "删除";
+
+
+            //重新加上鼠标经过的方法
+            var trs = document.getElementsByTagName("tr");
+            for(var x=0;x<trs.length;x++){
+                var tds = trs[x].getElementsByTagName("td");
+                for(var z=0;z<tds.length;z++){
+                    bgcChange(tds[z]);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>无标题文档</title>
+    <style type="text/css">
+
+    *{
+        margin:0;
+        padding:0;
+    }
+    div{
+        width:100px;
+        height:100px;
+        border:1px solid black;
+        background:#ccc;
+        margin:20px auto;
+    }
+    i{
+        position:relative;
+        top:20px;
+    }
+    a img{
+        margin:0 20px 0;
+        text-align:center;
+    }
+    a p{
+        margin:30px 0 0 30px;
+    }
+
+    </style>
+    <script src="../../JavaScript/JQuery/jquery-1.11.3.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+    $(function(){
+        $('#oi').mouseenter(function(){
+            $(this).stop(true);
+            $(this).animate({top:'-30px',opacity:'0'},200,function(){
+                $(this).css({top:'30px'});
+                $(this).animate({top:'20px',opacity:'100'})
+            })
+        })
+    })
+
+    // function addLoadEvent(func){
+    //     var oldonload=window.onload;
+    //     if(typeof window.onload!='function'){
+    //         window.onload=func;
+    //     }else{
+    //         window.onload=function(){
+    //             oldonload();
+    //             func();
+    //         }
+    //     }
+    // }
+
+    // function getStyle(obj,attr){
+    //     if(obj.currenStyle){
+    //         return obj.currenStyle[attr];
+    //     }else{
+    //         return getComputedStyle(obj,false)[attr];
+    //     }
+    // }
+
+    // addLoadEvent(b);
+
+    // function b(){
+    //     var b=document.getElementById('oi');
+    //         b.onmouseover=function(){
+    //             ani(b,{top:-30,opacity:0},function(){
+    //                 b.style.top=30+'px';
+    //                 ani(b,{top:20,opacity:100})
+    //             })
+    //     }
+    // }
+
+    // function ani(obj,json,fn){
+    //     clearInterval(obj.timer);
+    //     obj.timer=setInterval(function(){
+    //         var flag=true;
+    //         for(var attr in json){
+    //             //取得当前值
+    //             var sty=0;
+    //             if(attr=='opacity'){
+    //                 sty=Math.round(parseFloat(getStyle(obj,attr))*100)
+    //             }else{
+    //                 sty=parseInt(getStyle(obj,attr));
+    //             }
+    //             //计算速度
+    //             var speed=(json[attr]-sty)/10;
+    //             speed=speed>0?Math.ceil(speed):Math.floor(speed);
+    //             //检测停止
+    //             if(sty!=json[attr]){
+    //                 flag=false;
+    //             }
+    //             if(attr=='opacity'){
+    //                 obj.style[attr]=(sty+speed)/100;
+    //             }else{
+    //                 obj.style[attr]=sty+speed+'px';
+    //             }
+    //         }
+    //         if(flag){
+    //             clearInterval(obj.timer);
+    //             if(fn){
+    //                 fn();
+    //             }
+    //         }
+    //     },10)
+    // }
+
+    </script>
+</head>
+<body>
+    <div id='odiv'>
+    <a><i id='oi'><img src='images/11.png' alt=''></i><p>游戏</p></a>
+    </div>
+</body>
+</html>

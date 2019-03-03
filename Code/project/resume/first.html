@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人简历</title>
+    <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+            font-family:"微软雅黑";
+        }
+        /*整体布局*/
+        #wrap,#box,.section{
+            width:100%;
+            height:100%;
+            position:absolute;
+        }
+        .section{
+            overflow:hidden;
+        }
+        #wrap{
+            perspective:800px;
+            background:#2B2B2B;
+            cursor:pointer;
+        }
+        #box{
+            transform-style:preserve-3d;
+            transform: translateZ(-683px) rotateY(0deg);
+            transition: transform 1.2s;
+        }
+        #box1{
+            background-color:rgba(32,80,102,0.8);
+            transform: rotateY(0deg) translate3d(0px, 0px, 683px) scale(1);
+        }
+        #box2{
+            background-color:rgba(32,80,102,0.8);
+            transform: rotateY(90deg) translate3d(0px, 0px, 683px) scale(1);
+        }
+        #box3{
+            background-color:rgba(32,80,102,0.8);
+            transform: rotateY(180deg) translate3d(0px, 0px, 683px) scale(1);
+        }
+        #box4{
+            background-color:rgba(32,80,102,0.8);
+            transform: rotateY(270deg) translate3d(0px, 0px, 683px) scale(1);
+        }
+        /*第一块*/
+        #box1 .first{
+            width:70%;
+            margin:50px auto;
+            padding:30px;
+            position:relative;
+            text-align:center;
+        }
+        #box1 .first img{
+            z-index:100;
+            width:180px;
+            height:180px;
+            border-radius:100%;
+            border:5px solid #EEE;
+            margin:10px 0;
+            cursor:pointer;
+        }
+        #box1 .first h2{
+            color:#fff;
+            font-size:46px;
+            font-weight:100;
+            letter-spacing: 0.02em;
+            margin:15px 0;
+        }
+        #box1 .first h4{
+            color:#eee;
+            font-size:2em;
+            font-weight:100;
+            letter-spacing: 0.02em;
+            margin:0 0 20px 0;
+        }
+        #box1 .first p{
+            color:#ddd;
+            font-size:20px;
+            font-weight:100;
+            letter-spacing: 0.02em;
+        }
+        /*第二块*/
+        #box2 .second{
+            width:70%;
+            height:500px;
+            margin:65px auto;
+            box-sizing:border-box;
+            border-radius:60px 0 60px 0;
+            background: rgba(255, 255, 255, 0.1);
+            position:relative;
+            padding:30px 30px;
+        }
+        #box2 .second:before{
+            position:absolute;
+            top:0;
+            right:0;
+            content:"";
+            width:50px;
+            height:50px;
+            border-top:3px solid #FFF;
+            border-right:3px solid #FFF;
+        }
+        #box2 .second:after{
+            position:absolute;
+            bottom:0;
+            left:0;
+            content:"";
+            width:50px;
+            height:50px;
+            border-bottom:3px solid #FFF;
+            border-left:3px solid #FFF;
+        }
+        .second_title{
+            color:white;
+            font-size:20px;
+            font-weight:bold;
+            padding-bottom:10px;
+            border-bottom:2px solid #26B1B6;
+        }
+        .second ul{
+            padding:15px 0 20px 0;
+        }
+        .second ul li{
+            list-style-type:none;
+            padding:5px;
+            color:#ddd;
+        }
+        /*第三块*/
+        .third{
+            width:80%;
+            margin:auto;
+        }
+        .third_demo{
+            width:100%;
+            height:300px;
+            border-bottom:3px solid #AAA;
+            position:relative;
+            overflow:hidden;
+            text-align:center;
+        }
+        .third_demo .demo_left{
+            position:absolute;
+            top:50%;
+            left:0;
+            transform:translate(0,-50%);
+            width:120px;
+            height:180px;
+            border:3px solid #000;
+            border-radius:10%;
+        }
+        .demo_demo p{
+            margin:30px 0 0 80px;
+        }
+        .third_demo .demo_right{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(0,-50%);
+            width:120px;
+            height:180px;
+            border:3px solid #000;
+            border-radius:10%;
+        }
+
+
+
+        .fourth{
+            width:80%;
+            margin:auto;
+        }
+        .fourth_title{
+            width:100%;
+            box-sizing:border-box;
+            padding:50px 50px;
+            text-align:center;
+        }
+        .fourth_title h1{
+            color:#FFF;
+            font-size:2em;
+            font-weight:100;
+            letter-spacing: 0.02em;
+            padding:20px;
+            border-bottom:2px solid #5AC7E9;
+            margin-bottom:30px;
+        }
+        .fourth_title p{
+            color:#eee;
+            padding:10px;
+            font-size:20px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="wrap">
+        <div id="box">
+            <div class="section" id="box1">
+                <div class="first">
+                    <img src="../../images/photo.jpg"/>
+                    <h2>Taumu</h2>
+                    <h4>想要成为一名前端开发工程师</h4>
+                    <p>知道的越多，不知道的也就越多</p>
+                </div>
+            </div>
+            <div class="section" id="box2">
+                <div class="second">
+                    <div class="second_title">专业技能</div>
+                    <ul>
+                        <li>< 掌握Html，CSS，熟悉CSS3。 /></li>
+                        <li>< 熟悉原生JavaScript，熟悉JQuery，能实现常见的前端动态效果。 /></li>
+                        <li>< 熟悉DIV+CSS页面布局，了解不同浏览器下的一些问题。 /></li>
+                        <li>< 懂得语义化的重要性，有良好的编码习惯。 /></li>
+                        <li>< 会用一些前端的调试工具，如Firebug、Chrome DevTools。 /></li>
+                        <li>< 熟练运用Sublime text、DW等常用制作网页工具，以及PS切图操作。 /></li>
+                    </ul>
+                    <div class="second_title">技能简介</div>
+                    <ul>
+                        <li>< 非常喜欢CSS3，经常会用CSS3来做一些有意思的东西。 /></li>
+                        <li>< 很喜欢原生JS，尽量都在用原生来实现，很想学的更好。 /></li>
+                        <li>< 写代码有强迫症，优雅的代码是我的追求。 /></li>
+                        <li>< 实事求是，说到做到，以上就是现阶段我所会的。 /></li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="section" id="box3">
+                <div class="third">
+                    <div class="third_demo">
+                        <h1>我的作品</h1>
+                        <div class="demo_left"></div>
+                        <div class="demo_right"></div>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="section" id="box4">
+                <div class="fourth">
+                    <div class="fourth_title">
+                        <h1>关于我</h1>
+                        <p>热爱前端，喜欢前端的所见即所得。</p>
+                        <p>迄今为止一直在自学前端，到现了也有了很多收获，希望能学会更多。</p>
+                        <p>不断的在理解前端，从开始学到现在。</p>
+                        <p>
+                            <a href="">GitHub</a>
+                            <a href="">CSDN</a>
+                            <a href="">知乎</a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+<!--     <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul> -->
+
+<!--                 <div class="fourth_title">简介</div>
+                <ul>
+                    <li>< 大二开始对前端产生兴趣从此便踏上一条不归路。 /></li>
+                    <li>< 同喜欢前端的所见即所得。 /></li>
+                    <li>< 凭兴趣一直自学到现在，感觉很好。 /></li>
+                    <li>< 个人是非常喜欢CSS3的，没事到处寻找CSS3写的效果去实现。 /></li>
+                    <li>< 原生JS还是不错的，一如既往的优先使用原生来实现。 /></li>
+                    <li>< 强迫症患者，优雅的代码是我的追求。 /></li>
+                </ul>
+                <div class="fourth_title">自身</div>
+                <ul>
+                    <li>< 述其优点，不如述其缺点来的实在 /></li>
+                    <li>< 非科班出身的我对找工作是有所顾虑的（面试机会都不给。。。） /></li>
+                    <li>< 专科生，学历是硬伤啊。 /></li>
+                    <li>< 这是我的的诚意！ /></li>
+                </ul> -->
+
+<!--    #box4 .fourth{
+        height:auto;
+        box-sizing:border-box;
+        border-radius:60px 0 60px 0;
+        background: rgba(255, 255, 255, 0.4);
+        padding:30px 30px 10px 30px;
+        transform:scale(1,1);
+    }
+    @keyframes show_scale{
+        0%{
+            transform:scale(0.2,0.2);
+        }
+        40%{
+            transform:scale(1.2,1.2);
+        }
+        60%{
+            transform:scale(1,1);
+        }
+        80%{
+            transform:scale(1.1,1.1);
+        }
+        100%{
+            transform:scale(1,1);
+        }
+    }
+    .get_show{
+        animation:show_scale 0.5s ease-in backwards;
+    }
+    .fourth:before{
+        position:absolute;
+        top:-3px;
+        right:-3px;
+        content:"";
+        width:50px;
+        height:50px;
+        border-top:3px solid #FF6700;
+        border-right:3px solid #FF6700;
+    }
+    .fourth:after{
+        position:absolute;
+        bottom:-3px;
+        left:-3px;
+        content:"";
+        width:50px;
+        height:50px;
+        border-bottom:3px solid #FF6700;
+        border-left:3px solid #FF6700;
+    }
+    .fourth .fourth_title{
+        color:white;
+        font-size:20px;
+        font-weight:bold;
+        padding-bottom:10px;
+        border-bottom:2px solid #205066;
+    }
+    .fourth ul{
+        padding:15px 0 20px 0;
+    }
+    .fourth ul li{
+        list-style-type:none;
+        padding:5px;
+        color:#222;
+    } -->
+
+
+    <script type="text/javascript">
+    var box=(function(){
+        var owrap=document.body;
+        var obox=document.getElementById('box');
+        var odiv=obox.getElementsByTagName('div');
+        var j=0;
+        obox.onclick=function(event){
+            var disX=event.clientX-owrap.offsetLeft;
+            var oWidth=owrap.clientWidth/2;
+            if(disX>oWidth){
+                j++;
+                obox.style.transform="translateZ(-683px) rotateY(" + (90 * j) + "deg)";
+            }else{
+                j--;
+                obox.style.transform="translateZ(-683px) rotateY(" + (90 * j) + "deg)";
+            }
+            var reg = /(rotateY\(([\-\+]?(\d+))deg\))/i;
+            var wt = obox.style['transform'],
+                wts = wt.match (reg),
+                $2 = RegExp.$2;
+            console.log ($2);
+            // obox.style['transform'] = wt.replace ($2, parseFloat (RegExp.$3) + 10 + RegExp.$4);
+        }
+    })();
+    </script>
+
+</body>
+</html>

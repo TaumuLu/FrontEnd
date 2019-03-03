@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>无标题文档</title>
+	<style type="text/css">
+
+	*{
+		margin:0;
+		padding:0;
+	}
+	#b ul{
+		list-style-type:none;
+	}
+	#b li{
+		width:200px;
+		height:100px;
+		background:yellow;
+		margin-bottom:20px;
+		border:1px solid blue;
+		opacity:0.3;
+	}
+
+	</style>
+	<script type="text/javascript">
+
+	function addLoadEvent(func){
+		var oldonload=window.onload;
+		if(typeof window.onload!='function'){
+			window.onload=func;
+		}else{
+			window.onload=function(){
+				oldonload();
+				func();
+			}
+		}
+	}
+
+	function getStyle(obj,attr){
+		if(obj.currenStyle){
+			return obj.currenStyle[attr];
+		}else{
+			return getComputedStyle(obj,false)[attr];
+		}
+	}
+
+	addLoadEvent(b);
+
+	function b(){
+		var b=document.getElementsByTagName('li');
+		for(var i=0;i<b.length;i++){
+			b[i].onmouseover=function(){
+				var that=this;
+				ani(that,{width:400,opacity:100},function(){
+					ani(that,{height:200})
+				})
+			}
+			b[i].onmouseout=function(){
+				var that=this;
+				ani(that,{width:200,height:100,opacity:30})
+			}
+		}
+	}
+
+	function ani(obj,json,fn){		
+		clearInterval(obj.timer);
+		obj.timer=setInterval(function(){
+			var flag=true;
+					
+			// console.info(flag);
+			console.info(Number(null));
+			console.info(parseInt(null));
+
+			for(var attr in json){
+				// console.info(attr);
+				// console.info(json[attr]);
+
+				//取得当前值
+				var sty=0;
+				if(attr=='opacity'){
+					sty=Math.round(parseFloat(getStyle(obj,attr))*100)
+				}else{
+					sty=parseInt(getStyle(obj,attr));
+				}	
+				//计算速度
+				var speed=(json[attr]-sty)/10;
+				speed=speed>0?Math.ceil(speed):Math.floor(speed);
+				//检测停止
+				if(sty!=json[attr]){
+					flag=false;
+				}	
+				if(attr=='opacity'){
+					obj.style[attr]=(sty+speed)/100;
+				}else{
+					obj.style[attr]=sty+speed+'px';
+				}		
+				if(flag){
+					clearInterval(obj.timer);
+					if(fn){
+						fn();
+					}
+				}
+			}
+		},10)	
+	}
+
+	</script> 
+</head>
+<body>
+	<div id="b">
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</body>
+</html>

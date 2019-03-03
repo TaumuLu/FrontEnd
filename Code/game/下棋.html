@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/meyer-reset/2.0/reset.css">
+
+    <style>
+    .container {
+        width:340px;
+        height:320px;
+        margin:10px auto;
+        padding-left:10px;
+        padding-top:20px;
+        border:2px solid #ccc;
+    }
+    .cells {
+        display: block;
+        float:left;
+        width:80px;
+        height:80px;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        border:2px solid #ccc;
+        color:#777;
+        text-decoration: none;
+        font-size: 60px;
+        line-height:80px;
+        text-align: center;
+    }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <a href="javascript:;" class="cells" id="cell-0-0"></a>
+        <a href="javascript:;" class="cells" id="cell-0-1"></a>
+        <a href="javascript:;" class="cells" id="cell-0-2"></a>
+        <a href="javascript:;" class="cells" id="cell-1-0"></a>
+        <a href="javascript:;" class="cells" id="cell-1-1"></a>
+        <a href="javascript:;" class="cells" id="cell-1-2"></a>
+        <a href="javascript:;" class="cells" id="cell-2-0"></a>
+        <a href="javascript:;" class="cells" id="cell-2-1"></a>
+        <a href="javascript:;" class="cells" id="cell-2-2"></a>
+    </div>
+
+    <script type="text/javascript">
+
+    var TICK = '√';
+    var CROSS = 'Χ';
+
+    var model = [];
+    var cells = [];
+
+    var flag; // 用于表示轮到谁了
+
+    var newGame = function(){
+        for (i=0; i<3; i++)
+            for (j=0; j<3; j++){
+                model[i][j] = 0;
+                cells[i][j].text = ' ';
+            }
+        flag = 1;
+    }
+
+    var freshView = function(){
+        var i, j;
+
+        for (i=0; i<3; i++)
+            for (j=0; j<3; j++)
+                if (model[i][j] == 1){
+                    cells[i][j].text = CROSS;
+                }else if (model[i][j] == 2){
+                    cells[i][j].text = TICK;
+                }
+    }
+
+    var checkWin = function(x, y){
+
+        // 检查 X 方向
+        if (model[x][y] != 0 && model[0][y] == model[1][y] && model[0][y] == model[2][y])
+            return 1;
+        // 检查 Y 方向
+        if (model[x][y] != 0 && model[x][0] == model[x][1] && model[x][0] == model[x][2])
+            return 1;
+        // 如果在 \ 方向
+        if (x == y)
+            // 检查 \ 方向
+            if (model[0][0] != 0 && model[0][0] == model[1][1] && model[0][0] == model[2][2])
+                return 1;
+        // 如果在 / 方向
+        if ( ( x == 2 && y == 0 ) || ( x == 0 && y == 2 ) || ( x == 1 && y == 1 ) )
+            // 检查 / 方向
+            if (model[2][0] != 0 && model[2][0] == model[1][1] && model[2][0] == model[0][2])
+                return 1;
+        return 0;
+    }
+
+    window.onload = function(){
+        var i, j;
+
+        // 初始化二维数组
+        for (i=0; i<3; i++){
+            model[i] = [];
+            cells[i] = [];
+        }
+
+        for (i=0; i<3; i++)
+            for (j=0; j<3; j++){
+                cells[j][i] = document.getElementById('cell-' + i + '-' + j);
+
+                (function(j,i){
+                    cells[i][j].onclick = function(){
+                        model[i][j] = flag + 1;
+
+                        if (flag){
+                            flag = 0;
+                        }else{
+                            flag = 1;
+                        }
+                        freshView();
+
+                        if (checkWin(i, j)){
+                            if (flag){
+                                alert("用 " + CROSS + " 的选手胜利！");
+                            }else{
+                                alert("用 " + TICK + " 的选手胜利！");
+                            }
+                            newGame();
+                        }
+                    }
+                })(i, j);
+            }
+        newGame();
+    }
+
+    </script>
+</body>
+</html>
