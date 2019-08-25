@@ -2,10 +2,6 @@
 # 写法一
 set -euxo pipefail
 
-# 写法二
-set -eux
-set -o pipefail
-
 ## 指定目录
 src=$1
 dest=$2
