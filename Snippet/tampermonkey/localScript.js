@@ -118,11 +118,11 @@ const handleMap = {
 }
 
 const getMainDomain = host => {
-	const re = /com|tv|net|org|gov|edu/
-	const a = host.split('.')
-	let i = a.length - 2
-	if (re.test(a[i])) i--
-	return a[i]
+  const re = /com|tv|net|org|gov|edu/
+  const a = host.split('.')
+  let i = a.length - 2
+  if (re.test(a[i])) i--
+  return a[i]
 }
 
 const { host } = location
