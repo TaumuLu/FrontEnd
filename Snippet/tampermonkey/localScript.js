@@ -90,27 +90,40 @@ const handleMap = {
     document.getElementsByTagName = function(tagName) {
       const values = getElementsByTagName.call(this, tagName)
       if (tagName === 'video') {
-        return [new Proxy({}, {
+        const cacheMap = new Map()
+        return new Proxy([], {
           get(target, key, receiver) {
-            const [video] = values
-            const value = video[key]
-            if (typeof value === 'function') {
-              return value.bind(video)
+            const video = values[key]
+            if (video) {
+              if (!cacheMap.has(video)) {
+                cacheMap.set(
+                  video,
+                  new Proxy({}, {
+                    get(target, key, receiver) {
+                      const value = video[key]
+                      if (typeof value === 'function') {
+                        return value.bind(video)
+                      }
+                      return value
+                    },
+                    set(target, key, value, receiver) {
+                      if (key === 'currentTime') {
+                        const oldValue = video[key]
+                        Toast.show(toFixed(value - oldValue))
+                      } else if (key === 'volume') {
+                        Toast.show(toFixed(value))
+                      }
+                      video[key] = value
+                      return value
+                    }
+                  })
+                )
+              }
+              return cacheMap.get(video)
             }
-            return value
+            return video
           },
-          set(target, key, value, receiver) {
-            const [video] = values
-            if (key === 'currentTime') {
-              const oldValue = video[key]
-              Toast.show(toFixed(value - oldValue))
-            } else if (key === 'volume') {
-              Toast.show(toFixed(value))
-            }
-            video[key] = value
-            return value
-          }
-        })]
+        })
       }
       return values
     }
