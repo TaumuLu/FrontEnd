@@ -5,7 +5,7 @@
 // @description  try to take over the world!
 // @author       mt
 // @include      *.bilibili.*
-// @include      *.mp.weixin.qq.*
+// @include      *.weixin.*
 // @run-at       document-idle
 // @require      https://raw.githubusercontent.com/TaumuLu/style-media-toggle/master/lib/index.js
 // @require      https://raw.githubusercontent.com/TaumuLu/Record/master/Snippet/tampermonkey/themeScript.js
