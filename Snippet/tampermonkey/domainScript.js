@@ -6,7 +6,6 @@
 // @author       mt
 // @include      *.douyu.*
 // @include      *.bilibili.*
-// @include      *.mp.weixin.qq.*
 // @run-at       document-start
 // @require      https://raw.githubusercontent.com/TaumuLu/Record/master/Snippet/tampermonkey/domainScript.js
 // ==/UserScript==
