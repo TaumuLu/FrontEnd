@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         主题切换
 // @namespace    http://tampermonkey.net/
-// @version      0.1.3
+// @version      0.1.4
 // @description  网站@media (prefers-color-scheme: dark)主题样式切换，深色模式和浅色模式的切换
 // @author       taumu
 // @include      *://*.weixin.*
 // @include      *://sspai.*
-// @run-at       document-idle
+// @run-at       document-start
 // @require      https://unpkg.com/style-media-toggle
 // @grant        GM_registerMenuCommand
 // @grant        GM_setValue
