@@ -1,25 +1,22 @@
 // ==UserScript==
-// @name         ThemeScript
+// @name         主题切换
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
-// @author       mt
-// @include      *.bilibili.*
-// @include      *.weixin.*
+// @version      0.1.3
+// @description  网站@media (prefers-color-scheme: dark)主题样式切换，深色模式和浅色模式的切换
+// @author       taumu
+// @include      *://*.weixin.*
+// @include      *://sspai.*
 // @run-at       document-idle
-// @require      https://raw.githubusercontent.com/TaumuLu/style-media-toggle/master/lib/index.js
-// @require      https://raw.githubusercontent.com/TaumuLu/Record/master/Snippet/tampermonkey/themeScript.js
+// @require      https://unpkg.com/style-media-toggle
 // @grant        GM_registerMenuCommand
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_xmlhttpRequest
+// @namespace    https://greasyfork.org/users/445432
 // ==/UserScript==
 
 (function() {
   'use strict';
-  console.log("-----------------------------")
-  console.log("------load ThemeScript------")
-  console.log("-----------------------------")
   const mediaName = 'prefers-color-scheme'
   const { matches } = matchMedia(`(${mediaName}: dark)`)
   const { host } = location
