@@ -1,14 +1,15 @@
 // ==UserScript==
 // @name         主题切换
 // @namespace    http://tampermonkey.net/
-// @version      0.1.4
-// @description  网站@media (prefers-color-scheme: dark)主题样式切换，深色模式和浅色模式的切换
+// @version      0.1.6
+// @description  网站@media (prefers-color-scheme: dark|light)主题样式切换，深色模式和浅色模式的切换
 // @author       taumu
 // @include      *://*.weixin.*
 // @include      *://sspai.*
 // @run-at       document-start
 // @require      https://unpkg.com/style-media-toggle
 // @grant        GM_registerMenuCommand
+// @grant        GM_unregisterMenuCommand
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_xmlhttpRequest
@@ -18,20 +19,26 @@
 (function() {
   'use strict';
   const mediaName = 'prefers-color-scheme'
-  const { matches } = matchMedia(`(${mediaName}: dark)`)
+  const { matches: isDark } = matchMedia(`(${mediaName}: dark)`)
   const { host } = location
-  const name = `${mediaName}:${host}`
+  const saveName = `${mediaName}:${host}`
 
-  function getValue(saveName, defaultVal = matches) {
-    return GM_getValue(saveName, defaultVal)
+  function getValue(name, defaultVal = true) {
+    return GM_getValue(name, defaultVal)
   }
 
-  function registerMenu(title, saveName) {
-    const value = getValue(saveName)
-    if (value) title += '            √'
+  function registerMenu(title, name) {
+    const value = name && getValue(name)
+    if (name && value) {
+      title += '√'
+    }
     GM_registerMenuCommand(title, () => {
-      GM_setValue(saveName, !value)
-      location.reload()
+      if (name) {
+        GM_setValue(name, !value)
+        location.reload()
+      } else {
+        alert('当前系统主题下无可切换主题')
+      }
     })
   }
 
@@ -79,26 +86,54 @@
         styleSheet.disabled = true
         document.head.appendChild(style)
       }
-  });
+    })
   }
 
-  registerMenu('深色模式', name)
   const mediaToggle = getMediaToggle({
     onError(e, styleSheet) {
       replaceStyle(styleSheet)
     }
   })
 
+  const themeMap = new Map([
+    ['dark', {
+      isDefault: isDark,
+      title: '深色模式',
+      menuId: null
+    }],
+    ['light', {
+      isDefault: !isDark,
+      title: '浅色模式',
+      menuId: null
+    }]
+  ])
   let first = false
   function toggle() {
     first = true
-    const value = getValue(name)
     const mediaMap = mediaToggle.get()
-    const key = [...mediaMap.keys()].find((v) => v.includes(mediaName))
-    const media = key && mediaMap.get(key)
-    if (media) {
-        media.toggle(!value)
-    }
+    const keys = Array.from(mediaMap.keys()).filter((key) => key.includes(mediaName))
+
+    themeMap.forEach((v, k) => {
+      const { menuId, title, isDefault } = v
+      if (keys.length) {
+        if (isDefault) {
+          const key = keys.find((item) => item.includes(k))
+          const media = key && mediaMap.get(key)
+          const value = getValue(saveName)
+          const params = []
+          if (media) {
+            params.push(title, saveName)
+            media.toggle(!value)
+          } else {
+            params.push('无可切换主题')
+          }
+          if (!menuId) v.menuId = registerMenu(title, saveName)
+        }
+      } else if (menuId) {
+        GM_unregisterMenuCommand(menuId)
+        v.menuId = null
+      }
+    })
   }
 
   mediaToggle.subscribe(toggle)
