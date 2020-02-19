@@ -10,13 +10,15 @@
 // @require      https://raw.githubusercontent.com/TaumuLu/Record/master/Snippet/tampermonkey/domainScript.js
 // ==/UserScript==
 
-(function() {
-  'use strict';
-  console.log("-----------------------------")
-  console.log("------load DomainScript------")
-  console.log("-----------------------------")
+;(function() {
+  // eslint-disable-next-line
+  'use strict'
 
-  const Toast = new class {
+  console.log('-----------------------------')
+  console.log('------load DomainScript------')
+  console.log('-----------------------------')
+
+  const Toast = new (class {
     styles = {
       display: 'none',
       position: 'absolute',
@@ -43,7 +45,7 @@
       if (parent) {
         this.dom = document.createElement('div')
         this.dom.setAttribute('id', this.id)
-        Object.keys(this.styles).forEach((key) => {
+        Object.keys(this.styles).forEach(key => {
           const value = this.styles[key]
           this.dom.style[key] = value
         })
@@ -52,14 +54,14 @@
     }
 
     checkDom() {
-      if(!this.dom || !document.getElementById(this.id)) {
+      if (!this.dom || !document.getElementById(this.id)) {
         this.init()
       }
     }
 
     show(text, time = 2000) {
       this.checkDom()
-      if(!this.dom) return
+      if (!this.dom) return
 
       clearTimeout(this.timer)
       this.dom.innerText = text
@@ -68,9 +70,9 @@
         if (this.dom) {
           this.dom.style.display = 'none'
         }
-      }, time);
+      }, time)
     }
-  }
+  })()
 
   const toFixed = (value, num = 1) => {
     return +value.toFixed(num)
@@ -79,16 +81,16 @@
   // domain map
   const domainMap = {
     douyu() {
-      const addEventListener = document.addEventListener;
+      const { addEventListener } = document
       document.addEventListener = function(type, listener, ...other) {
-        const args = [type, listener, ...other];
-        if (type === "visibilitychange") return;
+        const args = [type, listener, ...other]
+        if (type === 'visibilitychange') return null
 
-        return addEventListener.apply(this, args);
-      };
+        return addEventListener.apply(this, args)
+      }
     },
     bilibili() {
-      const getElementsByTagName = document.getElementsByTagName
+      const { getElementsByTagName } = document
       document.getElementsByTagName = function(tagName) {
         const values = getElementsByTagName.call(this, tagName)
         if (tagName === 'video') {
@@ -100,25 +102,42 @@
                 if (!cacheMap.has(video)) {
                   cacheMap.set(
                     video,
-                    new Proxy({}, {
-                      get(target, key, receiver) {
-                        const value = video[key]
-                        if (typeof value === 'function') {
-                          return value.bind(video)
-                        }
-                        return value
-                      },
-                      set(target, key, value, receiver) {
-                        if (key === 'currentTime') {
-                          const oldValue = video[key]
-                          Toast.show(toFixed(value - oldValue))
-                        } else if (key === 'volume') {
-                          Toast.show(toFixed(value))
-                        }
-                        video[key] = value
-                        return value
+                    new Proxy(
+                      {},
+                      {
+                        get(t, k, r) {
+                          const value = video[k]
+                          if (typeof value === 'function') {
+                            return value.bind(video)
+                          }
+                          return value
+                        },
+                        set(t, k, value, r) {
+                          if (k === 'currentTime') {
+                            const oldValue = video[k]
+                            Toast.show(toFixed(value - oldValue))
+                          } else if (k === 'volume') {
+                            const fValue = toFixed(value)
+                            try {
+                              const itemKey = 'bilibili_player_settings'
+                              const setting =
+                                JSON.parse(localStorage.getItem(itemKey)) || {}
+                              // eslint-disable-next-line @typescript-eslint/camelcase
+                              setting.video_status = setting.video_status || {}
+                              setting.video_status.volume = fValue
+                              localStorage.setItem(
+                                itemKey,
+                                JSON.stringify(setting)
+                              )
+                              // eslint-disable-next-line no-empty
+                            } catch (e) {}
+                            Toast.show(fValue)
+                          }
+                          video[k] = value
+                          return value
+                        },
                       }
-                    })
+                    )
                   )
                 }
                 return cacheMap.get(video)
@@ -129,12 +148,12 @@
         }
         return values
       }
-    }
+    },
   }
 
-  const { host } = location
-  const key = Object.keys(domainMap).find((key) => host.includes(key))
+  const { host } = window.location
+  const key = Object.keys(domainMap).find(k => host.includes(k))
   const handle = domainMap[key]
 
   if (handle) handle.call(domainMap)
-})();
+})()

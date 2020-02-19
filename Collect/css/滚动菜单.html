@@ -1,80 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<style type="text/css">
-	*{
-		margin:0;
-		padding:0;
-	}
-	body{
-		padding:20px 0;
-		text-align:center;
-		font-family: "Roboto Condensed";
-	    height: 100%;
-		min-height: 100%;
-		background-image: radial-gradient(circle farthest-corner at center top , #3c3b52 0%, #252233 80%);
-	}
-	.scroll-menu {
-	    background-color: rgba(0, 0, 0, 0.4);
-	    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-	    border-radius: 16px;
-	    box-shadow: 0 0 8px rgba(0, 0, 0, 0.4) inset;
-	    margin: 0;
-	    padding: 0 30px;
-	}
-	.scroll-menu {
-	    display: inline-block;
-	    height: 50px;
-	    overflow: hidden;
-	    text-align: center;
-	}
-	.scroll-menu li {
-	    float: left;
-	    height: 100%;
-	    list-style: outside none none;
-	    margin: 0 30px;
-	}
-	.scroll-menu li a {
-	    color: #fff;
-	    letter-spacing: -1px;
-	    text-decoration: none;
-	    text-transform: uppercase;
-	}
-	.scroll-menu li a {
-	    margin-top: -50px;
-	    transition: all 0.3s cubic-bezier(0.1, 0.1, 0.5, 1.4) 0s;
-	}
-	.scroll-menu li * {
-	    display: inline-block;
-	    font-size: 1.3em;
-	    line-height: 50px;
-	}
-	.scroll-menu li a:hover {
-	    margin-top: 0;
-	}
-	.scroll-menu li a::before {
-	    color: #cdf745;
-	    content: attr(title);
-	    display: block;
-	}
-	</style>
-</head>
-<body>
-	<ul class="scroll-menu">
-		<li>
-			<a href="#" title="CSS">CSS</a>
-		</li>
-		<li>
-			<a href="#" title="HTML">HTML</a>
-		</li>
-		<li>
-			<a href="#" title="Javascript">Javascript</a>
-		</li>
-		<li>
-			<a href="#" title="About">About</a>
-		</li>
-	</ul>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        padding: 20px 0;
+        text-align: center;
+        font-family: 'Roboto Condensed';
+        height: 100%;
+        min-height: 100%;
+        background-image: radial-gradient(
+          circle farthest-corner at center top,
+          #3c3b52 0%,
+          #252233 80%
+        );
+      }
+      .scroll-menu {
+        background-color: rgba(0, 0, 0, 0.4);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 16px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.4) inset;
+        margin: 0;
+        padding: 0 30px;
+      }
+      .scroll-menu {
+        display: inline-block;
+        height: 50px;
+        overflow: hidden;
+        text-align: center;
+      }
+      .scroll-menu li {
+        float: left;
+        height: 100%;
+        list-style: outside none none;
+        margin: 0 30px;
+      }
+      .scroll-menu li a {
+        color: #fff;
+        letter-spacing: -1px;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      .scroll-menu li a {
+        margin-top: -50px;
+        transition: all 0.3s cubic-bezier(0.1, 0.1, 0.5, 1.4) 0s;
+      }
+      .scroll-menu li * {
+        display: inline-block;
+        font-size: 1.3em;
+        line-height: 50px;
+      }
+      .scroll-menu li a:hover {
+        margin-top: 0;
+      }
+      .scroll-menu li a::before {
+        color: #cdf745;
+        content: attr(title);
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <ul class="scroll-menu">
+      <li>
+        <a href="#" title="CSS">CSS</a>
+      </li>
+      <li>
+        <a href="#" title="HTML">HTML</a>
+      </li>
+      <li>
+        <a href="#" title="Javascript">Javascript</a>
+      </li>
+      <li>
+        <a href="#" title="About">About</a>
+      </li>
+    </ul>
+  </body>
 </html>

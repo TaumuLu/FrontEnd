@@ -1,64 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>1234</title>
     <style type="text/css">
-    *{
-        margin:0;
-        padding:0;
-    }
-    #father{
-        background-color:#333;
-        border-radius:5px;
-        height:45px;
-        margin:50px auto 0px;
-        width:680px;
-    }
-    .MenuItem{
-        float:left;
-        height:50px;
-        list-style:outside none none;
-        width:120px;
-    }
-    a,.MenuItemChildItem>a {
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #father {
+        background-color: #333;
+        border-radius: 5px;
+        height: 45px;
+        margin: 50px auto 0px;
+        width: 680px;
+      }
+      .MenuItem {
+        float: left;
+        height: 50px;
+        list-style: outside none none;
+        width: 120px;
+      }
+      a,
+      .MenuItemChildItem > a {
         float: left;
         color: #fff;
         padding: 10px 0px 10px 0px;
         text-align: center;
-        font: 15px "微软雅黑", Arial, Helvetica, sans-serif;
+        font: 15px '微软雅黑', Arial, Helvetica, sans-serif;
         cursor: pointer;
         width: 120px;
-    }
-    .MenuItem>a:hover {
+      }
+      .MenuItem > a:hover {
         background-color: #252525;
-    }
-    .MenuItem:first-child>a {
+      }
+      .MenuItem:first-child > a {
         border-radius: 5px 0 0 0;
-    }
-    #MenuMark{
-        background-color:#ff5500;
-        border-radius:2em;
-        height:5px;
-        margin-top:40px;
-        transition-duration:0.5s;
-        width:0;
-    }
-    .MenuItem:hover #MenuMark {
-        width:100%;
-    }
-    #MenuItemChild {
+      }
+      #MenuMark {
+        background-color: #ff5500;
+        border-radius: 2em;
+        height: 5px;
+        margin-top: 40px;
+        transition-duration: 0.5s;
+        width: 0;
+      }
+      .MenuItem:hover #MenuMark {
+        width: 100%;
+      }
+      #MenuItemChild {
         margin: 0;
-        visibility:hidden;
+        visibility: hidden;
         padding: 0;
         width: 100%;
         float: left;
-    }
-    #MenuItemChild>li>a {
+      }
+      #MenuItemChild > li > a {
         background-color: #333;
-
-    }
-    .MenuItemChildItem {
+      }
+      .MenuItemChildItem {
         list-style: none;
         color: #fff;
         -webkit-perspective: 300px;
@@ -67,8 +67,8 @@
         -o-perspective: 300px;
         perspective: 300px;
         /*transform-style:preserve-3d;*/
-    }
-    .MenuItemChildItem>a {
+      }
+      .MenuItemChildItem > a {
         border-bottom: 1px solid #222222;
         border-top: 1px solid #555555;
         -webkit-transform: rotateY(270deg);
@@ -80,105 +80,110 @@
         -o-perspective: 400px;
         perspective: 400px;
 
-        opacity:0;
-    }
+        opacity: 0;
+      }
 
-    .MenuItem:hover #MenuItemChild{
-        visibility:visible;
-    }
-    .MenuItemChildItem>a:hover {
+      .MenuItem:hover #MenuItemChild {
+        visibility: visible;
+      }
+      .MenuItemChildItem > a:hover {
         background-color: #252525 !important;
-    }
-    .MenuItem:hover #MenuItemChild>li:nth-child(1)>a {
+      }
+      .MenuItem:hover #MenuItemChild > li:nth-child(1) > a {
         opacity: 1;
         -webkit-transform: rotateY(0deg);
-    }
-    .MenuItem:hover #MenuItemChild>li:nth-child(2)>a {
+      }
+      .MenuItem:hover #MenuItemChild > li:nth-child(2) > a {
         opacity: 1;
         transition-delay: 0.2s;
         -webkit-transform: rotateY(0deg);
-    }
-    .MenuItem:hover #MenuItemChild>li:nth-child(3)>a {
+      }
+      .MenuItem:hover #MenuItemChild > li:nth-child(3) > a {
         opacity: 1;
         transition-delay: 0.4s;
         -webkit-transform: rotateY(0deg);
-    }
-    .MenuItem:hover #MenuItemChild>li:nth-child(4)>a {
+      }
+      .MenuItem:hover #MenuItemChild > li:nth-child(4) > a {
         opacity: 1;
         transition-delay: 0.6s;
         -webkit-transform: rotateY(0deg);
-    }
-    .MenuItem:hover #MenuItemChild>li:nth-child(5)>a {
+      }
+      .MenuItem:hover #MenuItemChild > li:nth-child(5) > a {
         opacity: 1;
         transition-delay: 0.8s;
         -webkit-transform: rotateY(0deg);
-    }
-    .MenuItem:hover #MenuItemChild>li:nth-child(6)>a {
+      }
+      .MenuItem:hover #MenuItemChild > li:nth-child(6) > a {
         opacity: 1;
         transition-delay: 1s;
         -webkit-transform: rotateY(0deg);
-    }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="father">
-        <ul id="MenuUl">
-            <li class="MenuItem"><a>菜单1</a>
-                <div id="MenuMark"></div>
-                <ul id="MenuItemChild">
-                    <li class="MenuItemChildItem"><a>菜单1-1</a></li>
-                    <li class="MenuItemChildItem"><a>菜单1-2</a></li>
-                    <li class="MenuItemChildItem"><a>菜单1-3</a></li>
-                    <li class="MenuItemChildItem"><a>菜单1-4</a></li>
-                    <li class="MenuItemChildItem"><a>菜单1-5</a></li>
-                    <li class="MenuItemChildItem"><a>菜单1-6</a></li>
-                </ul>
-            </li>
-            <li class="MenuItem"><a>菜单2</a>
-                <div id="MenuMark"></div>
-                <ul id="MenuItemChild">
-                    <li class="MenuItemChildItem"><a>菜单2-1</a></li>
-                    <li class="MenuItemChildItem"><a>菜单2-2</a></li>
-                    <li class="MenuItemChildItem"><a>菜单2-3</a></li>
-                    <li class="MenuItemChildItem"><a>菜单2-4</a></li>
-                    <li class="MenuItemChildItem"><a>菜单2-5</a></li>
-                    <li class="MenuItemChildItem"><a>菜单2-6</a></li>
-                </ul>
-            </li>
-            <li class="MenuItem"><a>菜单3</a>
-                <div id="MenuMark"></div>
-                <ul id="MenuItemChild">
-                    <li class="MenuItemChildItem"><a>菜单3-1</a></li>
-                    <li class="MenuItemChildItem"><a>菜单3-2</a></li>
-                    <li class="MenuItemChildItem"><a>菜单3-3</a></li>
-                    <li class="MenuItemChildItem"><a>菜单3-4</a></li>
-                    <li class="MenuItemChildItem"><a>菜单3-5</a></li>
-                    <li class="MenuItemChildItem"><a>菜单3-6</a></li>
-                </ul>
-            </li>
-            <li class="MenuItem"><a>菜单4</a>
-                <div id="MenuMark"></div>
-                <ul id="MenuItemChild">
-                    <li class="MenuItemChildItem"><a>菜单4-1</a></li>
-                    <li class="MenuItemChildItem"><a>菜单4-2</a></li>
-                    <li class="MenuItemChildItem"><a>菜单4-3</a></li>
-                    <li class="MenuItemChildItem"><a>菜单4-4</a></li>
-                    <li class="MenuItemChildItem"><a>菜单4-5</a></li>
-                    <li class="MenuItemChildItem"><a>菜单4-6</a></li>
-                </ul>
-            </li>
-            <li class="MenuItem"><a>菜单5</a>
-                <div id="MenuMark"></div>
-                <ul id="MenuItemChild">
-                    <li class="MenuItemChildItem"><a>菜单5-1</a></li>
-                    <li class="MenuItemChildItem"><a>菜单5-2</a></li>
-                    <li class="MenuItemChildItem"><a>菜单5-3</a></li>
-                    <li class="MenuItemChildItem"><a>菜单5-4</a></li>
-                    <li class="MenuItemChildItem"><a>菜单5-5</a></li>
-                    <li class="MenuItemChildItem"><a>菜单5-6</a></li>
-                </ul>
-            </li>
-        </ul>
+      <ul id="MenuUl">
+        <li class="MenuItem">
+          <a>菜单1</a>
+          <div id="MenuMark"></div>
+          <ul id="MenuItemChild">
+            <li class="MenuItemChildItem"><a>菜单1-1</a></li>
+            <li class="MenuItemChildItem"><a>菜单1-2</a></li>
+            <li class="MenuItemChildItem"><a>菜单1-3</a></li>
+            <li class="MenuItemChildItem"><a>菜单1-4</a></li>
+            <li class="MenuItemChildItem"><a>菜单1-5</a></li>
+            <li class="MenuItemChildItem"><a>菜单1-6</a></li>
+          </ul>
+        </li>
+        <li class="MenuItem">
+          <a>菜单2</a>
+          <div id="MenuMark"></div>
+          <ul id="MenuItemChild">
+            <li class="MenuItemChildItem"><a>菜单2-1</a></li>
+            <li class="MenuItemChildItem"><a>菜单2-2</a></li>
+            <li class="MenuItemChildItem"><a>菜单2-3</a></li>
+            <li class="MenuItemChildItem"><a>菜单2-4</a></li>
+            <li class="MenuItemChildItem"><a>菜单2-5</a></li>
+            <li class="MenuItemChildItem"><a>菜单2-6</a></li>
+          </ul>
+        </li>
+        <li class="MenuItem">
+          <a>菜单3</a>
+          <div id="MenuMark"></div>
+          <ul id="MenuItemChild">
+            <li class="MenuItemChildItem"><a>菜单3-1</a></li>
+            <li class="MenuItemChildItem"><a>菜单3-2</a></li>
+            <li class="MenuItemChildItem"><a>菜单3-3</a></li>
+            <li class="MenuItemChildItem"><a>菜单3-4</a></li>
+            <li class="MenuItemChildItem"><a>菜单3-5</a></li>
+            <li class="MenuItemChildItem"><a>菜单3-6</a></li>
+          </ul>
+        </li>
+        <li class="MenuItem">
+          <a>菜单4</a>
+          <div id="MenuMark"></div>
+          <ul id="MenuItemChild">
+            <li class="MenuItemChildItem"><a>菜单4-1</a></li>
+            <li class="MenuItemChildItem"><a>菜单4-2</a></li>
+            <li class="MenuItemChildItem"><a>菜单4-3</a></li>
+            <li class="MenuItemChildItem"><a>菜单4-4</a></li>
+            <li class="MenuItemChildItem"><a>菜单4-5</a></li>
+            <li class="MenuItemChildItem"><a>菜单4-6</a></li>
+          </ul>
+        </li>
+        <li class="MenuItem">
+          <a>菜单5</a>
+          <div id="MenuMark"></div>
+          <ul id="MenuItemChild">
+            <li class="MenuItemChildItem"><a>菜单5-1</a></li>
+            <li class="MenuItemChildItem"><a>菜单5-2</a></li>
+            <li class="MenuItemChildItem"><a>菜单5-3</a></li>
+            <li class="MenuItemChildItem"><a>菜单5-4</a></li>
+            <li class="MenuItemChildItem"><a>菜单5-5</a></li>
+            <li class="MenuItemChildItem"><a>菜单5-6</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
-</body>
+  </body>
 </html>

@@ -21,7 +21,7 @@ table {
 
 /* 清除浮动 */
 .clearfix:after {
-  content: "";
+  content: '';
   visibility: hidden;
   display: block;
   clear: both;
@@ -32,7 +32,7 @@ table {
 }
 
 .clearfix:after {
-  content: "";
+  content: '';
   display: table;
   clear: both;
 }
