@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         主题切换
 // @namespace    http://tampermonkey.net/
-// @version      0.1.7
+// @version      0.1.8
 // @description  网站@media (prefers-color-scheme: dark|light)主题样式切换，深色模式和浅色模式的切换
 // @author       taumu
 // @include      *://*.weixin.*
@@ -49,6 +49,8 @@
   }
 
   function getUrl(src, path) {
+    if (['http', 'https'].some(head => path.startsWith(head))) return path
+
     const sList = src.split('/')
     const pList = path.split('/')
     const hostPath = sList
