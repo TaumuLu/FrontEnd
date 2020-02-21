@@ -28,7 +28,7 @@
   const useTime = (now - value) / 1000
 
   // eslint-disable-next-line no-undef
-  GM_registerMenuCommand('重置时间·', () => {
+  GM_registerMenuCommand('重置时间', () => {
     // eslint-disable-next-line no-undef
     GM_setValue(name, null)
     window.location.reload()
