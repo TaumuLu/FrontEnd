@@ -4,6 +4,7 @@
 // @version      0.1.8
 // @description  网站@media (prefers-color-scheme: dark|light)主题样式切换，深色模式和浅色模式的切换
 // @author       taumu
+// @license      MIT
 // @include      *://*.weixin.*
 // @include      *://sspai.*
 // @run-at       document-start
