@@ -6,6 +6,7 @@
 // @author       taumu
 // @license      MIT
 // @include      *://*.bilibili.*
+// @exclude      *://*.bilibili.*/pages/nav*
 // @run-at       document-start
 // @grant        GM_registerMenuCommand
 // @grant        GM_unregisterMenuCommand
