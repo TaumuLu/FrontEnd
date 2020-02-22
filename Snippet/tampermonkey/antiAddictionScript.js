@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         b站防沉迷
+// @name         网站防沉迷
 // @namespace    http://tampermonkey.net/
 // @version      0.1.0
 // @description  网站防沉迷脚本，访问确认提示，按时间段提示
@@ -20,21 +20,44 @@
   'use strict'
 
   const { href, host } = window.location
-  const name = `${host}AntiAddiction`
+  const timeName = `${host}_time`
+  const waitName = `${host}_wait`
   const endTime = 30 * 60
-  const now = Date.now()
+
+  const setValue = (name, value) => {
+    // eslint-disable-next-line no-undef
+    return GM_setValue(name, value)
+  }
+  const getValue = (name, defaultValue) => {
+    // eslint-disable-next-line no-undef
+    return GM_getValue(name, defaultValue)
+  }
   // eslint-disable-next-line no-undef
-  const value = GM_getValue(name)
-  const useTime = (now - value) / 1000
+  const timeValue = getValue(timeName, 0)
+  const waitValue = getValue(waitName, 0)
+
+  const getUseTime = () => {
+    const now = Date.now()
+    return (now - timeValue) / 1000
+  }
+  const resetValue = (tValue = 0, wValue = false) => {
+    setValue(timeName, tValue)
+    setValue(waitName, wValue)
+    window.location.reload()
+  }
+  const zeroFill = value => {
+    if (`${value}`.length >= 2) {
+      return value
+    }
+    return `0${value}`
+  }
 
   // eslint-disable-next-line no-undef
   GM_registerMenuCommand('重置时间', () => {
-    // eslint-disable-next-line no-undef
-    GM_setValue(name, null)
-    window.location.reload()
+    resetValue()
   })
 
-  if (!value || useTime >= endTime) {
+  if (!waitValue && getUseTime() >= endTime) {
     const html = `
     <style>
       body {
@@ -99,13 +122,38 @@
       const input = [...form.getElementsByTagName('input')].filter(
         item => item.type !== 'submit'
       )
+      setValue(timeName, Date.now())
       if (input.every(checkbox => checkbox.checked)) {
-        // eslint-disable-next-line no-undef
-        GM_setValue(name, Date.now())
+        setValue(waitName, false)
         window.location.replace(href)
       } else {
-        alert('请填写完表单')
+        setValue(waitName, true)
+        window.location.reload()
       }
     })
+  } else if (waitValue) {
+    document.write(`
+      <h1 id="title" style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      "></h1>
+    `)
+    const title = document.getElementById('title')
+    const writeTime = (delay = 1000) => {
+      return setTimeout(() => {
+        const time = parseInt(endTime - getUseTime(), 10)
+        const minute = zeroFill(parseInt(time / 60, 10))
+        const second = zeroFill(time % 60)
+        title.innerText = `剩余等待时间 ${minute}: ${second}`
+        if (time > 0) {
+          writeTime()
+        } else {
+          resetValue(Date.now())
+        }
+      }, delay)
+    }
+    writeTime(0)
   }
 })()
