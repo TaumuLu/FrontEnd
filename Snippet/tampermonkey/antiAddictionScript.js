@@ -54,7 +54,10 @@
 
   // eslint-disable-next-line no-undef
   GM_registerMenuCommand('重置时间', () => {
-    resetValue()
+    const isReset = window.confirm()
+    if (isReset) {
+      resetValue()
+    }
   })
 
   if (!waitValue && getUseTime() >= endTime) {
