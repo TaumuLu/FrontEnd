@@ -903,3 +903,23 @@ function Promise(fn) {
 
     fn(resolve, reject);
 }
+
+// hex转rgba
+const hexToRgba = function(hex, { alpha = 1, isArgb = false, rValue = false } = {}) {
+  const d = function(v) {
+    return parseInt(v, 16)
+  };
+  const p = function(v) {
+    return parseFloat(parseInt((d(v) / 255) * 1000) / 1000)
+  };
+
+  const c = hex.slice(1).match(/.{2}/g)
+  let a = alpha
+  if (c.length === 4) {
+    a = p(isArgb ? c.shift() : c.pop())
+  }
+
+  const rgb = c.map(d);
+  if(rValue) return rgb.concat(a)
+  return `rgba(${rgb.join(', ')}, ${a})`
+}
